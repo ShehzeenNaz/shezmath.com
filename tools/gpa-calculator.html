@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPA Calculator | ShezMath</title>
+<meta name="description" content="Calculate your GPA on a 4.0 scale in seconds. Add up to four courses with grades and credit hours to see your grade point average instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What does a 4.0 GPA scale mean?", "acceptedAnswer": {"@type": "Answer", "text": "On a 4.0 scale, an A is worth 4 points, a B is worth 3, a C is worth 2, a D is worth 1 and an F is worth 0. Your GPA is the average of these points, weighted by credit hours."}},
+    {"@type": "Question", "name": "Do plus and minus grades count?", "acceptedAnswer": {"@type": "Answer", "text": "Many schools do count them, for example an A- is often 3.7 and a B+ is 3.3. This calculator uses whole letter grades only. If your school uses plus and minus grades, check its grade point table."}},
+    {"@type": "Question", "name": "Can I calculate a GPA for more than four courses?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Work out the GPA for four courses at a time, then use the cumulative GPA calculator to combine the results. Or add up all your grade points and divide by your total credits."}},
+    {"@type": "Question", "name": "What is the difference between GPA and weighted GPA?", "acceptedAnswer": {"@type": "Answer", "text": "A regular GPA caps every course at 4.0. A weighted GPA adds bonus points for harder courses, so an A in an AP class can be worth 5.0. Use our weighted GPA calculator for that."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>GPA Calculator</h1>
+<p class="lede">Work out your grade point average on the standard 4.0 scale. Add your courses, pick each letter grade and enter the credit hours.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="grade1">Course 1 grade</label>
+    <select id="grade1">
+      <option value="4" selected>A</option>
+      <option value="3">B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits1">Course 1 credits</label>
+    <input type="number" id="credits1" value="3" min="0" step="0.5">
+    <label for="grade2">Course 2 grade</label>
+    <select id="grade2">
+      <option value="4">A</option>
+      <option value="3" selected>B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits2">Course 2 credits</label>
+    <input type="number" id="credits2" value="3" min="0" step="0.5">
+    <label for="grade3">Course 3 grade</label>
+    <select id="grade3">
+      <option value="4" selected>A</option>
+      <option value="3">B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits3">Course 3 credits</label>
+    <input type="number" id="credits3" value="4" min="0" step="0.5">
+    <label for="grade4">Course 4 grade</label>
+    <select id="grade4">
+      <option value="4">A</option>
+      <option value="3">B</option>
+      <option value="2" selected>C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits4">Course 4 credits</label>
+    <input type="number" id="credits4" value="3" min="0" step="0.5">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> GPA = total grade points &divide; total credits. Each course earns grade points equal to its grade value (A = 4, B = 3, C = 2, D = 1, F = 0) multiplied by its credit hours.</p>
+<p><strong>Worked example:</strong> Four courses: A (3 credits), B (3 credits), A (4 credits) and C (3 credits). Grade points are 4 &times; 3 = 12, 3 &times; 3 = 9, 4 &times; 4 = 16 and 2 &times; 3 = 6. That is 12 + 9 + 16 + 6 = 43 grade points over 3 + 3 + 4 + 3 = 13 credits. 43 &divide; 13 = 3.31. Your GPA is 3.31.</p>
+
+<h2>Quick Reference: 4.0 GPA Scale</h2>
+<table>
+<tr><th>Letter grade</th><th>Grade points</th></tr>
+<tr><td>A</td><td>4.0</td></tr>
+<tr><td>B</td><td>3.0</td></tr>
+<tr><td>C</td><td>2.0</td></tr>
+<tr><td>D</td><td>1.0</td></tr>
+<tr><td>F</td><td>0.0</td></tr>
+</table>
+<p>This calculator uses whole letter grades only. Some schools use plus and minus grades, for example A&minus; is often 3.7 and B+ is often 3.3.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="weighted-gpa-calculator.html">Weighted GPA Calculator</a><p>Add AP and Honors bonuses to your GPA.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine your GPA so far with a new semester.</p></div>
+  <div class="card"><a href="semester-gpa-calculator.html">Semester GPA Calculator</a><p>Work out your GPA for a single semester.</p></div>
+  <div class="card"><a href="grade-points-calculator.html">Grade Points Calculator</a><p>Turn letter grades into grade points.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What does a 4.0 GPA scale mean?</h3>
+  <p>On a 4.0 scale, an A is worth 4 points, a B is worth 3, a C is worth 2, a D is worth 1 and an F is worth 0. Your GPA is the average of these points, weighted by credit hours.</p>
+  <h3>Do plus and minus grades count?</h3>
+  <p>Many schools do count them, for example an A- is often 3.7 and a B+ is 3.3. This calculator uses whole letter grades only. If your school uses plus and minus grades, check its grade point table.</p>
+  <h3>Can I calculate a GPA for more than four courses?</h3>
+  <p>Yes. Work out the GPA for four courses at a time, then use the cumulative GPA calculator to combine the results. Or add up all your grade points and divide by your total credits.</p>
+  <h3>What is the difference between GPA and weighted GPA?</h3>
+  <p>A regular GPA caps every course at 4.0. A weighted GPA adds bonus points for harder courses, so an A in an AP class can be worth 5.0. Use our weighted GPA calculator for that.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var totalPoints = 0;
+  var totalCredits = 0;
+  var r = document.getElementById('result');
+  for (var i = 1; i <= 4; i++) {
+    var grade = parseFloat(document.getElementById('grade' + i).value);
+    var credits = parseFloat(document.getElementById('credits' + i).value);
+    if (isNaN(credits) || credits < 0) {
+      r.innerHTML = 'Please enter valid credit hours for every course.';
+      r.classList.add('show');
+      return;
+    }
+    totalPoints += grade * credits;
+    totalCredits += credits;
+  }
+  if (totalCredits === 0) {
+    r.innerHTML = 'Enter at least one credit hour to calculate a GPA.';
+    r.classList.add('show');
+    return;
+  }
+  var gpa = totalPoints / totalCredits;
+  r.innerHTML = 'Your GPA is <strong>' + gpa.toFixed(2) + '</strong> (' + totalPoints + ' grade points &divide; ' + totalCredits + ' credits).';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decking Calculator | ShezMath</title>
+<meta name="description" content="Calculate deck boards, fasteners and area for a new deck. Enter deck size and board width to get exact board counts. Free online calculator.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "What gap should I leave between deck boards?", "acceptedAnswer": {"@type": "Answer", "text": "Leave 1/8 to 1/4 inch between boards so water drains and the wood can expand. Wider gaps suit wet climates."}},
+    {"@type": "Question", "name": "How many screws per deck board?", "acceptedAnswer": {"@type": "Answer", "text": "Two screws at every joist. With joists 16 inches apart, a 12 ft board needs about 18 screws."}},
+    {"@type": "Question", "name": "Should deck boards run long or short?", "acceptedAnswer": {"@type": "Answer", "text": "Run boards along the shorter deck dimension when you can, so you use fewer boards and have fewer joints."}},
+    {"@type": "Question", "name": "How much extra decking should I buy?", "acceptedAnswer": {"@type": "Answer", "text": "Buy 10% extra for cuts and bad boards, and 15% if the deck has angles or a picture-frame border."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Decking Calculator</h1>
+<p class="lede">Work out how many deck boards your deck needs, including the gap between boards. Get board counts and total linear feet.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Deck length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="16" min="0" step="0.5">
+    <label for="width">Deck width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="boardw">Board width (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="boardw" data-kind="in" value="5.5" min="0" step="0.25">
+    <label for="gap">Gap between boards (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="gap" data-kind="in" value="0.25" min="0" step="0.125">
+    <label for="boardlen">Board length</label>
+    <select id="boardlen"><option value="12" selected>12 ft boards</option><option value="16">16 ft boards</option><option value="8">8 ft boards</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per board" data-met="per board">per board</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Rows of boards = deck width in inches &divide; (board width + gap). Total linear feet = rows &times; deck length. Boards = linear feet &divide; board length, rounded up.</p>
+<p><strong>Worked example:</strong> A deck 16 ft by 12 ft with 5.5 in boards and a 0.25 in gap: width is 144 in. 144 &divide; 5.75 = 25.04, so 26 rows. Linear feet: 26 &times; 16 = 416 ft. With 12 ft boards: 416 &divide; 12 = 34.7, so 35 boards.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Deck size</th><th>5.5 in boards (12 ft)</th><th>Boards needed</th></tr><tr><td>10 ft x 10 ft</td><td>21 rows</td><td>18</td></tr><tr><td>12 ft x 12 ft</td><td>26 rows</td><td>26</td></tr><tr><td>16 ft x 12 ft</td><td>26 rows</td><td>35</td></tr><tr><td>20 ft x 16 ft</td><td>34 rows</td><td>57</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="lumber-calculator.html">Lumber Calculator</a><p>Work out how many boards to buy for framing, shelving or a fence run.</p></div>
+  <div class="card"><a href="board-foot-calculator.html">Board Foot Calculator</a><p>Work out board feet, the standard way lumber is measured and priced.</p></div>
+  <div class="card"><a href="stair-stringer-calculator.html">Stair Stringer Calculator</a><p>Work out the steps, riser height, total run and stringer length for a staircase.</p></div>
+  <div class="card"><a href="fence-boards-calculator.html">Fence Boards Calculator</a><p>Work out how many fence boards or pickets a fence needs.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What gap should I leave between deck boards?</h3>
+  <p>Leave 1/8 to 1/4 inch between boards so water drains and the wood can expand. Wider gaps suit wet climates.</p>
+  <h3>How many screws per deck board?</h3>
+  <p>Two screws at every joist. With joists 16 inches apart, a 12 ft board needs about 18 screws.</p>
+  <h3>Should deck boards run long or short?</h3>
+  <p>Run boards along the shorter deck dimension when you can, so you use fewer boards and have fewer joints.</p>
+  <h3>How much extra decking should I buy?</h3>
+  <p>Buy 10% extra for cuts and bad boards, and 15% if the deck has angles or a picture-frame border.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), bw = v('boardw','in'), gap = v('gap','in');
+  var blen = parseFloat(document.getElementById('boardlen').value);
+  if([L,W,bw,gap,blen].some(isNaN) || L <= 0 || W <= 0 || bw <= 0 || blen <= 0){ r.innerHTML = 'Please enter positive numbers for deck size and board width.'; r.classList.add('show'); return; }
+  var rows = Math.ceil(W * 12 / (bw + gap));
+  var linearFt = rows * L;
+  var boards = Math.ceil(linearFt / blen);
+  var screws = rows * Math.ceil(L / 1.33) * 2;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (boards) : (boards); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per board' : 'per board') + '.'; }
+
+  r.innerHTML = 'Deck area: <b>' + fmtArea(L * W) + '</b>.<br>You need <b>' + rows + ' rows</b> of boards — <b>' + boards + ' boards</b> of ' + blen + ' ft (' + linearFt.toFixed(0) + ' linear feet), plus about ' + screws + ' screws.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

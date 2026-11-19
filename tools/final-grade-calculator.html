@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Grade Calculator | ShezMath</title>
+<meta name="description" content="Work out your final course grade in seconds. Enter your current grade, final exam weight and expected score to see your final percentage.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What if my final exam is worth 40% of my grade?", "acceptedAnswer": {"@type": "Answer", "text": "Enter 40 as the final exam weight. Your current grade then counts for the other 60%. The calculator does the split for you, so any weight from 0 to 100 works."}},
+    {"@type": "Question", "name": "Can I use this for a course graded out of points, not percent?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. First turn your points into a percent: divide the points you earned by the points possible, then multiply by 100. Enter that percent as your current grade."}},
+    {"@type": "Question", "name": "What score do I need on the final to pass the course?", "acceptedAnswer": {"@type": "Answer", "text": "Use our final grade needed calculator. It works backwards from the grade you want and tells you the exact final exam score you must earn."}},
+    {"@type": "Question", "name": "Does the calculator round my final grade?", "acceptedAnswer": {"@type": "Answer", "text": "It shows your final grade to two decimal places. Most schools round to the nearest whole number, so 86.5% would usually count as 87%."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Final Grade Calculator</h1>
+<p class="lede">Find out what your final course grade will be before you sit the exam. Enter your current grade, the final exam weight and the score you expect.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current">Current grade (%)</label>
+    <input type="number" id="current" value="85" min="0" max="100" step="0.1">
+    <label for="weight">Final exam weight (%)</label>
+    <input type="number" id="weight" value="30" min="0" max="100" step="0.1">
+    <label for="expected">Expected final exam score (%)</label>
+    <input type="number" id="expected" value="90" min="0" max="100" step="0.1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final grade = current grade &times; (1 &minus; exam weight) + exam score &times; exam weight. The exam weight is written as a decimal, so a 30% exam counts as 0.30 and your current grade counts as 0.70.</p>
+<p><strong>Worked example:</strong> Your current grade is 85%, the final exam is worth 30% and you expect 90% on it. Your current grade counts for 70%: 85 &times; 0.70 = 59.5. The exam counts for 30%: 90 &times; 0.30 = 27. Add them: 59.5 + 27 = 86.5%. Your final grade is 86.5%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA on the 4.0 scale from your course grades.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Find your grade when assignments, tests and homework count differently.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>See the exact final exam score you need for the grade you want.</p></div>
+  <div class="card"><a href="what-if-grade-calculator.html">What-If Grade Calculator</a><p>Test different exam scores and see how each one changes your grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What if my final exam is worth 40% of my grade?</h3>
+  <p>Enter 40 as the final exam weight. Your current grade then counts for the other 60%. The calculator does the split for you, so any weight from 0 to 100 works.</p>
+  <h3>Can I use this for a course graded out of points, not percent?</h3>
+  <p>Yes. First turn your points into a percent: divide the points you earned by the points possible, then multiply by 100. Enter that percent as your current grade.</p>
+  <h3>What score do I need on the final to pass the course?</h3>
+  <p>Use our final grade needed calculator. It works backwards from the grade you want and tells you the exact final exam score you must earn.</p>
+  <h3>Does the calculator round my final grade?</h3>
+  <p>It shows your final grade to two decimal places. Most schools round to the nearest whole number, so 86.5% would usually count as 87%.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var c = parseFloat(document.getElementById('current').value);
+  var w = parseFloat(document.getElementById('weight').value);
+  var e = parseFloat(document.getElementById('expected').value);
+  var r = document.getElementById('result');
+  if (isNaN(c) || isNaN(w) || isNaN(e)) {
+    r.innerHTML = 'Please enter all three numbers.';
+    r.classList.add('show');
+    return;
+  }
+  if (w < 0 || w > 100) {
+    r.innerHTML = 'The final exam weight must be between 0 and 100.';
+    r.classList.add('show');
+    return;
+  }
+  var finalGrade = c * (1 - w / 100) + e * (w / 100);
+  r.innerHTML = 'Your final grade is <strong>' + finalGrade.toFixed(2) + '%</strong>.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

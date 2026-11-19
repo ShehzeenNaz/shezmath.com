@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concrete Footing Calculator | ShezMath</title>
+<meta name="description" content="Calculate concrete for footings in cubic yards and bags. Enter footing length, width and depth for decks, walls and posts. No sign-up needed.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How deep should a footing be?", "acceptedAnswer": {"@type": "Answer", "text": "Footings usually sit 12 inches deep and below the frost line in cold areas. Check local building rules for your area."}},
+    {"@type": "Question", "name": "How wide should a footing be?", "acceptedAnswer": {"@type": "Answer", "text": "At least twice the width of the wall it carries, and never less than 12 inches wide for a house wall."}},
+    {"@type": "Question", "name": "Can I pour footings with bagged concrete?", "acceptedAnswer": {"@type": "Answer", "text": "Yes for small runs. For long footings over a cubic yard, ready-mix is faster and more consistent."}},
+    {"@type": "Question", "name": "How long before I can build on a footing?", "acceptedAnswer": {"@type": "Answer", "text": "Wait at least 7 days for the concrete to cure enough to carry a load, and 28 days for full strength."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Concrete Footing Calculator</h1>
+<p class="lede">Work out concrete for strip footings under walls, decks and extensions. Enter the footing size and get cubic yards and bag counts.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Footing length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="30" min="0" step="0.5">
+    <label for="width">Footing width (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="width" data-kind="in" value="12" min="0" step="1">
+    <label for="depth">Footing depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="12" min="0" step="1">
+    <label for="bag">Bag size</label>
+    <select id="bag"><option value="0.6" selected>80 lb bag — 0.60 cubic feet</option><option value="0.45">60 lb bag — 0.45 cubic feet</option><option value="0.3">40 lb bag — 0.30 cubic feet</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per cubic yard" data-met="per cubic metre">per cubic yard</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Volume in cubic feet = length (ft) &times; width (in) &divide; 12 &times; depth (in) &divide; 12. Cubic yards = cubic feet &divide; 27. Bags = cubic feet &divide; yield per bag.</p>
+<p><strong>Worked example:</strong> A footing 30 ft long, 12 in wide and 12 in deep: 30 &times; 1 &times; 1 = 30 cubic feet. 30 &divide; 27 = 1.11 cubic yards. With 80 lb bags: 30 &divide; 0.60 = 50 bags.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Footing size</th><th>Cubic feet per 10 ft run</th><th>80 lb bags per 10 ft run</th></tr><tr><td>8 in wide, 8 in deep</td><td>4.44</td><td>8</td></tr><tr><td>12 in wide, 12 in deep</td><td>10.00</td><td>17</td></tr><tr><td>16 in wide, 12 in deep</td><td>13.33</td><td>23</td></tr><tr><td>24 in wide, 12 in deep</td><td>20.00</td><td>34</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="concrete-slab-calculator.html">Concrete Slab Calculator</a><p>Work out how much concrete a patio slab, shed base or garage floor needs.</p></div>
+  <div class="card"><a href="post-hole-concrete-calculator.html">Post Hole Concrete Bags Calculator</a><p>Work out concrete for fence and deck post holes.</p></div>
+  <div class="card"><a href="walkway-concrete-calculator.html">Walkway Concrete Calculator</a><p>Work out concrete for garden paths, sidewalks and walkways.</p></div>
+  <div class="card"><a href="retaining-wall-block-calculator.html">Retaining Wall Block Calculator</a><p>Work out how many blocks a retaining wall needs, plus cap blocks and drainage gravel.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How deep should a footing be?</h3>
+  <p>Footings usually sit 12 inches deep and below the frost line in cold areas. Check local building rules for your area.</p>
+  <h3>How wide should a footing be?</h3>
+  <p>At least twice the width of the wall it carries, and never less than 12 inches wide for a house wall.</p>
+  <h3>Can I pour footings with bagged concrete?</h3>
+  <p>Yes for small runs. For long footings over a cubic yard, ready-mix is faster and more consistent.</p>
+  <h3>How long before I can build on a footing?</h3>
+  <p>Wait at least 7 days for the concrete to cure enough to carry a load, and 28 days for full strength.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','in'), D = v('depth','in');
+  var yield_ = parseFloat(document.getElementById('bag').value);
+  if([L,W,D].some(isNaN) || L <= 0 || W <= 0 || D <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and depth.'; r.classList.add('show'); return; }
+  var cuft = L * (W / 12) * (D / 12);
+  var yd3 = cuft / 27;
+  var bags = Math.ceil(cuft / yield_);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (yd3*0.764555) : (yd3); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per cubic metre' : 'per cubic yard') + '.'; }
+
+  r.innerHTML = 'You need <b>' + fmtVol(yd3) + '</b> of concrete (' + fmtCuFt(cuft) + '), about <b>' + bags + ' bags</b>.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

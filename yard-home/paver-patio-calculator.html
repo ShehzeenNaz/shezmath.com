@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paver Patio Calculator | ShezMath</title>
+<meta name="description" content="Calculate pavers for a patio in pavers, base gravel and sand. Enter patio size and paver size to get the full material list. Try it free now.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How many pavers do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the patio area by the area of one paver and add 5% waste. A 180 square foot patio needs 189 twelve-inch pavers."}},
+    {"@type": "Question", "name": "How deep should the base be under a patio?", "acceptedAnswer": {"@type": "Answer", "text": "Four inches of compacted gravel for a patio, and six inches if cars will drive on it."}},
+    {"@type": "Question", "name": "What size pavers are best for a patio?", "acceptedAnswer": {"@type": "Answer", "text": "Twelve by twelve inch pavers are the most popular. Larger pavers mean fewer joints and a faster lay."}},
+    {"@type": "Question", "name": "Do I need edging for a paver patio?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Edge restraints stop the outer pavers spreading over time. Install them before you lay the pavers."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Paver Patio Calculator</h1>
+<p class="lede">Work out everything a paver patio needs: pavers, base gravel and joint sand. Enter the patio size and paver size.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Patio length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="15" min="0" step="0.5">
+    <label for="width">Patio width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="paver">Paver size</label>
+    <select id="paver"><option value="1" selected>12 x 12 in — 1 sq ft per paver</option><option value="0.25">6 x 6 in — 0.25 sq ft per paver</option><option value="0.5">6 x 12 in — 0.5 sq ft per paver</option><option value="2.25">18 x 18 in — 2.25 sq ft per paver</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per paver" data-met="per paver">per paver</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Pavers = patio area (sq ft) &divide; area per paver (sq ft) &times; 1.05 for waste. Base gravel = area &times; 4 in depth &divide; 12 &divide; 27. Joint sand bags = area &divide; 80.</p>
+<p><strong>Worked example:</strong> A patio 15 ft by 12 ft with 12 by 12 in pavers: area is 180 sq ft. 180 &divide; 1 = 180 pavers. With 5% waste: 180 &times; 1.05 = 189 pavers. Base gravel: 180 &times; 4 &divide; 12 &divide; 27 = 2.22 cubic yards. Joint sand: 180 &divide; 80 = 2.25, so 3 bags.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Patio size</th><th>12 in pavers (with waste)</th><th>Base gravel (4 in)</th></tr><tr><td>100 sq ft</td><td>105</td><td>1.23 cubic yards</td></tr><tr><td>180 sq ft</td><td>189</td><td>2.22 cubic yards</td></tr><tr><td>300 sq ft</td><td>315</td><td>3.70 cubic yards</td></tr><tr><td>500 sq ft</td><td>525</td><td>6.17 cubic yards</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="paver-base-calculator.html">Paver Base Calculator</a><p>Work out the crushed stone base under pavers for patios, paths and driveways.</p></div>
+  <div class="card"><a href="paver-sand-calculator.html">Paver Sand Calculator</a><p>Work out both kinds of paver sand: bedding sand under the pavers and joint sand swept between them.</p></div>
+  <div class="card"><a href="brick-calculator.html">Brick Calculator</a><p>Work out how many bricks a wall, planter or paver area needs.</p></div>
+  <div class="card"><a href="gravel-driveway-calculator.html">Gravel Driveway Calculator</a><p>Find how many tons and cubic yards of gravel your driveway needs before you order.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How many pavers do I need?</h3>
+  <p>Divide the patio area by the area of one paver and add 5% waste. A 180 square foot patio needs 189 twelve-inch pavers.</p>
+  <h3>How deep should the base be under a patio?</h3>
+  <p>Four inches of compacted gravel for a patio, and six inches if cars will drive on it.</p>
+  <h3>What size pavers are best for a patio?</h3>
+  <p>Twelve by twelve inch pavers are the most popular. Larger pavers mean fewer joints and a faster lay.</p>
+  <h3>Do I need edging for a paver patio?</h3>
+  <p>Yes. Edge restraints stop the outer pavers spreading over time. Install them before you lay the pavers.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft');
+  var paverArea = parseFloat(document.getElementById('paver').value);
+  if([L,W,paverArea].some(isNaN) || L <= 0 || W <= 0 || paverArea <= 0){ r.innerHTML = 'Please enter positive numbers for patio size.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var pavers = Math.ceil(area / paverArea * 1.05);
+  var baseYd3 = area * 4 / 12 / 27;
+  var jointBags = Math.ceil(area / 80);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (pavers) : (pavers); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per paver' : 'per paver') + '.'; }
+
+  r.innerHTML = 'Patio area: <b>' + fmtArea(area) + '</b>.<br>You need <b>' + pavers + ' pavers</b> (with 5% waste), <b>' + fmtVol(baseYd3) + '</b> of base gravel and <b>' + jointBags + ' bags</b> of joint sand.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

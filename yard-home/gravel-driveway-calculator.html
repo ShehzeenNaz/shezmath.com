@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gravel Driveway Calculator | ShezMath</title>
+<meta name="description" content="Work out how much gravel your driveway needs in cubic yards and tons. Enter length, width and depth to get exact amounts fast. Free to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How deep should a gravel driveway be?", "acceptedAnswer": {"@type": "Answer", "text": "Four inches of gravel over a compacted base works for most cars. Use six inches if heavy trucks use the driveway."}},
+    {"@type": "Question", "name": "How many tons of gravel do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply your cubic yards by 1.4. A typical two-car driveway 40 ft by 12 ft at 4 inches deep needs about 9 tons."}},
+    {"@type": "Question", "name": "Should I add extra for waste?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, add 10% for settling, spreading unevenly and edges. This calculator adds it for you."}},
+    {"@type": "Question", "name": "What size gravel is best for a driveway?", "acceptedAnswer": {"@type": "Answer", "text": "A 3/4 inch crushed stone locks together well and drains. Pea gravel looks nice but shifts under tyres."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Gravel Driveway Calculator</h1>
+<p class="lede">Find how many tons and cubic yards of gravel your driveway needs before you order. Built for homeowners planning a new or topped-up driveway.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Driveway length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="40" min="0" step="0.5">
+    <label for="width">Driveway width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="depth">Gravel depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="4" min="0" step="0.5">
+    <label for="waste">Extra for waste and settling (%)</label>
+    <input type="number" id="waste" value="10" min="0" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per cubic yard" data-met="per cubic metre">per cubic yard</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Cubic yards = length (ft) &times; width (ft) &times; depth (in) &divide; 12 &divide; 27. Tons = cubic yards &times; 1.4, because one cubic yard of gravel weighs about 1.4 tons.</p>
+<p><strong>Worked example:</strong> A driveway 40 ft long, 12 ft wide and 4 in deep: 40 &times; 12 &times; 4 &divide; 12 = 160 cubic feet. 160 &divide; 27 = 5.93 cubic yards. Add 10% waste: 5.93 &times; 1.1 = 6.52 cubic yards. 6.52 &times; 1.4 = 9.13 tons of gravel.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Depth</th><th>Cubic yards per 100 sq ft</th><th>Tons per 100 sq ft</th></tr><tr><td>2 in</td><td>0.62</td><td>0.86</td></tr><tr><td>3 in</td><td>0.93</td><td>1.30</td></tr><tr><td>4 in</td><td>1.23</td><td>1.73</td></tr><tr><td>6 in</td><td>1.85</td><td>2.59</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="crushed-stone-calculator.html">Crushed Stone Calculator</a><p>Work out how much crushed stone to order for paths, bases and drainage.</p></div>
+  <div class="card"><a href="sand-calculator.html">Sand Calculator</a><p>Work out how much sand to order for a sandbox, paver bedding or levelling job.</p></div>
+  <div class="card"><a href="paver-base-calculator.html">Paver Base Calculator</a><p>Work out the crushed stone base under pavers for patios, paths and driveways.</p></div>
+  <div class="card"><a href="sand-calculator.html">Sand Calculator</a><p>Work out how much sand to order for a sandbox, paver bedding or levelling job.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How deep should a gravel driveway be?</h3>
+  <p>Four inches of gravel over a compacted base works for most cars. Use six inches if heavy trucks use the driveway.</p>
+  <h3>How many tons of gravel do I need?</h3>
+  <p>Multiply your cubic yards by 1.4. A typical two-car driveway 40 ft by 12 ft at 4 inches deep needs about 9 tons.</p>
+  <h3>Should I add extra for waste?</h3>
+  <p>Yes, add 10% for settling, spreading unevenly and edges. This calculator adds it for you.</p>
+  <h3>What size gravel is best for a driveway?</h3>
+  <p>A 3/4 inch crushed stone locks together well and drains. Pea gravel looks nice but shifts under tyres.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), D = v('depth','in'), waste = raw('waste');
+  if([L,W,D].some(isNaN) || L <= 0 || W <= 0 || D <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and depth.'; r.classList.add('show'); return; }
+  var yd3 = L * W * D / 12 / 27;
+  var yd3w = yd3 * (1 + (isNaN(waste) ? 0 : waste) / 100);
+  var tons = yd3w * 1.4;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (yd3w*0.764555) : (yd3w); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per cubic metre' : 'per cubic yard') + '.'; }
+
+  r.innerHTML = 'You need <b>' + fmtVol(yd3w) + '</b> of gravel (<b>' + fmtWt(tons) + '</b>).<br>That is ' + fmtVol(yd3) + ' before waste, plus ' + (isNaN(waste)?0:waste) + '% extra.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

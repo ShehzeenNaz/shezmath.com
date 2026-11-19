@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Rank Estimator | ShezMath</title>
+<meta name="description" content="Estimate your class rank from your GPA and class size. Uses a normal distribution model with adjustable mean and standard deviation assumptions.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Is this my official class rank?", "acceptedAnswer": {"@type": "Answer", "text": "No. This is only an estimate based on a normal distribution model. Your school's official rank comes from the real GPAs of every student in your class, which this calculator cannot see."}},
+    {"@type": "Question", "name": "Why assume GPAs follow a normal distribution?", "acceptedAnswer": {"@type": "Answer", "text": "In a large class, GPAs often spread out in a rough bell shape around the average. It is a reasonable model for an estimate, but real classes can be skewed, so the result is approximate."}},
+    {"@type": "Question", "name": "What are the mean and standard deviation for?", "acceptedAnswer": {"@type": "Answer", "text": "The mean is the average GPA in your class, assumed to be 3.0, and the standard deviation, assumed to be 0.4, is how spread out GPAs are. Change them if you know your class is stronger or more spread out."}},
+    {"@type": "Question", "name": "What does a percentile of 93% mean?", "acceptedAnswer": {"@type": "Answer", "text": "It means your GPA is higher than about 93% of your classmates. In a class of 200, that puts you around rank 13, since about 7% of 200 students, or 14 students, are ahead of you."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Class Rank Estimator</h1>
+<p class="lede">Curious where you stand in your class? Enter your GPA and class size to estimate your rank and percentile. This is a statistical estimate, not an official rank.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="gpa">Your GPA (4.0 scale)</label>
+    <input type="number" id="gpa" min="0" max="4" step="0.01" value="3.6">
+    <label for="size">Class size (number of students)</label>
+    <input type="number" id="size" min="2" max="100000" step="1" value="200">
+    <label for="mean">Assumed class mean GPA</label>
+    <input type="number" id="mean" min="0" max="4" step="0.05" value="3.0">
+    <label for="sd">Assumed standard deviation</label>
+    <input type="number" id="sd" min="0.05" max="2" step="0.05" value="0.4">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Assume class GPAs are normally distributed with mean 3.0 and standard deviation 0.4. Z-score = (your GPA − mean) ÷ standard deviation. Your percentile is the normal CDF of the z-score. Estimated rank = class size × (1 − percentile).</p>
+<p><strong>Worked example:</strong> Your GPA is 3.6 in a class of 200. Z-score = (3.6 − 3.0) ÷ 0.4 = 1.5. A z-score of 1.5 is about the 93.3rd percentile, so you are above roughly 93.3% of your class. Rank = 200 × (1 − 0.933) = 200 × 0.067 = 13.4, so your estimated rank is about 13th out of 200. Remember, this is an estimate, not an official rank.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Calculate your GPA from your course grades and credit hours.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine GPA across semesters into one cumulative GPA.</p></div>
+  <div class="card"><a href="credits-to-raise-gpa-calculator.html">Credits to Raise GPA Calculator</a><p>Find how many credits you need to lift your GPA to a target.</p></div>
+  <div class="card"><a href="percentage-to-gpa-calculator.html">Percentage to GPA Calculator</a><p>Convert a percentage mark into a GPA on the 4.0 scale.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>Is this my official class rank?</h3>
+  <p>No. This is only an estimate based on a normal distribution model. Your school's official rank comes from the real GPAs of every student in your class, which this calculator cannot see.</p>
+  <h3>Why assume GPAs follow a normal distribution?</h3>
+  <p>In a large class, GPAs often spread out in a rough bell shape around the average. It is a reasonable model for an estimate, but real classes can be skewed, so the result is approximate.</p>
+  <h3>What are the mean and standard deviation for?</h3>
+  <p>The mean is the average GPA in your class, assumed to be 3.0, and the standard deviation, assumed to be 0.4, is how spread out GPAs are. Change them if you know your class is stronger or more spread out.</p>
+  <h3>What does a percentile of 93% mean?</h3>
+  <p>It means your GPA is higher than about 93% of your classmates. In a class of 200, that puts you around rank 13, since about 7% of 200 students, or 14 students, are ahead of you.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function normCdf(z) {
+  // Abramowitz and Stegun approximation of the standard normal CDF.
+  var t = 1 / (1 + 0.2316419 * Math.abs(z));
+  var d = 0.3989423 * Math.exp(-z * z / 2);
+  var p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  return z > 0 ? 1 - p : p;
+}
+function calculate() {
+  var gpa = parseFloat(document.getElementById('gpa').value);
+  var size = parseInt(document.getElementById('size').value, 10);
+  var mean = parseFloat(document.getElementById('mean').value);
+  var sd = parseFloat(document.getElementById('sd').value);
+  var result = document.getElementById('result');
+  if (isNaN(gpa) || isNaN(size) || isNaN(mean) || isNaN(sd) || gpa < 0 || gpa > 4 || size < 2 || sd <= 0) {
+    result.innerHTML = 'Please enter valid numbers. GPA must be 0 to 4.0, class size at least 2, and standard deviation above 0.';
+    result.classList.add('show');
+    return;
+  }
+  var z = (gpa - mean) / sd;
+  var percentile = normCdf(z);
+  var rank = size * (1 - percentile);
+  var rankRounded = Math.max(1, Math.round(rank));
+  result.innerHTML = 'Z-score: <strong>' + z.toFixed(2) + '</strong>. You are at about the <strong>' + (percentile * 100).toFixed(1) + 'th percentile</strong>.<br>Your estimated rank is about <strong>' + rankRounded + ' out of ' + size + '</strong>.<br><strong>This is an estimate, not an official rank.</strong> It assumes GPAs are normally distributed with mean ' + mean + ' and standard deviation ' + sd + '.';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

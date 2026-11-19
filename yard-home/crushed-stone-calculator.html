@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crushed Stone Calculator | ShezMath</title>
+<meta name="description" content="Calculate crushed stone in cubic yards and tons by stone type. Pick granite, limestone or pea gravel and get exact order amounts. Free to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How much does a cubic yard of crushed stone weigh?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the stone. Granite is about 1.35 tons, limestone about 1.5 tons and pea gravel about 1.25 tons per cubic yard."}},
+    {"@type": "Question", "name": "How deep should crushed stone be?", "acceptedAnswer": {"@type": "Answer", "text": "Use 2 to 3 inches for garden paths and 4 inches for driveways and areas with foot traffic."}},
+    {"@type": "Question", "name": "Is crushed stone sold by the ton or the yard?", "acceptedAnswer": {"@type": "Answer", "text": "Both. Bulk suppliers often sell by the ton, while bagged stone is sold by weight. This calculator gives you both numbers."}},
+    {"@type": "Question", "name": "Do I need landscape fabric under stone?", "acceptedAnswer": {"@type": "Answer", "text": "Yes for garden beds and paths. It stops weeds and keeps the stone from sinking into the soil."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Crushed Stone Calculator</h1>
+<p class="lede">Work out how much crushed stone to order for paths, bases and drainage. Pick your stone type, because each one weighs a different amount.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Area length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="20" min="0" step="0.5">
+    <label for="width">Area width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="10" min="0" step="0.5">
+    <label for="depth">Stone depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="3" min="0" step="0.5">
+    <label for="stone">Stone type</label>
+    <select id="stone"><option value="1.35" selected>Crushed granite — 1.35 tons per cubic yard</option><option value="1.5">Crushed limestone — 1.5 tons per cubic yard</option><option value="1.25">Pea gravel — 1.25 tons per cubic yard</option><option value="1.4">River rock — 1.4 tons per cubic yard</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per ton" data-met="per tonne">per ton</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Cubic yards = length (ft) &times; width (ft) &times; depth (in) &divide; 12 &divide; 27. Tons = cubic yards &times; the stone density in tons per cubic yard.</p>
+<p><strong>Worked example:</strong> An area 20 ft by 10 ft at 3 in deep with granite: 20 &times; 10 &times; 3 &divide; 12 = 50 cubic feet. 50 &divide; 27 = 1.85 cubic yards. 1.85 &times; 1.35 = 2.50 tons of granite.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Stone type</th><th>Tons per cubic yard</th><th>Best for</th></tr><tr><td>Crushed granite</td><td>1.35</td><td>Driveways, paths</td></tr><tr><td>Crushed limestone</td><td>1.50</td><td>Bases, drainage</td></tr><tr><td>Pea gravel</td><td>1.25</td><td>Garden beds, paths</td></tr><tr><td>River rock</td><td>1.40</td><td>Borders, decoration</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gravel-driveway-calculator.html">Gravel Driveway Calculator</a><p>Find how many tons and cubic yards of gravel your driveway needs before you order.</p></div>
+  <div class="card"><a href="sand-calculator.html">Sand Calculator</a><p>Work out how much sand to order for a sandbox, paver bedding or levelling job.</p></div>
+  <div class="card"><a href="mulch-calculator.html">Mulch Calculator</a><p>Work out mulch for flower beds and garden borders in cubic yards and bags.</p></div>
+  <div class="card"><a href="paver-base-calculator.html">Paver Base Calculator</a><p>Work out the crushed stone base under pavers for patios, paths and driveways.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much does a cubic yard of crushed stone weigh?</h3>
+  <p>It depends on the stone. Granite is about 1.35 tons, limestone about 1.5 tons and pea gravel about 1.25 tons per cubic yard.</p>
+  <h3>How deep should crushed stone be?</h3>
+  <p>Use 2 to 3 inches for garden paths and 4 inches for driveways and areas with foot traffic.</p>
+  <h3>Is crushed stone sold by the ton or the yard?</h3>
+  <p>Both. Bulk suppliers often sell by the ton, while bagged stone is sold by weight. This calculator gives you both numbers.</p>
+  <h3>Do I need landscape fabric under stone?</h3>
+  <p>Yes for garden beds and paths. It stops weeds and keeps the stone from sinking into the soil.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), D = v('depth','in');
+  var density = parseFloat(document.getElementById('stone').value);
+  if([L,W,D].some(isNaN) || L <= 0 || W <= 0 || D <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and depth.'; r.classList.add('show'); return; }
+  var yd3 = L * W * D / 12 / 27;
+  var tons = yd3 * density;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (tons*0.907185) : (tons); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per tonne' : 'per ton') + '.'; }
+
+  r.innerHTML = 'You need <b>' + fmtVol(yd3) + '</b> of crushed stone (<b>' + fmtWt(tons) + '</b>).' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

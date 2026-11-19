@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GPA to Percentage Calculator | ShezMath</title>
+<meta name="description" content="Convert your GPA on the 4.0 scale to a percentage instantly. Uses the common linear conversion where percentage equals GPA times 25.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do you convert GPA to percentage?", "acceptedAnswer": {"@type": "Answer", "text": "With the common linear conversion, multiply your GPA by 25. A 4.0 GPA becomes 100%, a 3.0 GPA becomes 75%, and a 3.5 GPA becomes 87.5%."}},
+    {"@type": "Question", "name": "Is GPA times 25 the official conversion?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is the most common simple conversion, but there is no single official formula. Some universities use their own band tables, so always check what your institution accepts."}},
+    {"@type": "Question", "name": "What percentage is a 3.0 GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Using the linear conversion, 3.0 times 25 equals 75%. On a letter scale that is usually around a B grade."}},
+    {"@type": "Question", "name": "Can I convert a GPA from a different scale?", "acceptedAnswer": {"@type": "Answer", "text": "This calculator is for the 4.0 scale only. If your GPA is on a 5.0 or 10.0 scale, convert it to the 4.0 scale first, or use percentage equals GPA divided by the maximum GPA, times 100."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>GPA to Percentage Calculator</h1>
+<p class="lede">Turn your GPA on the 4.0 scale into a percentage. Useful for job forms, university applications and scholarships that ask for a percentage instead of a GPA.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="gpa">GPA (4.0 scale)</label>
+    <input type="number" id="gpa" min="0" max="4" step="0.01" value="3.5">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Percentage = GPA × 25. This is the common linear conversion: a 4.0 GPA maps to 100% and a 0 GPA maps to 0%. It is a simple, widely used conversion, not an official standard, so check whether your university uses its own table.</p>
+<p><strong>Worked example:</strong> Your GPA is 3.5. Multiply by 25: 3.5 × 25 = 87.5. Your GPA converts to 87.5%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="percentage-to-gpa-calculator.html">Percentage to GPA Calculator</a><p>Convert a percentage mark into a GPA on the 4.0 scale using the standard band table.</p></div>
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Calculate your GPA from your course grades and credit hours.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine GPA across semesters into one cumulative GPA.</p></div>
+  <div class="card"><a href="grade-points-calculator.html">Grade Points Calculator</a><p>Work out grade points from a letter grade and credit hours.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How do you convert GPA to percentage?</h3>
+  <p>With the common linear conversion, multiply your GPA by 25. A 4.0 GPA becomes 100%, a 3.0 GPA becomes 75%, and a 3.5 GPA becomes 87.5%.</p>
+  <h3>Is GPA times 25 the official conversion?</h3>
+  <p>No. It is the most common simple conversion, but there is no single official formula. Some universities use their own band tables, so always check what your institution accepts.</p>
+  <h3>What percentage is a 3.0 GPA?</h3>
+  <p>Using the linear conversion, 3.0 times 25 equals 75%. On a letter scale that is usually around a B grade.</p>
+  <h3>Can I convert a GPA from a different scale?</h3>
+  <p>This calculator is for the 4.0 scale only. If your GPA is on a 5.0 or 10.0 scale, convert it to the 4.0 scale first, or use percentage equals GPA divided by the maximum GPA, times 100.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var gpa = parseFloat(document.getElementById('gpa').value);
+  var result = document.getElementById('result');
+  if (isNaN(gpa) || gpa < 0 || gpa > 4) {
+    result.innerHTML = 'Please enter a GPA between 0 and 4.0.';
+    result.classList.add('show');
+    return;
+  }
+  var pct = gpa * 25;
+  result.innerHTML = 'A GPA of <strong>' + gpa.toFixed(2) + '</strong> is <strong>' + pct.toFixed(1) + '%</strong> using the common linear conversion (GPA × 25).';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentage to GPA Calculator | ShezMath</title>
+<meta name="description" content="Convert a percentage mark to a GPA on the 4.0 scale using the standard band table. Enter your percentage to see your GPA instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What GPA is 90%?", "acceptedAnswer": {"@type": "Answer", "text": "On the standard band table, 90 to 92% converts to a 3.7 GPA, which is an A minus. A 93% or higher converts to a full 4.0 GPA."}},
+    {"@type": "Question", "name": "Is this band table used by every university?", "acceptedAnswer": {"@type": "Answer", "text": "No. This is the widely used standard 4.0 band table, but some schools use different cutoffs. Always check your own university's grading scale for official conversions."}},
+    {"@type": "Question", "name": "What GPA is a pass at 60%?", "acceptedAnswer": {"@type": "Answer", "text": "On this table, 60 to 62% converts to a 0.7 GPA. Anything below 60% converts to a 0.0 GPA, which is a fail."}},
+    {"@type": "Question", "name": "Can I convert an average percentage for a whole semester?", "acceptedAnswer": {"@type": "Answer", "text": "You can, but it is only an estimate. A true semester GPA weights each course by its credit hours, so use the GPA calculator for an exact result."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Percentage to GPA Calculator</h1>
+<p class="lede">Turn a percentage mark into a GPA on the 4.0 scale using the standard band table. Enter your percentage to see your GPA and letter grade at once.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="pct">Percentage (%)</label>
+    <input type="number" id="pct" min="0" max="100" step="0.1" value="88">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Your percentage is matched to a band on the standard 4.0 scale: 93–100 = 4.0, 90–92 = 3.7, 87–89 = 3.3, 83–86 = 3.0, 80–82 = 2.7, 77–79 = 2.3, 73–76 = 2.0, 70–72 = 1.7, 67–69 = 1.3, 63–66 = 1.0, 60–62 = 0.7, below 60 = 0.0.</p>
+<p><strong>Worked example:</strong> Your mark is 88%. Look up the band table: 88% falls in the 87–89 band, which is a 3.3 GPA (a B+). So 88% converts to a 3.3 GPA.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-to-percentage-calculator.html">GPA to Percentage Calculator</a><p>Convert a GPA on the 4.0 scale back into a percentage.</p></div>
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Calculate your GPA from your course grades and credit hours.</p></div>
+  <div class="card"><a href="letter-grade-calculator.html">Letter Grade Calculator</a><p>Find the letter grade for any percentage score.</p></div>
+  <div class="card"><a href="grade-points-calculator.html">Grade Points Calculator</a><p>Work out grade points from a letter grade and credit hours.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What GPA is 90%?</h3>
+  <p>On the standard band table, 90 to 92% converts to a 3.7 GPA, which is an A minus. A 93% or higher converts to a full 4.0 GPA.</p>
+  <h3>Is this band table used by every university?</h3>
+  <p>No. This is the widely used standard 4.0 band table, but some schools use different cutoffs. Always check your own university's grading scale for official conversions.</p>
+  <h3>What GPA is a pass at 60%?</h3>
+  <p>On this table, 60 to 62% converts to a 0.7 GPA. Anything below 60% converts to a 0.0 GPA, which is a fail.</p>
+  <h3>Can I convert an average percentage for a whole semester?</h3>
+  <p>You can, but it is only an estimate. A true semester GPA weights each course by its credit hours, so use the GPA calculator for an exact result.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function pctToGpa(p) {
+  var bands = [
+    [93, 4.0, 'A'], [90, 3.7, 'A-'], [87, 3.3, 'B+'], [83, 3.0, 'B'],
+    [80, 2.7, 'B-'], [77, 2.3, 'C+'], [73, 2.0, 'C'], [70, 1.7, 'C-'],
+    [67, 1.3, 'D+'], [63, 1.0, 'D'], [60, 0.7, 'D-']
+  ];
+  for (var i = 0; i < bands.length; i++) {
+    if (p >= bands[i][0]) return { gpa: bands[i][1], letter: bands[i][2] };
+  }
+  return { gpa: 0.0, letter: 'F' };
+}
+function calculate() {
+  var p = parseFloat(document.getElementById('pct').value);
+  var result = document.getElementById('result');
+  if (isNaN(p) || p < 0 || p > 100) {
+    result.innerHTML = 'Please enter a percentage between 0 and 100.';
+    result.classList.add('show');
+    return;
+  }
+  var r = pctToGpa(p);
+  result.innerHTML = p + '% converts to a GPA of <strong>' + r.gpa.toFixed(1) + '</strong> (letter grade ' + r.letter + ') on the 4.0 scale.';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

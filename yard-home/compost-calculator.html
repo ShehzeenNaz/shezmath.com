@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compost Calculator | ShezMath</title>
+<meta name="description" content="Work out how much compost you need in cubic yards, bags and weight. Enter your bed size and depth for an exact garden amount. Free to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How deep should compost be?", "acceptedAnswer": {"@type": "Answer", "text": "Spread 2 to 3 inches over a bed and mix it into the top few inches of soil. One inch works as a yearly top dressing."}},
+    {"@type": "Question", "name": "How much does a cubic yard of compost weigh?", "acceptedAnswer": {"@type": "Answer", "text": "About half a ton, or 1,000 lb. It is much lighter than topsoil or gravel."}},
+    {"@type": "Question", "name": "Can I use too much compost?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. More than 3 to 4 inches mixed in can hold too much water and unbalance nutrients. Stick to the depth above."}},
+    {"@type": "Question", "name": "Compost or topsoil for a new bed?", "acceptedAnswer": {"@type": "Answer", "text": "Use topsoil to build up height and compost to feed the soil. Mix compost into the top layer of topsoil."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Compost Calculator</h1>
+<p class="lede">Find the right amount of compost to enrich garden beds and improve soil. Enter the area and depth and get cubic yards, bags and weight.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Bed length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="20" min="0" step="0.5">
+    <label for="width">Bed width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="depth">Compost depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="2" min="0" step="0.5">
+    <label for="bag">Bag size</label>
+    <select id="bag"><option value="1" selected>1 cubic foot bag</option><option value="2">2 cubic foot bag</option><option value="0.75">0.75 cubic foot bag</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per cubic yard" data-met="per cubic metre">per cubic yard</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Cubic yards = length (ft) &times; width (ft) &times; depth (in) &divide; 12 &divide; 27. One cubic yard of compost weighs about 0.5 tons.</p>
+<p><strong>Worked example:</strong> A bed 20 ft by 8 ft at 2 in deep: 20 &times; 8 &times; 2 &divide; 12 = 26.67 cubic feet. 26.67 &divide; 27 = 0.99 cubic yards. With 1 cubic foot bags: 26.67 &divide; 1 = 27 bags.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Depth</th><th>Cubic yards per 100 sq ft</th><th>1 cu ft bags per 100 sq ft</th></tr><tr><td>1 in</td><td>0.31</td><td>9</td></tr><tr><td>2 in</td><td>0.62</td><td>17</td></tr><tr><td>3 in</td><td>0.93</td><td>25</td></tr><tr><td>4 in</td><td>1.23</td><td>34</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="topsoil-calculator.html">Topsoil Calculator</a><p>Work out how much topsoil you need to level a lawn or fill a raised bed.</p></div>
+  <div class="card"><a href="mulch-calculator.html">Mulch Calculator</a><p>Work out mulch for flower beds and garden borders in cubic yards and bags.</p></div>
+  <div class="card"><a href="grass-seed-calculator.html">Grass Seed Calculator</a><p>Work out how much grass seed to buy for a new lawn or to thicken an old one.</p></div>
+  <div class="card"><a href="sod-calculator.html">Sod Calculator</a><p>Work out how much sod your lawn needs in square feet, rolls and pallets.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How deep should compost be?</h3>
+  <p>Spread 2 to 3 inches over a bed and mix it into the top few inches of soil. One inch works as a yearly top dressing.</p>
+  <h3>How much does a cubic yard of compost weigh?</h3>
+  <p>About half a ton, or 1,000 lb. It is much lighter than topsoil or gravel.</p>
+  <h3>Can I use too much compost?</h3>
+  <p>Yes. More than 3 to 4 inches mixed in can hold too much water and unbalance nutrients. Stick to the depth above.</p>
+  <h3>Compost or topsoil for a new bed?</h3>
+  <p>Use topsoil to build up height and compost to feed the soil. Mix compost into the top layer of topsoil.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), D = v('depth','in');
+  var bag = parseFloat(document.getElementById('bag').value);
+  if([L,W,D].some(isNaN) || L <= 0 || W <= 0 || D <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and depth.'; r.classList.add('show'); return; }
+  var yd3 = L * W * D / 12 / 27;
+  var bags = Math.ceil(yd3 * 27 / bag);
+  var tons = yd3 * 0.5;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (yd3*0.764555) : (yd3); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per cubic metre' : 'per cubic yard') + '.'; }
+
+  r.innerHTML = 'You need <b>' + fmtVol(yd3) + '</b> of compost (<b>' + fmtWt(tons) + '</b>), about <b>' + bags + ' bags</b>.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drywall Sheet Calculator | ShezMath</title>
+<meta name="description" content="Calculate drywall sheets, screws and tape for walls and ceilings. Enter wall size and sheet size to get exact counts. Free, instant results.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How many drywall sheets do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the wall area by the sheet area and add 5% waste. A 12 by 8 ft wall needs 4 sheets of 4 by 8 ft drywall."}},
+    {"@type": "Question", "name": "What size drywall sheet should I use?", "acceptedAnswer": {"@type": "Answer", "text": "Four by eight foot sheets suit most rooms. Twelve foot sheets mean fewer joints on long walls but need two people to lift."}},
+    {"@type": "Question", "name": "How many screws per drywall sheet?", "acceptedAnswer": {"@type": "Answer", "text": "About 32 screws per 4 by 8 ft sheet when studs are 16 inches apart. Use more on ceilings."}},
+    {"@type": "Question", "name": "How much joint tape do I need?", "acceptedAnswer": {"@type": "Answer", "text": "One 250 foot roll of tape covers about 250 square feet of wall. Buy one roll per room for most jobs."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Drywall Sheet Calculator</h1>
+<p class="lede">Work out how many drywall sheets a room needs, plus screws and joint tape. Enter the wall area and sheet size.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Wall length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="height">Wall height (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="height" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="sheet">Sheet size</label>
+    <select id="sheet"><option value="32" selected>4 x 8 ft — 32 sq ft per sheet</option><option value="48">4 x 12 ft — 48 sq ft per sheet</option><option value="40">4 x 10 ft — 40 sq ft per sheet</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per sheet" data-met="per sheet">per sheet</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Sheets = wall area (sq ft) &divide; area per sheet (sq ft) &times; 1.05 for waste. Screws = sheets &times; 32. Tape rolls = area &divide; 250 sq ft per roll.</p>
+<p><strong>Worked example:</strong> A wall 12 ft by 8 ft with 4 by 8 ft sheets: area is 96 sq ft. 96 &divide; 32 = 3 sheets. With 5% waste: 3 &times; 1.05 = 3.15, so 4 sheets. Screws: 4 &times; 32 = 128. Tape: 96 &divide; 250 = 0.38, so 1 roll.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Sheet size</th><th>Area per sheet</th><th>Sheets per 100 sq ft</th></tr><tr><td>4 x 8 ft</td><td>32 sq ft</td><td>4</td></tr><tr><td>4 x 10 ft</td><td>40 sq ft</td><td>3</td></tr><tr><td>4 x 12 ft</td><td>48 sq ft</td><td>3</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="paint-calculator.html">Paint Calculator</a><p>Work out how much paint a room or wall needs.</p></div>
+  <div class="card"><a href="wallpaper-roll-calculator.html">Wallpaper Roll Calculator</a><p>Work out how many wallpaper rolls your wall or room needs.</p></div>
+  <div class="card"><a href="flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Work out how many floor tiles a room needs, plus boxes.</p></div>
+  <div class="card"><a href="lumber-calculator.html">Lumber Calculator</a><p>Work out how many boards to buy for framing, shelving or a fence run.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How many drywall sheets do I need?</h3>
+  <p>Divide the wall area by the sheet area and add 5% waste. A 12 by 8 ft wall needs 4 sheets of 4 by 8 ft drywall.</p>
+  <h3>What size drywall sheet should I use?</h3>
+  <p>Four by eight foot sheets suit most rooms. Twelve foot sheets mean fewer joints on long walls but need two people to lift.</p>
+  <h3>How many screws per drywall sheet?</h3>
+  <p>About 32 screws per 4 by 8 ft sheet when studs are 16 inches apart. Use more on ceilings.</p>
+  <h3>How much joint tape do I need?</h3>
+  <p>One 250 foot roll of tape covers about 250 square feet of wall. Buy one roll per room for most jobs.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), H = v('height','ft');
+  var sheetArea = parseFloat(document.getElementById('sheet').value);
+  if([L,H,sheetArea].some(isNaN) || L <= 0 || H <= 0 || sheetArea <= 0){ r.innerHTML = 'Please enter positive numbers for wall size.'; r.classList.add('show'); return; }
+  var area = L * H;
+  var sheets = Math.ceil(area / sheetArea * 1.05);
+  var screws = sheets * 32;
+  var tape = Math.ceil(area / 250);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (sheets) : (sheets); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per sheet' : 'per sheet') + '.'; }
+
+  r.innerHTML = 'Wall area: <b>' + fmtArea(area) + '</b>.<br>You need <b>' + sheets + ' sheets</b> of drywall, about <b>' + screws + ' screws</b> and <b>' + tape + ' roll' + (tape > 1 ? 's' : '') + '</b> of joint tape.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

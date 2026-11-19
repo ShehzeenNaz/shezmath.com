@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grout Calculator | ShezMath</title>
+<meta name="description" content="Calculate grout bags for tiled floors and walls. Enter tile area, tile size and joint width to get the grout you need. Free and easy to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How much grout do I need?", "acceptedAnswer": {"@type": "Answer", "text": "One 25 lb bag covers about 150 square feet of 12 inch tile with 1/8 inch joints. Smaller tiles and wider joints use more grout."}},
+    {"@type": "Question", "name": "Sanded or unsanded grout?", "acceptedAnswer": {"@type": "Answer", "text": "Use sanded grout for joints wider than 1/8 inch. Use unsanded grout for narrow joints and polished stone that scratches easily."}},
+    {"@type": "Question", "name": "How much grout for a bathroom floor?", "acceptedAnswer": {"@type": "Answer", "text": "A typical 50 square foot bathroom floor with 12 inch tiles needs one 25 lb bag of grout."}},
+    {"@type": "Question", "name": "Can I mix grout colours?", "acceptedAnswer": {"@type": "Answer", "text": "Do not mix different colours or brands. Buy all your grout from one batch so the colour matches."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Grout Calculator</h1>
+<p class="lede">Work out how much grout your tiling job needs. Enter the area, tile size and joint width to get 25 lb bag counts.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Tiled length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="width">Tiled width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="10" min="0" step="0.5">
+    <label for="tile">Tile size (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="tile" data-kind="in" value="12" min="0" step="1">
+    <label for="joint">Grout joint width (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="joint" data-kind="in" value="0.125" min="0" step="0.0625">
+    <label for="price">Price (<span class="ulabel" data-imp="per 25 lb bag" data-met="per 25 lb bag">per 25 lb bag</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Coverage per 25 lb bag = 150 sq ft &times; (tile size &divide; 12) &times; (0.125 &divide; joint width). Bags = area &divide; coverage, rounded up.</p>
+<p><strong>Worked example:</strong> A floor 12 ft by 10 ft with 12 in tiles and 1/8 in joints: area is 120 sq ft. Coverage is 150 &times; 1 &times; 1 = 150 sq ft per bag. 120 &divide; 150 = 0.8, so 1 bag of 25 lb grout.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Tile size</th><th>Joint width</th><th>Coverage per 25 lb bag</th></tr><tr><td>6 in</td><td>1/8 in</td><td>75 sq ft</td></tr><tr><td>12 in</td><td>1/8 in</td><td>150 sq ft</td></tr><tr><td>12 in</td><td>1/4 in</td><td>75 sq ft</td></tr><tr><td>24 in</td><td>1/8 in</td><td>300 sq ft</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Work out how many floor tiles a room needs, plus boxes.</p></div>
+  <div class="card"><a href="brick-calculator.html">Brick Calculator</a><p>Work out how many bricks a wall, planter or paver area needs.</p></div>
+  <div class="card"><a href="paver-sand-calculator.html">Paver Sand Calculator</a><p>Work out both kinds of paver sand: bedding sand under the pavers and joint sand swept between them.</p></div>
+  <div class="card"><a href="paint-calculator.html">Paint Calculator</a><p>Work out how much paint a room or wall needs.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much grout do I need?</h3>
+  <p>One 25 lb bag covers about 150 square feet of 12 inch tile with 1/8 inch joints. Smaller tiles and wider joints use more grout.</p>
+  <h3>Sanded or unsanded grout?</h3>
+  <p>Use sanded grout for joints wider than 1/8 inch. Use unsanded grout for narrow joints and polished stone that scratches easily.</p>
+  <h3>How much grout for a bathroom floor?</h3>
+  <p>A typical 50 square foot bathroom floor with 12 inch tiles needs one 25 lb bag of grout.</p>
+  <h3>Can I mix grout colours?</h3>
+  <p>Do not mix different colours or brands. Buy all your grout from one batch so the colour matches.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), tile = v('tile','in'), joint = v('joint','in');
+  if([L,W,tile,joint].some(isNaN) || L <= 0 || W <= 0 || tile <= 0 || joint <= 0){ r.innerHTML = 'Please enter positive numbers for all values.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var coverage = 150 * (tile / 12) * (0.125 / joint);
+  var bags = Math.ceil(area / coverage);
+  var lb = bags * 25;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (bags) : (bags); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per 25 lb bag' : 'per 25 lb bag') + '.'; }
+
+  r.innerHTML = 'Tiled area: <b>' + fmtArea(area) + '</b>.<br>One 25 lb bag covers about ' + coverage.toFixed(0) + ' sq ft here.<br>You need <b>' + bags + ' bags</b> of grout (' + fmtLb(lb) + ').' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Average Calculator | ShezMath</title>
+<meta name="description" content="Find the average of up to five test scores in seconds. Enter your scores to see your average grade and how each test compares to the average.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do I calculate the average of my test scores?", "acceptedAnswer": {"@type": "Answer", "text": "Add all your test scores together, then divide by the number of tests. For example, 78 plus 85 plus 92 plus 67 plus 88 is 410, and 410 divided by 5 is 82, so the average is 82."}},
+    {"@type": "Question", "name": "What if I have fewer than five scores?", "acceptedAnswer": {"@type": "Answer", "text": "Leave the boxes you do not need empty. The calculator only averages the scores you enter, so two scores will be averaged over two, and three over three."}},
+    {"@type": "Question", "name": "Is this a weighted average?", "acceptedAnswer": {"@type": "Answer", "text": "No. This is a simple average where every test counts the same. If your tests have different weights, use a weighted grade calculator instead."}},
+    {"@type": "Question", "name": "Can I enter percentages and marks together?", "acceptedAnswer": {"@type": "Answer", "text": "Only if they are on the same scale. Convert marks to percentages first, or enter all scores as percentages, so the average is fair."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Grade Average Calculator</h1>
+<p class="lede">Find the average of up to five test scores in seconds. Enter your scores and see your average grade at a glance.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="score1">Test score 1</label>
+    <input type="number" id="score1" min="0" step="any" value="78">
+    <label for="score2">Test score 2</label>
+    <input type="number" id="score2" min="0" step="any" value="85">
+    <label for="score3">Test score 3</label>
+    <input type="number" id="score3" min="0" step="any" value="92">
+    <label for="score4">Test score 4</label>
+    <input type="number" id="score4" min="0" step="any" value="67">
+    <label for="score5">Test score 5</label>
+    <input type="number" id="score5" min="0" step="any" value="88">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Average = (score 1 + score 2 + score 3 + score 4 + score 5) &divide; number of scores entered.</p>
+<p><strong>Worked example:</strong> Your five test scores are 78, 85, 92, 67 and 88. Add them up: 78 + 85 + 92 + 67 + 88 = 410. Divide by 5 tests: 410 &divide; 5 = 82. Your grade average is 82.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn marks into a percentage before averaging them.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Average grades that count for different weights.</p></div>
+  <div class="card"><a href="drop-lowest-grade-calculator.html">Drop Lowest Grade Calculator</a><p>See your average after dropping your lowest score.</p></div>
+  <div class="card"><a href="letter-grade-calculator.html">Letter Grade Calculator</a><p>Convert your average percentage into a letter grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How do I calculate the average of my test scores?</h3>
+  <p>Add all your test scores together, then divide by the number of tests. For example, 78 plus 85 plus 92 plus 67 plus 88 is 410, and 410 divided by 5 is 82, so the average is 82.</p>
+  <h3>What if I have fewer than five scores?</h3>
+  <p>Leave the boxes you do not need empty. The calculator only averages the scores you enter, so two scores will be averaged over two, and three over three.</p>
+  <h3>Is this a weighted average?</h3>
+  <p>No. This is a simple average where every test counts the same. If your tests have different weights, use a weighted grade calculator instead.</p>
+  <h3>Can I enter percentages and marks together?</h3>
+  <p>Only if they are on the same scale. Convert marks to percentages first, or enter all scores as percentages, so the average is fair.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var scores = [];
+  for (var i = 1; i <= 5; i++) {
+    var v = parseFloat(document.getElementById('score' + i).value);
+    if (!isNaN(v)) scores.push(v);
+  }
+  var result = document.getElementById('result');
+  if (scores.length === 0) {
+    result.innerHTML = 'Please enter at least one test score.';
+    result.classList.add('show');
+    return;
+  }
+  var sum = scores.reduce(function (a, b) { return a + b; }, 0);
+  var avg = sum / scores.length;
+  result.innerHTML = 'Your grade average is <strong>' + avg.toFixed(1) + '</strong> (total ' + sum + ' across ' + scores.length + ' test' + (scores.length > 1 ? 's' : '') + ').';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

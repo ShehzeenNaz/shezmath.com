@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credits to Raise GPA Calculator | ShezMath</title>
+<meta name="description" content="Find out how many credits of A grades you need to reach your target GPA. Enter your current GPA and credits to see the exact number.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Why does this calculator assume I earn all As?", "acceptedAnswer": {"@type": "Answer", "text": "All As give the fastest possible climb, so the answer is the smallest number of credits that can reach your target. Earning Bs instead would take more credits."}},
+    {"@type": "Question", "name": "What if I earn Bs instead of As?", "acceptedAnswer": {"@type": "Answer", "text": "Bs are worth 3.0 points, so they pull your average up more slowly. If your target is above 3.0, Bs alone can never reach it. Mix in As to close the gap faster."}},
+    {"@type": "Question", "name": "Can I ever reach a 4.0 GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Only if you have no credits below an A so far. Once a lower grade is on your record, even all As afterwards leave your average just under 4.0. The calculator tells you when a target is out of reach."}},
+    {"@type": "Question", "name": "Would retaking a low grade help more than new credits?", "acceptedAnswer": {"@type": "Answer", "text": "Often yes. Retaking replaces the low grade instead of diluting it, so a few retaken credits can move your GPA more than many new ones. Try our retake GPA calculator to compare."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Credits to Raise GPA Calculator</h1>
+<p class="lede">Find out how many credits of A grades you need to reach your target GPA. Enter your current GPA, your credits so far and the GPA you want.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current-gpa">Current GPA</label>
+    <input type="number" id="current-gpa" value="2.8" min="0" max="4" step="0.01">
+    <label for="current-credits">Completed credits</label>
+    <input type="number" id="current-credits" value="30" min="0" step="0.5">
+    <label for="target-gpa">Target GPA</label>
+    <input type="number" id="target-gpa" value="3.0" min="0" max="4" step="0.01">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Solve (current GPA &times; credits + 4.0 &times; x) &divide; (credits + x) = target GPA for x, the credits of A (4.0) grades needed. That gives x = credits &times; (target &minus; current GPA) &divide; (4.0 &minus; target). The answer is rounded up to whole credits.</p>
+<p><strong>Worked example:</strong> Your GPA is 2.8 over 30 credits and your target is 3.0. Solve (2.8 &times; 30 + 4.0 &times; x) &divide; (30 + x) = 3.0. That is 84 + 4x = 90 + 3x, so x = 6. You need 6 credits of A grades, about two 3-credit courses, to reach a 3.0 GPA.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine your GPA so far with a new semester.</p></div>
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA on the 4.0 scale from your course grades.</p></div>
+  <div class="card"><a href="retake-gpa-calculator.html">Retake GPA Calculator</a><p>See how retaking a course changes your GPA.</p></div>
+  <div class="card"><a href="semester-gpa-calculator.html">Semester GPA Calculator</a><p>Work out your GPA for a single semester.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>Why does this calculator assume I earn all As?</h3>
+  <p>All As give the fastest possible climb, so the answer is the smallest number of credits that can reach your target. Earning Bs instead would take more credits.</p>
+  <h3>What if I earn Bs instead of As?</h3>
+  <p>Bs are worth 3.0 points, so they pull your average up more slowly. If your target is above 3.0, Bs alone can never reach it. Mix in As to close the gap faster.</p>
+  <h3>Can I ever reach a 4.0 GPA?</h3>
+  <p>Only if you have no credits below an A so far. Once a lower grade is on your record, even all As afterwards leave your average just under 4.0. The calculator tells you when a target is out of reach.</p>
+  <h3>Would retaking a low grade help more than new credits?</h3>
+  <p>Often yes. Retaking replaces the low grade instead of diluting it, so a few retaken credits can move your GPA more than many new ones. Try our retake GPA calculator to compare.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var gpa = parseFloat(document.getElementById('current-gpa').value);
+  var credits = parseFloat(document.getElementById('current-credits').value);
+  var target = parseFloat(document.getElementById('target-gpa').value);
+  var r = document.getElementById('result');
+  if (isNaN(gpa) || isNaN(credits) || isNaN(target)) {
+    r.innerHTML = 'Please enter all three numbers.';
+    r.classList.add('show');
+    return;
+  }
+  if (credits <= 0) {
+    r.innerHTML = 'Enter the credits you have completed so far.';
+    r.classList.add('show');
+    return;
+  }
+  if (target <= gpa) {
+    r.innerHTML = 'You have already reached a GPA of <strong>' + gpa.toFixed(2) + '</strong>, so no extra credits are needed to hit ' + target.toFixed(2) + '.';
+    r.classList.add('show');
+    return;
+  }
+  if (target >= 4.0) {
+    r.innerHTML = 'A target of ' + target.toFixed(2) + ' cannot be reached with A grades alone, because an A is worth 4.0 and your earlier grades pull the average below 4.0. Pick a target under 4.0.';
+    r.classList.add('show');
+    return;
+  }
+  var x = credits * (target - gpa) / (4.0 - target);
+  var needed = Math.ceil(x - 1e-9); // tiny epsilon so 6.0000000001 does not round up to 7
+  var courses = Math.ceil(needed / 3);
+  r.innerHTML = 'You need <strong>' + needed + ' credits of A grades</strong> (about ' + courses + ' three-credit course' + (courses === 1 ? '' : 's') + ') to reach a GPA of ' + target.toFixed(2) + '.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

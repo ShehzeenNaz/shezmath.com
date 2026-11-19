@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paint Calculator | ShezMath</title>
+<meta name="description" content="Calculate paint in gallons and litres for walls and rooms. Enter wall size and coats to get exact paint amounts. Get instant results free.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How much paint do I need per room?", "acceptedAnswer": {"@type": "Answer", "text": "Measure each wall, add the areas and divide by 350 for one coat. Double it for two coats. A 12 by 12 ft room needs about 2 gallons for two coats."}},
+    {"@type": "Question", "name": "Does primer count as a coat?", "acceptedAnswer": {"@type": "Answer", "text": "No. Primer is a separate coat that seals the surface. Count it apart from your two finish coats."}},
+    {"@type": "Question", "name": "How much does a gallon of paint cover?", "acceptedAnswer": {"@type": "Answer", "text": "About 350 square feet on a smooth wall. Rough or porous walls use more, so coverage drops to about 250 square feet."}},
+    {"@type": "Question", "name": "Should I buy extra paint?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, buy one extra quart for touch-ups later. Paint colours vary slightly between batches."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Paint Calculator</h1>
+<p class="lede">Work out how much paint a room or wall needs. Enter the wall area and coats, and get gallons, litres and cans.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Wall length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="width">Wall height (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="coats">Number of coats</label>
+    <input type="number" id="coats" value="2" min="1" step="1">
+    <label for="coverage">Coverage per gallon (sq ft)</label>
+    <input type="number" id="coverage" value="350" min="1" step="10">
+    <label for="price">Price (<span class="ulabel" data-imp="per gallon" data-met="per litre">per gallon</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Gallons = wall area (sq ft) &times; coats &divide; coverage per gallon. One gallon of paint covers about 350 sq ft.</p>
+<p><strong>Worked example:</strong> A wall 12 ft by 8 ft with 2 coats: area is 96 sq ft. 96 &times; 2 = 192 sq ft to paint. 192 &divide; 350 = 0.55 gallons. Buy 1 gallon.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Area to paint</th><th>1 coat (350 sq ft/gal)</th><th>2 coats (350 sq ft/gal)</th></tr><tr><td>100 sq ft</td><td>0.29 gallons</td><td>0.57 gallons</td></tr><tr><td>200 sq ft</td><td>0.57 gallons</td><td>1.14 gallons</td></tr><tr><td>400 sq ft</td><td>1.14 gallons</td><td>2.29 gallons</td></tr><tr><td>800 sq ft</td><td>2.29 gallons</td><td>4.57 gallons</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="wallpaper-roll-calculator.html">Wallpaper Roll Calculator</a><p>Work out how many wallpaper rolls your wall or room needs.</p></div>
+  <div class="card"><a href="flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Work out how many floor tiles a room needs, plus boxes.</p></div>
+  <div class="card"><a href="drywall-sheet-calculator.html">Drywall Sheet Calculator</a><p>Work out how many drywall sheets a room needs, plus screws and joint tape.</p></div>
+  <div class="card"><a href="btu-ac-size-calculator.html">BTU AC Size Calculator</a><p>Work out the BTU rating your room needs so the AC cools well without wasting power.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much paint do I need per room?</h3>
+  <p>Measure each wall, add the areas and divide by 350 for one coat. Double it for two coats. A 12 by 12 ft room needs about 2 gallons for two coats.</p>
+  <h3>Does primer count as a coat?</h3>
+  <p>No. Primer is a separate coat that seals the surface. Count it apart from your two finish coats.</p>
+  <h3>How much does a gallon of paint cover?</h3>
+  <p>About 350 square feet on a smooth wall. Rough or porous walls use more, so coverage drops to about 250 square feet.</p>
+  <h3>Should I buy extra paint?</h3>
+  <p>Yes, buy one extra quart for touch-ups later. Paint colours vary slightly between batches.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), coats = raw('coats'), cov = raw('coverage');
+  if([L,W,coats,cov].some(isNaN) || L <= 0 || W <= 0 || coats <= 0 || cov <= 0){ r.innerHTML = 'Please enter positive numbers for wall size, coats and coverage.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var galExact = area * coats / cov;
+  var gal = Math.ceil(galExact);
+  var buyTxt = UNIT === 'met' ? Math.ceil(galExact * 3.78541) + ' litres' : gal + ' gallon' + (gal > 1 ? 's' : '');
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (galExact*3.78541) : (gal); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per litre' : 'per gallon') + '.'; }
+
+  r.innerHTML = 'Wall area: <b>' + fmtArea(area) + '</b> (' + coats + ' coats).<br>You need <b>' + fmtGal(galExact) + '</b> — buy <b>' + buyTxt + '</b>.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

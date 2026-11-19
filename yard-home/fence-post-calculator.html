@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fence Post Calculator | ShezMath</title>
+<meta name="description" content="Calculate fence posts, spacing and concrete bags. Enter fence length and post spacing to get post counts fast. Get instant results free.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How far apart should fence posts be?", "acceptedAnswer": {"@type": "Answer", "text": "Six to eight feet apart is standard. Use six feet for tall or heavy fences and windy spots."}},
+    {"@type": "Question", "name": "How many posts do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the fence length by the spacing and add one. A 100 ft fence at 8 ft spacing needs 14 posts."}},
+    {"@type": "Question", "name": "How deep should fence posts go?", "acceptedAnswer": {"@type": "Answer", "text": "One third of the post length, and at least 24 inches deep. Deeper in soft soil or cold areas."}},
+    {"@type": "Question", "name": "Do corners need extra posts?", "acceptedAnswer": {"@type": "Answer", "text": "Each corner and gate needs its own post. Add one post for every corner and two for a gate opening."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Fence Post Calculator</h1>
+<p class="lede">Work out how many fence posts your fence needs and how far apart to set them. Includes concrete bags per post.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Fence length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="100" min="0" step="0.5">
+    <label for="spacing">Post spacing (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="spacing" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="bagsper">Concrete bags per post (60 lb)</label>
+    <input type="number" id="bagsper" value="1" min="0" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per post" data-met="per post">per post</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Sections = fence length &divide; post spacing, rounded up. Posts = sections + 1. Concrete bags = posts &times; bags per post.</p>
+<p><strong>Worked example:</strong> A 100 ft fence with 8 ft spacing: 100 &divide; 8 = 12.5, so 13 sections. Posts: 13 + 1 = 14 posts. With 1 bag per post, that is 14 bags of concrete.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Fence length</th><th>Posts at 8 ft spacing</th><th>Posts at 6 ft spacing</th></tr><tr><td>50 ft</td><td>8</td><td>10</td></tr><tr><td>100 ft</td><td>14</td><td>18</td></tr><tr><td>150 ft</td><td>20</td><td>26</td></tr><tr><td>200 ft</td><td>26</td><td>35</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="fence-boards-calculator.html">Fence Boards Calculator</a><p>Work out how many fence boards or pickets a fence needs.</p></div>
+  <div class="card"><a href="post-hole-concrete-calculator.html">Post Hole Concrete Bags Calculator</a><p>Work out concrete for fence and deck post holes.</p></div>
+  <div class="card"><a href="lumber-calculator.html">Lumber Calculator</a><p>Work out how many boards to buy for framing, shelving or a fence run.</p></div>
+  <div class="card"><a href="concrete-footing-calculator.html">Concrete Footing Calculator</a><p>Work out concrete for strip footings under walls, decks and extensions.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How far apart should fence posts be?</h3>
+  <p>Six to eight feet apart is standard. Use six feet for tall or heavy fences and windy spots.</p>
+  <h3>How many posts do I need?</h3>
+  <p>Divide the fence length by the spacing and add one. A 100 ft fence at 8 ft spacing needs 14 posts.</p>
+  <h3>How deep should fence posts go?</h3>
+  <p>One third of the post length, and at least 24 inches deep. Deeper in soft soil or cold areas.</p>
+  <h3>Do corners need extra posts?</h3>
+  <p>Each corner and gate needs its own post. Add one post for every corner and two for a gate opening.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), S = v('spacing','ft'), bpp = raw('bagsper');
+  if([L,S].some(isNaN) || L <= 0 || S <= 0){ r.innerHTML = 'Please enter positive numbers for fence length and spacing.'; r.classList.add('show'); return; }
+  var sections = Math.ceil(L / S);
+  var posts = sections + 1;
+  var bags = posts * (isNaN(bpp) ? 0 : bpp);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (posts) : (posts); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per post' : 'per post') + '.'; }
+
+  r.innerHTML = 'You need <b>' + posts + ' posts</b> (' + sections + ' sections at ' + fmtLenFt(S) + ' spacing).<br>Concrete: about <b>' + bags + ' bags</b> of 60 lb mix.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

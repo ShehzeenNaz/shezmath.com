@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Time Allocation Calculator | ShezMath</title>
+<meta name="description" content="Plan your exam time question by question. Enter total minutes, question count and reserve time to see exactly how long each question gets.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How much time should I spend per question?", "acceptedAnswer": {"@type": "Answer", "text": "Divide your available minutes by the number of questions. First set aside time for reading the paper and checking answers at the end, then split what is left evenly across the questions."}},
+    {"@type": "Question", "name": "How much time should I reserve for checking?", "acceptedAnswer": {"@type": "Answer", "text": "Reserve about 10% of the exam time, or at least 10 to 15 minutes. Checking catches careless mistakes and is one of the easiest ways to gain extra marks."}},
+    {"@type": "Question", "name": "Should every question get the same time?", "acceptedAnswer": {"@type": "Answer", "text": "No. Give more time to questions worth more marks. If a question is worth double the marks of another, it deserves about double the time."}},
+    {"@type": "Question", "name": "What if I get stuck on a question?", "acceptedAnswer": {"@type": "Answer", "text": "Move on when your time for that question is up. Answer the questions you know first, then return to the hard ones with whatever time is left."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Exam Time Allocation Calculator</h1>
+<p class="lede">Plan exactly how long to spend on each question. Enter your exam length, question count and reserve time to get your per-question time.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="totalmin">Total exam time (minutes)</label>
+    <input type="number" id="totalmin" value="180" min="1" step="1">
+    <label for="questions">Number of questions</label>
+    <input type="number" id="questions" value="60" min="1" step="1">
+    <label for="reserve">Reading and checking reserve (minutes)</label>
+    <input type="number" id="reserve" value="15" min="0" step="1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Minutes per question = (Total exam minutes &minus; Reserve minutes) &divide; Number of questions. To show minutes and seconds, take the whole minutes and multiply the decimal part by 60 to get seconds.</p>
+<p><strong>Worked example:</strong> A 180-minute exam has 60 questions and you reserve 15 minutes for reading and checking. Time for questions: 180 &minus; 15 = 165 minutes. Minutes per question: 165 &divide; 60 = 2.75 minutes. The decimal 0.75 &times; 60 = 45 seconds, so you get 2 minutes 45 seconds per question.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="study-hours-planner.html">Study Hours Planner</a><p>Split your study time across subjects by importance.</p></div>
+  <div class="card"><a href="negative-marking-calculator.html">Negative Marking Calculator</a><p>Work out your score when wrong answers lose marks.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the score you need on your final exam.</p></div>
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn any test score into a percentage.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much time should I spend per question?</h3>
+  <p>Divide your available minutes by the number of questions. First set aside time for reading the paper and checking answers at the end, then split what is left evenly across the questions.</p>
+  <h3>How much time should I reserve for checking?</h3>
+  <p>Reserve about 10% of the exam time, or at least 10 to 15 minutes. Checking catches careless mistakes and is one of the easiest ways to gain extra marks.</p>
+  <h3>Should every question get the same time?</h3>
+  <p>No. Give more time to questions worth more marks. If a question is worth double the marks of another, it deserves about double the time.</p>
+  <h3>What if I get stuck on a question?</h3>
+  <p>Move on when your time for that question is up. Answer the questions you know first, then return to the hard ones with whatever time is left.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var totalMin = parseFloat(document.getElementById('totalmin').value);
+  var questions = parseFloat(document.getElementById('questions').value);
+  var reserve = parseFloat(document.getElementById('reserve').value);
+  var r = document.getElementById('result');
+  if (isNaN(totalMin) || isNaN(questions) || isNaN(reserve) || totalMin <= 0 || questions <= 0) {
+    r.innerHTML = 'Please enter valid numbers. Exam time and question count must be more than 0.';
+    r.classList.add('show');
+    return;
+  }
+  if (reserve < 0 || reserve >= totalMin) {
+    r.innerHTML = 'Reserve time must be 0 or more, and less than the total exam time.';
+    r.classList.add('show');
+    return;
+  }
+  var available = totalMin - reserve;
+  var perQ = available / questions;
+  var mins = Math.floor(perQ);
+  var secs = Math.round((perQ - mins) * 60);
+  if (secs === 60) { mins += 1; secs = 0; }
+  r.innerHTML = 'You get <strong>' + perQ.toFixed(2) + ' minutes per question</strong> — that is <strong>' + mins + ' min ' + secs + ' sec</strong>. You have ' + available + ' minutes for questions after reserving ' + reserve + ' minutes for reading and checking.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

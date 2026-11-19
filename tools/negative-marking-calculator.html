@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negative Marking Calculator | ShezMath</title>
+<meta name="description" content="Work out your exam score with negative marking. Enter correct and wrong answers plus the marks per answer to see your final score instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is negative marking?", "acceptedAnswer": {"@type": "Answer", "text": "Negative marking means you lose marks for a wrong answer. For example, with +1 for a correct answer and -0.25 for a wrong answer, a guess that is wrong costs you a quarter of a mark."}},
+    {"@type": "Question", "name": "Should I guess on a negative marking exam?", "acceptedAnswer": {"@type": "Answer", "text": "Only guess if you can rule out at least one option. With -0.25 per wrong answer and 4 options, a random guess breaks even on average, so blind guessing does not help or hurt over many questions."}},
+    {"@type": "Question", "name": "Do unattempted questions lose marks?", "acceptedAnswer": {"@type": "Answer", "text": "No. Unattempted questions score 0. You only lose marks for answers you got wrong, so leaving a question blank is safer than a wild guess."}},
+    {"@type": "Question", "name": "Can my score go below zero with negative marking?", "acceptedAnswer": {"@type": "Answer", "text": "In theory yes, if you get far more wrong than right. In practice most exams set the minimum score to zero, so a very low raw score is simply recorded as 0."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Negative Marking Calculator</h1>
+<p class="lede">Work out your exam score when wrong answers lose marks. Enter your correct and wrong answers and the marking scheme to see your final score.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="totalq">Total questions</label>
+    <input type="number" id="totalq" value="100" min="1" step="1">
+    <label for="correct">Correct answers</label>
+    <input type="number" id="correct" value="70" min="0" step="1">
+    <label for="wrong">Wrong answers</label>
+    <input type="number" id="wrong" value="20" min="0" step="1">
+    <label for="posmarks">Marks per correct answer</label>
+    <input type="number" id="posmarks" value="1" min="0" step="0.01">
+    <label for="negmarks">Negative marks per wrong answer</label>
+    <input type="number" id="negmarks" value="0.25" min="0" step="0.01">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final score = (Correct answers &times; Marks per correct answer) &minus; (Wrong answers &times; Negative marks per wrong answer). Unattempted questions score 0. Maximum possible score = Total questions &times; Marks per correct answer.</p>
+<p><strong>Worked example:</strong> An exam has 100 questions, with +1 per correct answer and &minus;0.25 per wrong answer. You got 70 correct, 20 wrong, and left 10 unattempted. Correct marks: 70 &times; 1 = 70. Penalty: 20 &times; 0.25 = 5. Final score: 70 &minus; 5 = 65 out of a maximum of 100, which is 65%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn any test score into a percentage.</p></div>
+  <div class="card"><a href="test-score-needed-calculator.html">Test Score Needed Calculator</a><p>Work out the score you need on your next test.</p></div>
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Work out the average of your marks.</p></div>
+  <div class="card"><a href="exam-time-allocation-calculator.html">Exam Time Allocation Calculator</a><p>Plan how many minutes to spend per question.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is negative marking?</h3>
+  <p>Negative marking means you lose marks for a wrong answer. For example, with +1 for a correct answer and -0.25 for a wrong answer, a guess that is wrong costs you a quarter of a mark.</p>
+  <h3>Should I guess on a negative marking exam?</h3>
+  <p>Only guess if you can rule out at least one option. With -0.25 per wrong answer and 4 options, a random guess breaks even on average, so blind guessing does not help or hurt over many questions.</p>
+  <h3>Do unattempted questions lose marks?</h3>
+  <p>No. Unattempted questions score 0. You only lose marks for answers you got wrong, so leaving a question blank is safer than a wild guess.</p>
+  <h3>Can my score go below zero with negative marking?</h3>
+  <p>In theory yes, if you get far more wrong than right. In practice most exams set the minimum score to zero, so a very low raw score is simply recorded as 0.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var total = parseFloat(document.getElementById('totalq').value);
+  var correct = parseFloat(document.getElementById('correct').value);
+  var wrong = parseFloat(document.getElementById('wrong').value);
+  var pos = parseFloat(document.getElementById('posmarks').value);
+  var neg = parseFloat(document.getElementById('negmarks').value);
+  var r = document.getElementById('result');
+  if (isNaN(total) || isNaN(correct) || isNaN(wrong) || isNaN(pos) || isNaN(neg) || total <= 0) {
+    r.innerHTML = 'Please enter a number in every box. Total questions must be more than 0.';
+    r.classList.add('show');
+    return;
+  }
+  if (correct < 0 || wrong < 0 || correct + wrong > total) {
+    r.innerHTML = 'Correct plus wrong answers cannot be more than the total number of questions.';
+    r.classList.add('show');
+    return;
+  }
+  var unattempted = total - correct - wrong;
+  var gained = correct * pos;
+  var lost = wrong * neg;
+  var score = gained - lost;
+  var maxScore = total * pos;
+  var pct = maxScore > 0 ? (score / maxScore) * 100 : 0;
+  r.innerHTML = 'Your final score is <strong>' + score.toFixed(2) + ' out of ' + maxScore + '</strong> (' + pct.toFixed(1) + '%). You gained ' + gained.toFixed(2) + ' marks, lost ' + lost.toFixed(2) + ' to negative marking, and left ' + unattempted + ' questions unattempted.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

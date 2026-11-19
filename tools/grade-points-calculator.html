@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade Points Calculator | ShezMath</title>
+<meta name="description" content="Convert a letter grade into grade points for one course. Pick your letter grade and credits to see how many grade points you earned toward your GPA.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What are grade points?", "acceptedAnswer": {"@type": "Answer", "text": "Grade points are the number you get when you multiply a grade point value by the credits of a course. For example, an A minus is worth 3.7 points, so in a 3-credit course it earns 3.7 times 3, which is 11.1 grade points."}},
+    {"@type": "Question", "name": "How many grade points is an A worth?", "acceptedAnswer": {"@type": "Answer", "text": "An A is worth 4.0 grade points per credit, the same as an A plus. So an A in a 3-credit course earns 12 grade points, while an A minus at 3.7 earns 11.1."}},
+    {"@type": "Question", "name": "What grade point value does an F have?", "acceptedAnswer": {"@type": "Answer", "text": "An F is worth 0 grade points, so it earns no points no matter how many credits the course carries, and it still counts in your GPA."}},
+    {"@type": "Question", "name": "How do grade points turn into a GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Add up the grade points from all your courses, then divide by the total number of credits. That result is your GPA on the 4.0 scale."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Grade Points Calculator</h1>
+<p class="lede">Convert a letter grade into grade points for one course. Pick your letter grade and the course credits to see how many points you earned.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="letter">Letter grade</label>
+    <select id="letter">
+      <option value="4.0">A+</option>
+      <option value="4.0">A</option>
+      <option value="3.7" selected>A&minus;</option>
+      <option value="3.3">B+</option>
+      <option value="3.0">B</option>
+      <option value="2.7">B&minus;</option>
+      <option value="2.3">C+</option>
+      <option value="2.0">C</option>
+      <option value="1.7">C&minus;</option>
+      <option value="1.3">D+</option>
+      <option value="1.0">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits">Course credits</label>
+    <input type="number" id="credits" min="0" step="any" value="3">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Grade points earned = grade point value &times; credits. The standard 4.0 scale is A+ = 4.0, A = 4.0, A&minus; = 3.7, B+ = 3.3, B = 3.0, B&minus; = 2.7, C+ = 2.3, C = 2.0, C&minus; = 1.7, D+ = 1.3, D = 1.0, F = 0.</p>
+<p><strong>Worked example:</strong> You earned an A&minus; in a 3-credit course. An A&minus; is worth 3.7 grade points per credit. Multiply 3.7 by 3 credits to get 11.1. You earned 11.1 grade points from this course.</p>
+
+<h2>Quick Reference: Letter Grade to Grade Points</h2>
+<table>
+<tr><th>Letter grade</th><th>Grade points</th></tr>
+<tr><td>A+</td><td>4.0</td></tr>
+<tr><td>A</td><td>4.0</td></tr>
+<tr><td>A&minus;</td><td>3.7</td></tr>
+<tr><td>B+</td><td>3.3</td></tr>
+<tr><td>B</td><td>3.0</td></tr>
+<tr><td>B&minus;</td><td>2.7</td></tr>
+<tr><td>C+</td><td>2.3</td></tr>
+<tr><td>C</td><td>2.0</td></tr>
+<tr><td>C&minus;</td><td>1.7</td></tr>
+<tr><td>D+</td><td>1.3</td></tr>
+<tr><td>D</td><td>1.0</td></tr>
+<tr><td>F</td><td>0.0</td></tr>
+</table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA from all your courses and credits.</p></div>
+  <div class="card"><a href="weighted-gpa-calculator.html">Weighted GPA Calculator</a><p>Calculate a GPA that gives extra weight to honours or AP courses.</p></div>
+  <div class="card"><a href="semester-gpa-calculator.html">Semester GPA Calculator</a><p>Find your GPA for a single semester.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine past and current semesters into one overall GPA.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What are grade points?</h3>
+  <p>Grade points are the number you get when you multiply a grade point value by the credits of a course. For example, an A minus is worth 3.7 points, so in a 3-credit course it earns 3.7 times 3, which is 11.1 grade points.</p>
+  <h3>How many grade points is an A worth?</h3>
+  <p>An A is worth 4.0 grade points per credit, the same as an A plus. So an A in a 3-credit course earns 12 grade points, while an A minus at 3.7 earns 11.1.</p>
+  <h3>What grade point value does an F have?</h3>
+  <p>An F is worth 0 grade points, so it earns no points no matter how many credits the course carries, and it still counts in your GPA.</p>
+  <h3>How do grade points turn into a GPA?</h3>
+  <p>Add up the grade points from all your courses, then divide by the total number of credits. That result is your GPA on the 4.0 scale.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var letter = document.getElementById('letter');
+  var points = parseFloat(letter.value);
+  var grade = letter.options[letter.selectedIndex].text;
+  var credits = parseFloat(document.getElementById('credits').value);
+  var result = document.getElementById('result');
+  if (isNaN(credits) || credits < 0) {
+    result.innerHTML = 'Please enter the number of credits.';
+    result.classList.add('show');
+    return;
+  }
+  var earned = points * credits;
+  result.innerHTML = 'A grade of <strong>' + grade + '</strong> in a ' + credits + '-credit course earns <strong>' + earned.toFixed(1) + ' grade points</strong> (' + points.toFixed(1) + ' points &times; ' + credits + ' credits).';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

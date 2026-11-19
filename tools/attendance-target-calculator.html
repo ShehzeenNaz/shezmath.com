@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Target Calculator | ShezMath</title>
+<meta name="description" content="How many classes in a row must you attend to reach your target attendance? Enter your attended classes, total classes and target to find out.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How many classes in a row do I need to attend to reach 75%?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your current attendance. Enter your classes attended, total classes held and your target of 75% in the calculator, and it will tell you the exact number of classes in a row you must attend."}},
+    {"@type": "Question", "name": "What if my target is already met?", "acceptedAnswer": {"@type": "Answer", "text": "If your current attendance is already at or above your target, you need 0 more classes in a row. You can still miss a few classes before you fall below the target again."}},
+    {"@type": "Question", "name": "Can I still reach 100% attendance?", "acceptedAnswer": {"@type": "Answer", "text": "No. Once you have missed a class, you can never reach exactly 100% again, because the missed class stays in your total. You can get very close by attending every class from now on."}},
+    {"@type": "Question", "name": "What if I miss one more class?", "acceptedAnswer": {"@type": "Answer", "text": "Missing a class lowers your attendance and increases the number of classes in a row you must attend afterwards. Re-run the calculator with your new numbers to see the updated count."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Attendance Target Calculator</h1>
+<p class="lede">Find out how many classes in a row you must attend to reach your target attendance. Enter your numbers and get the exact count in seconds.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="attended">Classes attended</label>
+    <input type="number" id="attended" value="30" min="0" step="1">
+    <label for="total">Total classes held</label>
+    <input type="number" id="total" value="45" min="1" step="1">
+    <label for="target">Target attendance (%)</label>
+    <input type="number" id="target" value="75" min="1" max="99.9" step="0.1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> If you attend x more classes in a row, your new attendance is (attended + x) &divide; (total + x). Set that equal to your target and solve for x: x = (target &times; total &minus; attended) &divide; (1 &minus; target), using the target as a decimal, then round up to the next whole class. If your current attendance already meets the target, x is 0. A target of 100% can never be reached once a class has been missed.</p>
+<p><strong>Worked example:</strong> You attended 30 out of 45 classes and your target is 75%. Your current attendance is 30 &divide; 45 = 66.7%. Solve (30 + x) &divide; (45 + x) = 0.75. That gives 30 + x = 33.75 + 0.75x, so 0.25x = 3.75, and x = 15. You need to attend 15 classes in a row. Check: 45 attended out of 60 held is exactly 75%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="attendance-percentage-calculator.html">Attendance Percentage Calculator</a><p>Work out your current attendance percentage.</p></div>
+  <div class="card"><a href="grade-to-pass-calculator.html">Grade to Pass Calculator</a><p>Find the mark you need to pass your course.</p></div>
+  <div class="card"><a href="test-score-needed-calculator.html">Test Score Needed Calculator</a><p>Work out the score you need on your next test.</p></div>
+  <div class="card"><a href="study-hours-planner.html">Study Hours Planner</a><p>Split your study time across subjects by importance.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How many classes in a row do I need to attend to reach 75%?</h3>
+  <p>It depends on your current attendance. Enter your classes attended, total classes held and your target of 75% in the calculator, and it will tell you the exact number of classes in a row you must attend.</p>
+  <h3>What if my target is already met?</h3>
+  <p>If your current attendance is already at or above your target, you need 0 more classes in a row. You can still miss a few classes before you fall below the target again.</p>
+  <h3>Can I still reach 100% attendance?</h3>
+  <p>No. Once you have missed a class, you can never reach exactly 100% again, because the missed class stays in your total. You can get very close by attending every class from now on.</p>
+  <h3>What if I miss one more class?</h3>
+  <p>Missing a class lowers your attendance and increases the number of classes in a row you must attend afterwards. Re-run the calculator with your new numbers to see the updated count.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var attended = parseFloat(document.getElementById('attended').value);
+  var total = parseFloat(document.getElementById('total').value);
+  var targetPct = parseFloat(document.getElementById('target').value);
+  var r = document.getElementById('result');
+  if (isNaN(attended) || isNaN(total) || isNaN(targetPct) || total <= 0) {
+    r.innerHTML = 'Please enter valid numbers. Total classes held must be more than 0.';
+    r.classList.add('show');
+    return;
+  }
+  if (attended < 0 || attended > total) {
+    r.innerHTML = 'Classes attended cannot be less than 0 or more than total classes held.';
+    r.classList.add('show');
+    return;
+  }
+  if (targetPct >= 100) {
+    r.innerHTML = 'A target of 100% can only be reached with perfect attendance from the start. Once a class is missed, 100% is impossible.';
+    r.classList.add('show');
+    return;
+  }
+  if (targetPct <= 0) {
+    r.innerHTML = 'Please enter a target above 0%.';
+    r.classList.add('show');
+    return;
+  }
+  var target = targetPct / 100;
+  var current = (attended / total) * 100;
+  if (current >= targetPct) {
+    r.innerHTML = 'You already meet your target. Your attendance is <strong>' + current.toFixed(1) + '%</strong>, so you need <strong>0 more classes</strong> in a row.';
+    r.classList.add('show');
+    return;
+  }
+  var x = Math.ceil((target * total - attended) / (1 - target));
+  var newAttended = attended + x;
+  var newTotal = total + x;
+  r.innerHTML = 'You need to attend <strong>' + x + ' more classes in a row</strong> to reach ' + targetPct + '%. That would take you to ' + newAttended + ' out of ' + newTotal + ' classes (' + ((newAttended / newTotal) * 100).toFixed(1) + '%). Your current attendance is ' + current.toFixed(1) + '%.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

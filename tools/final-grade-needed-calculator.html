@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Grade Needed Calculator | ShezMath</title>
+<meta name="description" content="Find out what score you need on your final exam to reach your target course grade. Enter your current grade, final weight and desired grade.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What if the score I need is over 100%?", "acceptedAnswer": {"@type": "Answer", "text": "If the calculator shows a needed score above 100%, your target grade cannot be reached, even with a perfect final exam. Lower your desired grade or check whether extra credit is available."}},
+    {"@type": "Question", "name": "What does final exam weight mean?", "acceptedAnswer": {"@type": "Answer", "text": "The final exam weight is the share of your course grade decided by the final. If your final is worth 30% of your grade, enter 30. Your current grade covers the other 70%."}},
+    {"@type": "Question", "name": "Can I use this calculator before all my coursework is graded?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Enter your best estimate of your current grade so far. The result is only as accurate as the grade you enter, so update it when new marks come in."}},
+    {"@type": "Question", "name": "What score do I need to just pass the course?", "acceptedAnswer": {"@type": "Answer", "text": "Enter your pass mark, usually 50% or 60%, as your desired grade. The calculator will show the lowest final exam score that still lets you pass."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Final Grade Needed Calculator</h1>
+<p class="lede">Work out exactly what score you need on your final exam to reach the course grade you want. Enter your current grade, how much the final is worth, and your target grade.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current">Current grade (%)</label>
+    <input type="number" id="current" min="0" max="100" step="0.1" value="85">
+    <label for="weight">Final exam weight (%)</label>
+    <input type="number" id="weight" min="1" max="100" step="0.1" value="30">
+    <label for="desired">Desired course grade (%)</label>
+    <input type="number" id="desired" min="0" max="100" step="0.1" value="90">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Needed final score = (desired grade − current grade × (1 − final weight)) ÷ final weight. Weights are used as decimals, so a 30% final is 0.30 and the rest of the course is 0.70.</p>
+<p><strong>Worked example:</strong> Your current grade is 85%, your final is worth 30%, and you want a 90% course grade. First, 85 × 0.70 = 59.5. Then 90 − 59.5 = 30.5. Finally, 30.5 ÷ 0.30 = 101.7%. You would need 101.7% on the final, which is impossible, so a 90% course grade cannot be reached.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out your final course grade from your current grade and final exam score.</p></div>
+  <div class="card"><a href="two-part-final-calculator.html">Two-Part Final Calculator</a><p>Find your course grade when the final exam has two parts with different weights.</p></div>
+  <div class="card"><a href="grade-to-pass-calculator.html">Grade to Pass Calculator</a><p>Find the lowest score you need on remaining work to pass your course.</p></div>
+  <div class="card"><a href="what-if-grade-calculator.html">What-If Grade Calculator</a><p>See how different scores on future work would change your course grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What if the score I need is over 100%?</h3>
+  <p>If the calculator shows a needed score above 100%, your target grade cannot be reached, even with a perfect final exam. Lower your desired grade or check whether extra credit is available.</p>
+  <h3>What does final exam weight mean?</h3>
+  <p>The final exam weight is the share of your course grade decided by the final. If your final is worth 30% of your grade, enter 30. Your current grade covers the other 70%.</p>
+  <h3>Can I use this calculator before all my coursework is graded?</h3>
+  <p>Yes. Enter your best estimate of your current grade so far. The result is only as accurate as the grade you enter, so update it when new marks come in.</p>
+  <h3>What score do I need to just pass the course?</h3>
+  <p>Enter your pass mark, usually 50% or 60%, as your desired grade. The calculator will show the lowest final exam score that still lets you pass.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var current = parseFloat(document.getElementById('current').value);
+  var weight = parseFloat(document.getElementById('weight').value);
+  var desired = parseFloat(document.getElementById('desired').value);
+  var result = document.getElementById('result');
+  if (isNaN(current) || isNaN(weight) || isNaN(desired) || weight <= 0 || weight > 100) {
+    result.innerHTML = 'Please enter valid numbers. Final weight must be between 1 and 100.';
+    result.classList.add('show');
+    return;
+  }
+  var w = weight / 100;
+  var needed = (desired - current * (1 - w)) / w;
+  var html = 'You need <strong>' + needed.toFixed(1) + '%</strong> on your final exam to finish with ' + desired + '%.';
+  if (needed > 100) {
+    html += '<br><strong>This target cannot be reached.</strong> Even a perfect 100% on the final would not be enough. Try a lower desired grade.';
+  } else if (needed < 0) {
+    html = 'You have already secured your target grade. You need <strong>0%</strong> on the final to finish with ' + desired + '%.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

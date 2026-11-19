@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Score Needed Calculator | ShezMath</title>
+<meta name="description" content="Find the score you need on your next test to reach your target average. Enter your current average, tests taken and the average you want.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What if the score I need is over 100%?", "acceptedAnswer": {"@type": "Answer", "text": "If the needed score is above 100%, your target average cannot be reached with one more test. Aim for a lower target average, or plan to raise your average over several tests instead."}},
+    {"@type": "Question", "name": "Does this assume all tests count equally?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. This calculator treats every test as worth the same. If your tests have different weights, use the weighted grade calculator instead."}},
+    {"@type": "Question", "name": "What should I enter for tests taken?", "acceptedAnswer": {"@type": "Answer", "text": "Enter how many tests you have already completed. The calculator adds one more test, so if you have taken 4 tests it works out the score needed on test 5."}},
+    {"@type": "Question", "name": "Can I use this for quizzes or homework too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, as long as each quiz or assignment counts equally toward the average. Just enter your current average and how many you have done so far."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Test Score Needed Calculator</h1>
+<p class="lede">Want to lift your average with your next test? Enter your current average, how many tests you have taken, and your target average to find the exact score you need.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="average">Current average (%)</label>
+    <input type="number" id="average" min="0" max="100" step="0.1" value="78">
+    <label for="taken">Number of tests taken so far</label>
+    <input type="number" id="taken" min="1" max="100" step="1" value="4">
+    <label for="target">Target average after the next test (%)</label>
+    <input type="number" id="target" min="0" max="100" step="0.1" value="80">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Needed score = (target average × (tests taken + 1)) − (current average × tests taken). The next test is counted as one test among the new total, so all tests count equally.</p>
+<p><strong>Worked example:</strong> Your average is 78% over 4 tests and you want an 80% average after 5 tests. Total marks so far = 78 × 4 = 312. Total marks needed after 5 tests = 80 × 5 = 400. Needed score = 400 − 312 = 88%. You need 88% on your next test.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Work out your average grade from a set of test scores.</p></div>
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn your marks on a test into a percentage score.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the final exam score you need to reach your target course grade.</p></div>
+  <div class="card"><a href="grade-to-pass-calculator.html">Grade to Pass Calculator</a><p>Find the lowest score you need on remaining work to pass your course.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What if the score I need is over 100%?</h3>
+  <p>If the needed score is above 100%, your target average cannot be reached with one more test. Aim for a lower target average, or plan to raise your average over several tests instead.</p>
+  <h3>Does this assume all tests count equally?</h3>
+  <p>Yes. This calculator treats every test as worth the same. If your tests have different weights, use the weighted grade calculator instead.</p>
+  <h3>What should I enter for tests taken?</h3>
+  <p>Enter how many tests you have already completed. The calculator adds one more test, so if you have taken 4 tests it works out the score needed on test 5.</p>
+  <h3>Can I use this for quizzes or homework too?</h3>
+  <p>Yes, as long as each quiz or assignment counts equally toward the average. Just enter your current average and how many you have done so far.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var average = parseFloat(document.getElementById('average').value);
+  var taken = parseInt(document.getElementById('taken').value, 10);
+  var target = parseFloat(document.getElementById('target').value);
+  var result = document.getElementById('result');
+  if (isNaN(average) || isNaN(taken) || isNaN(target) || taken < 1) {
+    result.innerHTML = 'Please enter valid numbers. Tests taken must be at least 1.';
+    result.classList.add('show');
+    return;
+  }
+  var needed = target * (taken + 1) - average * taken;
+  var html = 'You need <strong>' + needed.toFixed(1) + '%</strong> on your next test (test ' + (taken + 1) + ') to reach an average of ' + target + '%.';
+  if (needed > 100) {
+    html += '<br><strong>This target cannot be reached with one test.</strong> Even a perfect 100% would not be enough. Try a lower target average.';
+  } else if (needed < 0) {
+    html = 'Your average is already above your target. You need <strong>0%</strong> on your next test to stay at or above ' + target + '%.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

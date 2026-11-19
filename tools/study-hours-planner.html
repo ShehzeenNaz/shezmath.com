@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Hours Planner | ShezMath</title>
+<meta name="description" content="Split your study hours across subjects before exam day. Enter days left, daily hours and each subject's importance to get a fair study plan.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How should I split study time between subjects?", "acceptedAnswer": {"@type": "Answer", "text": "Split your total hours in proportion to each subject's importance. A subject with a higher weight, more marks or an earlier exam gets more hours. This planner does that split for you automatically."}},
+    {"@type": "Question", "name": "What does the importance number mean?", "acceptedAnswer": {"@type": "Answer", "text": "Importance is a score from 1 to 5. Give 5 to your most important subject, such as one worth the most marks or the one you find hardest, and 1 to the least important."}},
+    {"@type": "Question", "name": "How many hours a day should I study?", "acceptedAnswer": {"@type": "Answer", "text": "Most students do well with 2 to 4 focused hours a day, with short breaks every 25 to 50 minutes. Long sessions without breaks lead to poor focus and weak memory."}},
+    {"@type": "Question", "name": "What if I have more than 3 subjects?", "acceptedAnswer": {"@type": "Answer", "text": "Plan your 3 most important subjects here first, then run the planner again for the rest. Or group smaller subjects together and treat the group as one subject."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Study Hours Planner</h1>
+<p class="lede">Split your study hours across subjects before exam day. Tell us your days left, daily hours and each subject's importance to get a fair plan.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="days">Days left before exams</label>
+    <input type="number" id="days" value="7" min="1" step="1">
+    <label for="hoursday">Hours available per day</label>
+    <input type="number" id="hoursday" value="3" min="0.5" step="0.5">
+    <label for="subj1">Subject 1 importance (1-5)</label>
+    <input type="number" id="subj1" value="5" min="1" max="5" step="1">
+    <label for="subj2">Subject 2 importance (1-5)</label>
+    <input type="number" id="subj2" value="3" min="1" max="5" step="1">
+    <label for="subj3">Subject 3 importance (1-5, or 0 to skip)</label>
+    <input type="number" id="subj3" value="2" min="0" max="5" step="1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Total hours = Days left &times; Hours per day. Each subject gets: Total hours &times; (Subject importance &divide; Sum of all importance scores). A subject with a higher importance score gets a bigger share of your time.</p>
+<p><strong>Worked example:</strong> You have 7 days left and 3 hours a day, so total hours = 7 &times; 3 = 21 hours. Your subjects have importance scores of 5, 3 and 2, which add up to 10. Subject 1 gets 21 &times; (5 &divide; 10) = 10.5 hours. Subject 2 gets 21 &times; (3 &divide; 10) = 6.3 hours. Subject 3 gets 21 &times; (2 &divide; 10) = 4.2 hours.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="exam-time-allocation-calculator.html">Exam Time Allocation Calculator</a><p>Plan how many minutes to spend per question.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the score you need on your final exam.</p></div>
+  <div class="card"><a href="attendance-target-calculator.html">Attendance Target Calculator</a><p>How many classes in a row you must attend to hit your target.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Calculate a grade from weighted assignments and exams.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How should I split study time between subjects?</h3>
+  <p>Split your total hours in proportion to each subject's importance. A subject with a higher weight, more marks or an earlier exam gets more hours. This planner does that split for you automatically.</p>
+  <h3>What does the importance number mean?</h3>
+  <p>Importance is a score from 1 to 5. Give 5 to your most important subject, such as one worth the most marks or the one you find hardest, and 1 to the least important.</p>
+  <h3>How many hours a day should I study?</h3>
+  <p>Most students do well with 2 to 4 focused hours a day, with short breaks every 25 to 50 minutes. Long sessions without breaks lead to poor focus and weak memory.</p>
+  <h3>What if I have more than 3 subjects?</h3>
+  <p>Plan your 3 most important subjects here first, then run the planner again for the rest. Or group smaller subjects together and treat the group as one subject.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var days = parseFloat(document.getElementById('days').value);
+  var hoursDay = parseFloat(document.getElementById('hoursday').value);
+  var w1 = parseFloat(document.getElementById('subj1').value);
+  var w2 = parseFloat(document.getElementById('subj2').value);
+  var w3 = parseFloat(document.getElementById('subj3').value);
+  var r = document.getElementById('result');
+  if (isNaN(days) || isNaN(hoursDay) || isNaN(w1) || isNaN(w2) || isNaN(w3) || days <= 0 || hoursDay <= 0) {
+    r.innerHTML = 'Please enter valid numbers. Days left and hours per day must be more than 0.';
+    r.classList.add('show');
+    return;
+  }
+  var weights = [w1, w2, w3].filter(function (w) { return w > 0; });
+  if (weights.length === 0) {
+    r.innerHTML = 'Please give at least one subject an importance above 0.';
+    r.classList.add('show');
+    return;
+  }
+  var totalHours = days * hoursDay;
+  var sumW = weights.reduce(function (a, b) { return a + b; }, 0);
+  var lines = weights.map(function (w, i) {
+    var h = totalHours * (w / sumW);
+    return 'Subject ' + (i + 1) + ' (importance ' + w + '): <strong>' + h.toFixed(1) + ' hours</strong>';
+  });
+  r.innerHTML = 'You have <strong>' + totalHours.toFixed(1) + ' total study hours</strong> (' + days + ' days &times; ' + hoursDay + ' hours/day).<br>' + lines.join('<br>');
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

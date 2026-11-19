@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stair Stringer Calculator | ShezMath</title>
+<meta name="description" content="Calculate stair steps, riser height and stringer length. Enter total rise and tread depth to get a safe, even staircase. No sign-up needed.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "What is a good riser height?", "acceptedAnswer": {"@type": "Answer", "text": "Between 7 and 7.5 inches is comfortable for most people. Building rules usually cap risers at 7.75 inches."}},
+    {"@type": "Question", "name": "How deep should stair treads be?", "acceptedAnswer": {"@type": "Answer", "text": "At least 10 inches, and 11 inches feels best. Shallower treads make stairs feel steep and unsafe."}},
+    {"@type": "Question", "name": "Why must all risers be the same height?", "acceptedAnswer": {"@type": "Answer", "text": "Uneven risers cause trips. Every riser in one flight must match within a small tolerance, usually 3/8 inch."}},
+    {"@type": "Question", "name": "How many stringers do I need?", "acceptedAnswer": {"@type": "Answer", "text": "Use two stringers for stairs up to 36 inches wide and three for wider stairs, so the treads do not flex."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Stair Stringer Calculator</h1>
+<p class="lede">Work out the steps, riser height, total run and stringer length for a staircase. Keeps every step the same height, as building rules require.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="rise">Total rise (floor to floor) (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="rise" data-kind="in" value="36" min="0" step="0.5">
+    <label for="riser">Target riser height (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="riser" data-kind="in" value="7" min="0" step="0.25">
+    <label for="tread">Tread depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="tread" data-kind="in" value="11" min="0" step="0.25">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Steps = total rise &divide; target riser height, rounded to a whole number. Actual riser = total rise &divide; steps. Total run = steps &times; tread depth. Stringer length = &radic;(rise&#178; + run&#178;).</p>
+<p><strong>Worked example:</strong> A total rise of 36 in with a 7 in target riser: 36 &divide; 7 = 5.14, so 5 risers. Actual riser is 36 &divide; 5 = 7.2 in. With 11 in treads, the run is 5 &times; 11 = 55 in. Stringer length is &radic;(36&#178; + 55&#178;) = 65.7 in.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Total rise</th><th>Steps at 7 in riser</th><th>Total run at 11 in tread</th></tr><tr><td>24 in</td><td>3 to 4</td><td>33 to 44 in</td></tr><tr><td>36 in</td><td>5</td><td>55 in</td></tr><tr><td>48 in</td><td>7</td><td>77 in</td></tr><tr><td>60 in</td><td>9</td><td>99 in</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="decking-calculator.html">Decking Calculator</a><p>Work out how many deck boards your deck needs, including the gap between boards.</p></div>
+  <div class="card"><a href="lumber-calculator.html">Lumber Calculator</a><p>Work out how many boards to buy for framing, shelving or a fence run.</p></div>
+  <div class="card"><a href="board-foot-calculator.html">Board Foot Calculator</a><p>Work out board feet, the standard way lumber is measured and priced.</p></div>
+  <div class="card"><a href="drywall-sheet-calculator.html">Drywall Sheet Calculator</a><p>Work out how many drywall sheets a room needs, plus screws and joint tape.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is a good riser height?</h3>
+  <p>Between 7 and 7.5 inches is comfortable for most people. Building rules usually cap risers at 7.75 inches.</p>
+  <h3>How deep should stair treads be?</h3>
+  <p>At least 10 inches, and 11 inches feels best. Shallower treads make stairs feel steep and unsafe.</p>
+  <h3>Why must all risers be the same height?</h3>
+  <p>Uneven risers cause trips. Every riser in one flight must match within a small tolerance, usually 3/8 inch.</p>
+  <h3>How many stringers do I need?</h3>
+  <p>Use two stringers for stairs up to 36 inches wide and three for wider stairs, so the treads do not flex.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var rise = v('rise','in'), target = v('riser','in'), tread = v('tread','in');
+  if([rise,target,tread].some(isNaN) || rise <= 0 || target <= 0 || tread <= 0){ r.innerHTML = 'Please enter positive numbers for rise, riser and tread.'; r.classList.add('show'); return; }
+  var steps = Math.max(1, Math.round(rise / target));
+  var actualRiser = rise / steps;
+  var run = steps * tread;
+  var stringer = Math.sqrt(rise * rise + run * run);
+  r.innerHTML = 'You need <b>' + steps + ' risers</b> at <b>' + fmtLenIn(actualRiser) + '</b> each.<br>Total run: <b>' + fmtLenIn(run) + '</b> (' + steps + ' treads).<br>Stringer length: <b>' + fmtLenIn(stringer) + '</b>.';
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

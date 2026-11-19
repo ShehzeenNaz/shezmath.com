@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTU AC Size Calculator | ShezMath</title>
+<meta name="description" content="Calculate the right air conditioner size in BTU for any room. Enter room size, sun and people to get the correct cooling power. Free to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "What BTU do I need for my room?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply the room area in square feet by 20. A 300 square foot room needs about 6,000 BTU."}},
+    {"@type": "Question", "name": "What happens if my AC is too big?", "acceptedAnswer": {"@type": "Answer", "text": "It cools fast but shuts off before removing humidity, leaving the room cold and clammy. It also wastes power."}},
+    {"@type": "Question", "name": "What happens if my AC is too small?", "acceptedAnswer": {"@type": "Answer", "text": "It runs all day, never reaches the set temperature and wears out faster. Size it right with this calculator."}},
+    {"@type": "Question", "name": "Do sunny rooms need a bigger AC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, add 10% for very sunny rooms. Shaded rooms need 10% less. Kitchens add about 4,000 BTU for cooking heat."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>BTU AC Size Calculator</h1>
+<p class="lede">Work out the BTU rating your room needs so the AC cools well without wasting power. Too small struggles, too big wastes money.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Room length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="15" min="0" step="0.5">
+    <label for="width">Room width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="ceiling">Ceiling height (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="ceiling" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="sun">Sun exposure</label>
+    <select id="sun"><option value="1" selected>Normal sun</option><option value="1.1">Very sunny room</option><option value="0.9">Shaded room</option></select>
+    <label for="people">People in the room</label>
+    <input type="number" id="people" value="2" min="1" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per unit" data-met="per unit">per unit</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> BTU = room area (sq ft) &times; 20 &times; (ceiling height &divide; 8) &times; sun factor. Add 600 BTU for each person above two. One ton of cooling = 12,000 BTU.</p>
+<p><strong>Worked example:</strong> A room 15 ft by 12 ft with 8 ft ceilings and normal sun: area is 180 sq ft. 180 &times; 20 = 3,600 BTU. With 2 people, no extra is added. That is 3,600 &divide; 12,000 = 0.3 tons, so buy a 6,000 BTU unit.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Room size</th><th>BTU needed</th><th>AC size to buy</th></tr><tr><td>100 sq ft</td><td>2,000</td><td>6,000 BTU</td></tr><tr><td>150 sq ft</td><td>3,000</td><td>6,000 BTU</td></tr><tr><td>300 sq ft</td><td>6,000</td><td>6,000 to 9,000 BTU</td></tr><tr><td>500 sq ft</td><td>10,000</td><td>12,000 BTU</td></tr><tr><td>700 sq ft</td><td>14,000</td><td>15,000 BTU</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="paint-calculator.html">Paint Calculator</a><p>Work out how much paint a room or wall needs.</p></div>
+  <div class="card"><a href="drywall-sheet-calculator.html">Drywall Sheet Calculator</a><p>Work out how many drywall sheets a room needs, plus screws and joint tape.</p></div>
+  <div class="card"><a href="flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Work out how many floor tiles a room needs, plus boxes.</p></div>
+  <div class="card"><a href="wallpaper-roll-calculator.html">Wallpaper Roll Calculator</a><p>Work out how many wallpaper rolls your wall or room needs.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What BTU do I need for my room?</h3>
+  <p>Multiply the room area in square feet by 20. A 300 square foot room needs about 6,000 BTU.</p>
+  <h3>What happens if my AC is too big?</h3>
+  <p>It cools fast but shuts off before removing humidity, leaving the room cold and clammy. It also wastes power.</p>
+  <h3>What happens if my AC is too small?</h3>
+  <p>It runs all day, never reaches the set temperature and wears out faster. Size it right with this calculator.</p>
+  <h3>Do sunny rooms need a bigger AC?</h3>
+  <p>Yes, add 10% for very sunny rooms. Shaded rooms need 10% less. Kitchens add about 4,000 BTU for cooking heat.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), H = v('ceiling','ft');
+  var sun = parseFloat(document.getElementById('sun').value);
+  var people = raw('people');
+  if([L,W,H,sun,people].some(isNaN) || L <= 0 || W <= 0 || H <= 0 || people <= 0){ r.innerHTML = 'Please enter positive numbers for room size and people.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var btu = area * 20 * (H / 8) * sun;
+  if(people > 2) btu += (people - 2) * 600;
+  var tons = btu / 12000;
+  r.innerHTML = 'Room area: <b>' + fmtArea(area) + '</b>.<br>You need about <b>' + Math.round(btu).toLocaleString() + ' BTU</b> (' + tons.toFixed(1) + ' tons of cooling).<br>Buy the nearest standard size at or above this, such as ' + (Math.ceil(btu / 6000) * 6000).toLocaleString() + ' BTU.';
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

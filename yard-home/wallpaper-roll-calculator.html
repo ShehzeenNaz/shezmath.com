@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wallpaper Roll Calculator | ShezMath</title>
+<meta name="description" content="Calculate wallpaper rolls for a wall or room. Enter wall size and roll coverage to get roll counts with waste included. Free and easy to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How much wallpaper is in a roll?", "acceptedAnswer": {"@type": "Answer", "text": "A standard US roll is 20.5 inches wide by 33 feet long and covers about 56 square feet. European rolls are often smaller."}},
+    {"@type": "Question", "name": "Why add 10% extra wallpaper?", "acceptedAnswer": {"@type": "Answer", "text": "Pattern matching wastes paper at every join. Large patterns can waste up to 20%, so add more for bold prints."}},
+    {"@type": "Question", "name": "Do I need to match the pattern?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, unless the paper is plain or random. Check the pattern repeat on the label before you buy."}},
+    {"@type": "Question", "name": "Can I wallpaper over old wallpaper?", "acceptedAnswer": {"@type": "Answer", "text": "It is not ideal. Old paper can peel and show through. Strip it first for the best result."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Wallpaper Roll Calculator</h1>
+<p class="lede">Work out how many wallpaper rolls your wall or room needs. Includes 10% extra for pattern matching and cuts.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Wall length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="width">Wall height (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="coverage">One roll covers (sq ft)</label>
+    <input type="number" id="coverage" value="56" min="1" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per roll" data-met="per roll">per roll</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Rolls = wall area (sq ft) &times; 1.1 for waste &divide; coverage per roll (sq ft). A standard roll covers about 56 sq ft.</p>
+<p><strong>Worked example:</strong> A wall 12 ft by 8 ft with standard rolls: area is 96 sq ft. With 10% waste: 96 &times; 1.1 = 105.6 sq ft. 105.6 &divide; 56 = 1.89, so 2 rolls.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Wall area</th><th>Rolls at 56 sq ft per roll</th><th>Rolls at 35 sq ft per roll</th></tr><tr><td>100 sq ft</td><td>2</td><td>4</td></tr><tr><td>200 sq ft</td><td>4</td><td>7</td></tr><tr><td>400 sq ft</td><td>8</td><td>13</td></tr><tr><td>800 sq ft</td><td>16</td><td>26</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="paint-calculator.html">Paint Calculator</a><p>Work out how much paint a room or wall needs.</p></div>
+  <div class="card"><a href="flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Work out how many floor tiles a room needs, plus boxes.</p></div>
+  <div class="card"><a href="drywall-sheet-calculator.html">Drywall Sheet Calculator</a><p>Work out how many drywall sheets a room needs, plus screws and joint tape.</p></div>
+  <div class="card"><a href="btu-ac-size-calculator.html">BTU AC Size Calculator</a><p>Work out the BTU rating your room needs so the AC cools well without wasting power.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much wallpaper is in a roll?</h3>
+  <p>A standard US roll is 20.5 inches wide by 33 feet long and covers about 56 square feet. European rolls are often smaller.</p>
+  <h3>Why add 10% extra wallpaper?</h3>
+  <p>Pattern matching wastes paper at every join. Large patterns can waste up to 20%, so add more for bold prints.</p>
+  <h3>Do I need to match the pattern?</h3>
+  <p>Yes, unless the paper is plain or random. Check the pattern repeat on the label before you buy.</p>
+  <h3>Can I wallpaper over old wallpaper?</h3>
+  <p>It is not ideal. Old paper can peel and show through. Strip it first for the best result.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), cov = raw('coverage');
+  if([L,W,cov].some(isNaN) || L <= 0 || W <= 0 || cov <= 0){ r.innerHTML = 'Please enter positive numbers for wall size and roll coverage.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var rolls = Math.ceil(area * 1.1 / cov);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (rolls) : (rolls); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per roll' : 'per roll') + '.'; }
+
+  r.innerHTML = 'Wall area: <b>' + fmtArea(area) + '</b>.<br>You need <b>' + rolls + ' rolls</b> (with 10% extra for pattern matching).' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

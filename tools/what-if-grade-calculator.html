@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What If Grade Calculator | ShezMath</title>
+<meta name="description" content="Find out what your final grade will be if you score a set mark on your remaining work. Enter your current grade and weights to plan your next exam.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do I work out my final grade if I know my score on the remaining work?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply your current grade by the weight of the work you have finished, then add your expected score on the remaining work multiplied by its weight. For example, 82% on 70% of the course plus 90% on the remaining 30% gives 84.4%."}},
+    {"@type": "Question", "name": "Do the completed and remaining weights have to add up to 100%?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The weight of the work you have finished and the weight of the work still to come must add up to 100% of the course, otherwise the result will not be a true final grade."}},
+    {"@type": "Question", "name": "What if my expected score on the remaining work is only a guess?", "acceptedAnswer": {"@type": "Answer", "text": "Try a few values. Enter a low score, a realistic score and a high score to see the range of final grades you could end up with, then aim for the score that reaches your target grade."}},
+    {"@type": "Question", "name": "Can I use this calculator for a single exam instead of all remaining work?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Treat the exam as the remaining work: enter your current grade, the weight of everything done so far, your expected exam score, and the exam's weight in the course."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>What If Grade Calculator</h1>
+<p class="lede">See what your final grade will be if you score a certain mark on your remaining work. Perfect for planning how hard you need to work for your target grade.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current">Current grade (%)</label>
+    <input type="number" id="current" min="0" max="100" step="any" value="82">
+    <label for="completed-weight">Weight of completed work (%)</label>
+    <input type="number" id="completed-weight" min="0" max="100" step="any" value="70">
+    <label for="expected">Score you expect on remaining work (%)</label>
+    <input type="number" id="expected" min="0" max="100" step="any" value="90">
+    <label for="remaining-weight">Weight of remaining work (%)</label>
+    <input type="number" id="remaining-weight" min="0" max="100" step="any" value="30">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final grade = (current grade &times; completed weight &divide; 100) + (expected score &times; remaining weight &divide; 100).</p>
+<p><strong>Worked example:</strong> Your current grade is 82% and that work counts for 70% of the course. You expect 90% on the remaining work, which counts for 30%. First, 82 &times; 0.70 = 57.4. Then, 90 &times; 0.30 = 27. Add them together: 57.4 + 27 = 84.4. Your final grade would be 84.4%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out the score you need on your final exam to reach a target grade.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Combine grades with different weights into one overall grade.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the exact mark you must score on the final to hit your goal.</p></div>
+  <div class="card"><a href="test-score-needed-calculator.html">Test Score Needed Calculator</a><p>See how many marks you need on a test to reach a chosen percentage.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How do I work out my final grade if I know my score on the remaining work?</h3>
+  <p>Multiply your current grade by the weight of the work you have finished, then add your expected score on the remaining work multiplied by its weight. For example, 82% on 70% of the course plus 90% on the remaining 30% gives 84.4%.</p>
+  <h3>Do the completed and remaining weights have to add up to 100%?</h3>
+  <p>Yes. The weight of the work you have finished and the weight of the work still to come must add up to 100% of the course, otherwise the result will not be a true final grade.</p>
+  <h3>What if my expected score on the remaining work is only a guess?</h3>
+  <p>Try a few values. Enter a low score, a realistic score and a high score to see the range of final grades you could end up with, then aim for the score that reaches your target grade.</p>
+  <h3>Can I use this calculator for a single exam instead of all remaining work?</h3>
+  <p>Yes. Treat the exam as the remaining work: enter your current grade, the weight of everything done so far, your expected exam score, and the exam's weight in the course.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var current = parseFloat(document.getElementById('current').value);
+  var cw = parseFloat(document.getElementById('completed-weight').value);
+  var expected = parseFloat(document.getElementById('expected').value);
+  var rw = parseFloat(document.getElementById('remaining-weight').value);
+  var result = document.getElementById('result');
+  if (isNaN(current) || isNaN(cw) || isNaN(expected) || isNaN(rw)) {
+    result.innerHTML = 'Please enter a number in every box.';
+    result.classList.add('show');
+    return;
+  }
+  var final = (current * cw / 100) + (expected * rw / 100);
+  var html = 'Your final grade would be <strong>' + final.toFixed(1) + '%</strong>.';
+  if (Math.abs(cw + rw - 100) > 0.001) {
+    html += '<br>Note: your weights add up to ' + (cw + rw) + '%, not 100%, so this is only an estimate.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

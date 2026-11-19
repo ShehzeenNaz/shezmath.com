@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fertilizer Coverage Calculator | ShezMath</title>
+<meta name="description" content="Calculate fertilizer bags for your lawn size. Enter the area and bag coverage to get bags and total weight fast. Get instant results free.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How do I know a bag's coverage?", "acceptedAnswer": {"@type": "Answer", "text": "It is printed on the bag label as square feet covered. Most lawn fertilizer bags cover 5,000 to 15,000 square feet."}},
+    {"@type": "Question", "name": "How often should I fertilize my lawn?", "acceptedAnswer": {"@type": "Answer", "text": "Three to four times a year in spring, early summer, late summer and autumn. Follow the label for your grass type."}},
+    {"@type": "Question", "name": "Can too much fertilizer burn the lawn?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Over-applying burns grass and leaves brown patches. Measure your lawn and stick to the bag rate."}},
+    {"@type": "Question", "name": "Should I water after fertilizing?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, water lightly after spreading granular fertilizer so it reaches the soil and starts working."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Fertilizer Coverage Calculator</h1>
+<p class="lede">Work out how many bags of fertilizer your lawn needs. Enter the lawn area and the coverage printed on the bag.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Lawn length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="40" min="0" step="0.5">
+    <label for="width">Lawn width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="25" min="0" step="0.5">
+    <label for="coverage">One bag covers (sq ft)</label>
+    <input type="number" id="coverage" value="5000" min="1" step="100">
+    <label for="bagwt">Bag weight</label>
+    <select id="bagwt"><option value="20" selected>20 lb bag</option><option value="15">15 lb bag</option><option value="25">25 lb bag</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per bag" data-met="per bag">per bag</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Bags = lawn area (sq ft) &divide; coverage per bag (sq ft), rounded up. Total weight = bags &times; weight per bag.</p>
+<p><strong>Worked example:</strong> A lawn 40 ft by 25 ft with bags covering 5,000 sq ft: area is 1,000 sq ft. 1,000 &divide; 5,000 = 0.2, so 1 bag. With 20 lb bags, that is 20 lb of fertilizer.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Lawn size</th><th>Bags at 5,000 sq ft coverage</th><th>Bags at 10,000 sq ft coverage</th></tr><tr><td>1,000 sq ft</td><td>1</td><td>1</td></tr><tr><td>5,000 sq ft</td><td>1</td><td>1</td></tr><tr><td>10,000 sq ft</td><td>2</td><td>1</td></tr><tr><td>20,000 sq ft</td><td>4</td><td>2</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grass-seed-calculator.html">Grass Seed Calculator</a><p>Work out how much grass seed to buy for a new lawn or to thicken an old one.</p></div>
+  <div class="card"><a href="sod-calculator.html">Sod Calculator</a><p>Work out how much sod your lawn needs in square feet, rolls and pallets.</p></div>
+  <div class="card"><a href="topsoil-calculator.html">Topsoil Calculator</a><p>Work out how much topsoil you need to level a lawn or fill a raised bed.</p></div>
+  <div class="card"><a href="mulch-calculator.html">Mulch Calculator</a><p>Work out mulch for flower beds and garden borders in cubic yards and bags.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How do I know a bag's coverage?</h3>
+  <p>It is printed on the bag label as square feet covered. Most lawn fertilizer bags cover 5,000 to 15,000 square feet.</p>
+  <h3>How often should I fertilize my lawn?</h3>
+  <p>Three to four times a year in spring, early summer, late summer and autumn. Follow the label for your grass type.</p>
+  <h3>Can too much fertilizer burn the lawn?</h3>
+  <p>Yes. Over-applying burns grass and leaves brown patches. Measure your lawn and stick to the bag rate.</p>
+  <h3>Should I water after fertilizing?</h3>
+  <p>Yes, water lightly after spreading granular fertilizer so it reaches the soil and starts working.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), cov = raw('coverage');
+  var bagwt = parseFloat(document.getElementById('bagwt').value);
+  if([L,W,cov].some(isNaN) || L <= 0 || W <= 0 || cov <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and bag coverage.'; r.classList.add('show'); return; }
+  var area = L * W;
+  var bags = Math.ceil(area / cov);
+  var totalLb = bags * bagwt;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (bags) : (bags); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per bag' : 'per bag') + '.'; }
+
+  r.innerHTML = 'Lawn area: <b>' + fmtArea(area) + '</b>.<br>You need <b>' + bags + ' bags</b> of fertilizer (' + fmtLb(totalLb) + ' total).' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

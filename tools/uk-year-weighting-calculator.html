@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Year Weighting Calculator | ShezMath</title>
+<meta name="description" content="Work out your UK degree mark with year weightings. Enter each year's average and weight to see your final mark and degree class instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What are year weightings in a UK degree?", "acceptedAnswer": {"@type": "Answer", "text": "Year weightings say how much each year of study counts toward your final degree mark. A common split is 40% for year 2 and 60% for year 3, while year 1 often counts for 0%."}},
+    {"@type": "Question", "name": "Do the weights have to add up to 100?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The weights of the years that count must add up to 100%. If they do not, the calculator warns you and the result will be wrong, so check your course handbook for the correct split."}},
+    {"@type": "Question", "name": "What mark do I need for a First?", "acceptedAnswer": {"@type": "Answer", "text": "You need a final weighted mark of 70% or more for a First. A mark of 60 to 69 is a 2:1, 50 to 59 is a 2:2, and 40 to 49 is a Third."}},
+    {"@type": "Question", "name": "Does year 1 count toward my degree?", "acceptedAnswer": {"@type": "Answer", "text": "At most UK universities year 1 does not count toward your final mark. You still need to pass it to progress, but it is usually weighted at 0%."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>UK Year Weighting Calculator</h1>
+<p class="lede">Work out your final UK degree mark when each year counts for a different amount. Enter your year averages and their weights to see your mark and degree class.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="year2avg">Year 2 average (%)</label>
+    <input type="number" id="year2avg" value="65" min="0" max="100" step="0.1">
+    <label for="year2weight">Year 2 weight (%)</label>
+    <input type="number" id="year2weight" value="40" min="0" max="100" step="0.1">
+    <label for="year3avg">Year 3 average (%)</label>
+    <input type="number" id="year3avg" value="72" min="0" max="100" step="0.1">
+    <label for="year3weight">Year 3 weight (%)</label>
+    <input type="number" id="year3weight" value="60" min="0" max="100" step="0.1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final mark = (Year 2 average &times; Year 2 weight + Year 3 average &times; Year 3 weight) &divide; 100. The weights must add up to 100. Degree class: 70% or more is a First, 60&ndash;69% is a 2:1, 50&ndash;59% is a 2:2, and 40&ndash;49% is a Third.</p>
+<p><strong>Worked example:</strong> Year 2 average 65% at 40% weight, and year 3 average 72% at 60% weight. Multiply each mark by its weight: 65 &times; 40 = 2600, and 72 &times; 60 = 4320. Add them: 2600 + 4320 = 6920. Divide by 100: 6920 &divide; 100 = 69.2%. The final mark is 69.2%, which is a 2:1.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="uk-degree-classification-calculator.html">UK Degree Classification Calculator</a><p>Find your degree class from your final mark.</p></div>
+  <div class="card"><a href="dissertation-weighting-calculator.html">Dissertation Weighting Calculator</a><p>See how your dissertation mark affects your final grade.</p></div>
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Work out the average of your module marks.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Calculate a grade from weighted assignments and exams.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What are year weightings in a UK degree?</h3>
+  <p>Year weightings say how much each year of study counts toward your final degree mark. A common split is 40% for year 2 and 60% for year 3, while year 1 often counts for 0%.</p>
+  <h3>Do the weights have to add up to 100?</h3>
+  <p>Yes. The weights of the years that count must add up to 100%. If they do not, the calculator warns you and the result will be wrong, so check your course handbook for the correct split.</p>
+  <h3>What mark do I need for a First?</h3>
+  <p>You need a final weighted mark of 70% or more for a First. A mark of 60 to 69 is a 2:1, 50 to 59 is a 2:2, and 40 to 49 is a Third.</p>
+  <h3>Does year 1 count toward my degree?</h3>
+  <p>At most UK universities year 1 does not count toward your final mark. You still need to pass it to progress, but it is usually weighted at 0%.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function degreeClass(mark) {
+  if (mark >= 70) return 'First Class (1st)';
+  if (mark >= 60) return 'Upper Second Class (2:1)';
+  if (mark >= 50) return 'Lower Second Class (2:2)';
+  if (mark >= 40) return 'Third Class (3rd)';
+  return 'Fail';
+}
+function calculate() {
+  var y2a = parseFloat(document.getElementById('year2avg').value);
+  var y2w = parseFloat(document.getElementById('year2weight').value);
+  var y3a = parseFloat(document.getElementById('year3avg').value);
+  var y3w = parseFloat(document.getElementById('year3weight').value);
+  var r = document.getElementById('result');
+  if (isNaN(y2a) || isNaN(y2w) || isNaN(y3a) || isNaN(y3w)) {
+    r.innerHTML = 'Please enter a number in every box.';
+    r.classList.add('show');
+    return;
+  }
+  var totalWeight = y2w + y3w;
+  var mark = (y2a * y2w + y3a * y3w) / 100;
+  var warn = '';
+  if (Math.abs(totalWeight - 100) > 0.001) {
+    warn = '<br><strong>Warning:</strong> your weights add up to ' + totalWeight + '%, not 100%. Check your course handbook.';
+  }
+  r.innerHTML = 'Your final weighted mark is <strong>' + mark.toFixed(1) + '%</strong> — ' + degreeClass(mark) + '.' + warn;
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

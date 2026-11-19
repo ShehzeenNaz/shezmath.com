@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paver Base Calculator | ShezMath</title>
+<meta name="description" content="Calculate gravel base for pavers in cubic yards and tons. Enter patio or path size and base depth to get the right amount. No sign-up needed.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How deep should a paver base be?", "acceptedAnswer": {"@type": "Answer", "text": "Four inches for patios and paths, and six to eight inches for driveways that carry cars."}},
+    {"@type": "Question", "name": "What gravel goes under pavers?", "acceptedAnswer": {"@type": "Answer", "text": "Crushed stone, often called road base or crusher run, compacts hard and drains well. Do not use pea gravel."}},
+    {"@type": "Question", "name": "Do I need sand under pavers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a one inch layer of coarse bedding sand sits on the compacted base and lets you level the pavers."}},
+    {"@type": "Question", "name": "Should I compact the base?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, compact it in layers of two inches at a time with a plate compactor, or the pavers will sink."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Paver Base Calculator</h1>
+<p class="lede">Work out the crushed stone base under pavers for patios, paths and driveways. Get cubic yards, tons and the sand bedding amount too.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Area length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="15" min="0" step="0.5">
+    <label for="width">Area width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="12" min="0" step="0.5">
+    <label for="depth">Base depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="4" min="0" step="0.5">
+    <label for="price">Price (<span class="ulabel" data-imp="per cubic yard" data-met="per cubic metre">per cubic yard</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Base cubic yards = length (ft) &times; width (ft) &times; base depth (in) &divide; 12 &divide; 27. Tons = cubic yards &times; 1.4. Bedding sand uses a 1 inch layer.</p>
+<p><strong>Worked example:</strong> A patio 15 ft by 12 ft with a 4 in base: 15 &times; 12 &times; 4 &divide; 12 = 60 cubic feet. 60 &divide; 27 = 2.22 cubic yards. 2.22 &times; 1.4 = 3.11 tons. Bedding sand: 15 &times; 12 &times; 1 &divide; 12 &divide; 27 = 0.56 cubic yards.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Use</th><th>Base depth</th><th>Gravel per 100 sq ft</th></tr><tr><td>Garden path</td><td>4 in</td><td>1.23 cubic yards</td></tr><tr><td>Patio</td><td>4 to 6 in</td><td>1.23 to 1.85 cubic yards</td></tr><tr><td>Driveway</td><td>6 to 8 in</td><td>1.85 to 2.47 cubic yards</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="paver-patio-calculator.html">Paver Patio Calculator</a><p>Work out everything a paver patio needs: pavers, base gravel and joint sand.</p></div>
+  <div class="card"><a href="paver-sand-calculator.html">Paver Sand Calculator</a><p>Work out both kinds of paver sand: bedding sand under the pavers and joint sand swept between them.</p></div>
+  <div class="card"><a href="gravel-driveway-calculator.html">Gravel Driveway Calculator</a><p>Find how many tons and cubic yards of gravel your driveway needs before you order.</p></div>
+  <div class="card"><a href="crushed-stone-calculator.html">Crushed Stone Calculator</a><p>Work out how much crushed stone to order for paths, bases and drainage.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How deep should a paver base be?</h3>
+  <p>Four inches for patios and paths, and six to eight inches for driveways that carry cars.</p>
+  <h3>What gravel goes under pavers?</h3>
+  <p>Crushed stone, often called road base or crusher run, compacts hard and drains well. Do not use pea gravel.</p>
+  <h3>Do I need sand under pavers?</h3>
+  <p>Yes, a one inch layer of coarse bedding sand sits on the compacted base and lets you level the pavers.</p>
+  <h3>Should I compact the base?</h3>
+  <p>Yes, compact it in layers of two inches at a time with a plate compactor, or the pavers will sink.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), D = v('depth','in');
+  if([L,W,D].some(isNaN) || L <= 0 || W <= 0 || D <= 0){ r.innerHTML = 'Please enter positive numbers for length, width and depth.'; r.classList.add('show'); return; }
+  var yd3 = L * W * D / 12 / 27;
+  var tons = yd3 * 1.4;
+  var sandYd3 = L * W * 1 / 12 / 27;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (yd3*0.764555) : (yd3); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per cubic metre' : 'per cubic yard') + '.'; }
+
+  r.innerHTML = 'You need <b>' + fmtVol(yd3) + '</b> of base gravel (<b>' + fmtWt(tons) + '</b>).<br>Plus about <b>' + fmtVol(sandYd3) + '</b> of bedding sand (1 inch layer).' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

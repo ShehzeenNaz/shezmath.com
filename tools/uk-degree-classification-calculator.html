@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UK Degree Classification Calculator | ShezMath</title>
+<meta name="description" content="Work out your UK degree classification from Year 2 and Year 3 marks. Enter each year mark and its weight to see if you get a First, 2:1, 2:2 or Third.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How is a UK degree classification worked out?", "acceptedAnswer": {"@type": "Answer", "text": "Universities combine your marks from each year using year weights, often 40% for Year 2 and 60% for Year 3. The weighted average then gives your class: 70% or more is a First, 60 to 69% is an Upper Second (2:1), 50 to 59% is a Lower Second (2:2), 40 to 49% is a Third, and below 40% is a Fail."}},
+    {"@type": "Question", "name": "What mark do I need for a First?", "acceptedAnswer": {"@type": "Answer", "text": "You need a weighted average of 70% or more across the years that count toward your degree. For example, with Year 2 at 65% (40%) and Year 3 at 72% (60%), the average is 69.2%, which is 0.8 marks short of a First."}},
+    {"@type": "Question", "name": "Does Year 1 count toward my degree classification?", "acceptedAnswer": {"@type": "Answer", "text": "At most UK universities Year 1 does not count toward the final classification, but you usually need to pass it to progress. Check your university handbook, as a few courses weight Year 1 as well."}},
+    {"@type": "Question", "name": "What is the difference between a 2:1 and a 2:2?", "acceptedAnswer": {"@type": "Answer", "text": "A 2:1, or Upper Second, needs a weighted average of 60 to 69%, while a 2:2, or Lower Second, needs 50 to 59%. Many graduate jobs ask for a 2:1 as a minimum."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>UK Degree Classification Calculator</h1>
+<p class="lede">Work out your UK degree class from your module marks. Enter your Year 2 and Year 3 averages with their weights to see if you get a First, 2:1, 2:2 or Third.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="year2">Year 2 average mark (%)</label>
+    <input type="number" id="year2" min="0" max="100" step="any" value="65">
+    <label for="year2-weight">Year 2 weight (%)</label>
+    <input type="number" id="year2-weight" min="0" max="100" step="any" value="40">
+    <label for="year3">Year 3 average mark (%)</label>
+    <input type="number" id="year3" min="0" max="100" step="any" value="72">
+    <label for="year3-weight">Year 3 weight (%)</label>
+    <input type="number" id="year3-weight" min="0" max="100" step="any" value="60">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Overall mark = (Year 2 mark &times; Year 2 weight &divide; 100) + (Year 3 mark &times; Year 3 weight &divide; 100). Boundaries: 70%+ First, 60&ndash;69% Upper Second (2:1), 50&ndash;59% Lower Second (2:2), 40&ndash;49% Third, below 40% Fail.</p>
+<p><strong>Worked example:</strong> Your Year 2 average is 65% with a 40% weight, and your Year 3 average is 72% with a 60% weight. First, 65 &times; 0.40 = 26. Then, 72 &times; 0.60 = 43.2. Add them: 26 + 43.2 = 69.2. Your overall mark is 69.2%, which is an Upper Second (2:1), just 0.8 marks away from a First.</p>
+
+<h2>Quick Reference: UK Degree Classifications</h2>
+<table>
+<tr><th>Overall mark</th><th>Classification</th></tr>
+<tr><td>70% and above</td><td>First Class (1st)</td></tr>
+<tr><td>60&ndash;69%</td><td>Upper Second Class (2:1)</td></tr>
+<tr><td>50&ndash;59%</td><td>Lower Second Class (2:2)</td></tr>
+<tr><td>40&ndash;49%</td><td>Third Class (3rd)</td></tr>
+<tr><td>Below 40%</td><td>Fail</td></tr>
+</table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="uk-year-weighting-calculator.html">UK Year Weighting Calculator</a><p>See how each year of your degree counts toward your final mark.</p></div>
+  <div class="card"><a href="dissertation-weighting-calculator.html">Dissertation Weighting Calculator</a><p>Find out how much your dissertation moves your final mark.</p></div>
+  <div class="card"><a href="ucas-tariff-calculator.html">UCAS Tariff Calculator</a><p>Add up your UCAS points from A-Levels, AS levels and BTECs.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Combine grades with different weights into one overall grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How is a UK degree classification worked out?</h3>
+  <p>Universities combine your marks from each year using year weights, often 40% for Year 2 and 60% for Year 3. The weighted average then gives your class: 70% or more is a First, 60 to 69% is an Upper Second (2:1), 50 to 59% is a Lower Second (2:2), 40 to 49% is a Third, and below 40% is a Fail.</p>
+  <h3>What mark do I need for a First?</h3>
+  <p>You need a weighted average of 70% or more across the years that count toward your degree. For example, with Year 2 at 65% (40%) and Year 3 at 72% (60%), the average is 69.2%, which is 0.8 marks short of a First.</p>
+  <h3>Does Year 1 count toward my degree classification?</h3>
+  <p>At most UK universities Year 1 does not count toward the final classification, but you usually need to pass it to progress. Check your university handbook, as a few courses weight Year 1 as well.</p>
+  <h3>What is the difference between a 2:1 and a 2:2?</h3>
+  <p>A 2:1, or Upper Second, needs a weighted average of 60 to 69%, while a 2:2, or Lower Second, needs 50 to 59%. Many graduate jobs ask for a 2:1 as a minimum.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function degreeClass(m) {
+  if (m >= 70) return 'First Class (1st)';
+  if (m >= 60) return 'Upper Second Class (2:1)';
+  if (m >= 50) return 'Lower Second Class (2:2)';
+  if (m >= 40) return 'Third Class (3rd)';
+  return 'Fail';
+}
+function calculate() {
+  var y2 = parseFloat(document.getElementById('year2').value);
+  var w2 = parseFloat(document.getElementById('year2-weight').value);
+  var y3 = parseFloat(document.getElementById('year3').value);
+  var w3 = parseFloat(document.getElementById('year3-weight').value);
+  var result = document.getElementById('result');
+  if (isNaN(y2) || isNaN(w2) || isNaN(y3) || isNaN(w3)) {
+    result.innerHTML = 'Please enter a number in every box.';
+    result.classList.add('show');
+    return;
+  }
+  var overall = (y2 * w2 / 100) + (y3 * w3 / 100);
+  var cls = degreeClass(overall);
+  var html = 'Your overall mark is <strong>' + overall.toFixed(1) + '%</strong> — <strong>' + cls + '</strong>.';
+  var nextBoundary = null;
+  if (overall < 70 && overall >= 60) nextBoundary = 70;
+  else if (overall < 60 && overall >= 50) nextBoundary = 60;
+  else if (overall < 50 && overall >= 40) nextBoundary = 50;
+  else if (overall < 40) nextBoundary = 40;
+  if (nextBoundary !== null) {
+    html += '<br>You are ' + (nextBoundary - overall).toFixed(1) + ' marks away from the next class up (' + nextBoundary + '%).';
+  } else if (overall >= 70) {
+    html += '<br>Congratulations — that is the highest classification.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

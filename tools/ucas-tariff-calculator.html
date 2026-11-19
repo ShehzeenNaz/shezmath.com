@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCAS Tariff Calculator | ShezMath</title>
+<meta name="description" content="Add up your UCAS tariff points from up to three qualifications. Pick A-Level, AS level or BTEC grades to see your total UCAS points instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How many UCAS points is an A at A-Level worth?", "acceptedAnswer": {"@type": "Answer", "text": "An A at A-Level is worth 48 UCAS tariff points. An A star is worth 56, a B is 40, a C is 32, a D is 24 and an E is 16."}},
+    {"@type": "Question", "name": "How many UCAS points is a BTEC Merit worth?", "acceptedAnswer": {"@type": "Answer", "text": "A BTEC Merit at National Extended Certificate level is worth 32 UCAS points. A Distinction star is 56, a Distinction is 48 and a Pass is 16."}},
+    {"@type": "Question", "name": "How many UCAS points do I need for university?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on the course. Many courses ask for 96 to 128 points, which is around three C to B grades at A-Level, while competitive courses can ask for 144 points or more. Check the entry requirements for each course."}},
+    {"@type": "Question", "name": "Do AS levels count toward UCAS points?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. An AS level grade A is worth 20 points, B is 16, C is 12, D is 10 and E is 6. AS levels are worth less than full A-Levels because they cover half the course."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>UCAS Tariff Calculator</h1>
+<p class="lede">Add up your UCAS tariff points from up to three qualifications. Pick the qualification type and grade for each row to see your total points.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="type1">Qualification 1 — type</label>
+    <select id="type1" onchange="updateGrades(1)">
+      <option value="alevel" selected>A-Level</option>
+      <option value="as">AS Level</option>
+      <option value="btec">BTEC</option>
+    </select>
+    <label for="grade1">Qualification 1 — grade</label>
+    <select id="grade1"></select>
+
+    <label for="type2">Qualification 2 — type</label>
+    <select id="type2" onchange="updateGrades(2)">
+      <option value="alevel" selected>A-Level</option>
+      <option value="as">AS Level</option>
+      <option value="btec">BTEC</option>
+    </select>
+    <label for="grade2">Qualification 2 — grade</label>
+    <select id="grade2"></select>
+
+    <label for="type3">Qualification 3 — type</label>
+    <select id="type3" onchange="updateGrades(3)">
+      <option value="alevel">A-Level</option>
+      <option value="as">AS Level</option>
+      <option value="btec" selected>BTEC</option>
+    </select>
+    <label for="grade3">Qualification 3 — grade</label>
+    <select id="grade3"></select>
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Total UCAS points = points for qualification 1 + points for qualification 2 + points for qualification 3. A-Level: A* = 56, A = 48, B = 40, C = 32, D = 24, E = 16. AS level: A = 20, B = 16, C = 12, D = 10, E = 6. BTEC: Distinction* = 56, Distinction = 48, Merit = 32, Pass = 16.</p>
+<p><strong>Worked example:</strong> You have an A-Level A (48 points), an A-Level B (40 points) and a BTEC Merit (32 points). Add them up: 48 + 40 + 32 = 120. Your total is 120 UCAS points.</p>
+
+<h2>Quick Reference: UCAS Tariff Points</h2>
+<table>
+<tr><th>Qualification</th><th>Grade</th><th>UCAS points</th></tr>
+<tr><td>A-Level</td><td>A*</td><td>56</td></tr>
+<tr><td>A-Level</td><td>A</td><td>48</td></tr>
+<tr><td>A-Level</td><td>B</td><td>40</td></tr>
+<tr><td>A-Level</td><td>C</td><td>32</td></tr>
+<tr><td>A-Level</td><td>D</td><td>24</td></tr>
+<tr><td>A-Level</td><td>E</td><td>16</td></tr>
+<tr><td>AS level</td><td>A</td><td>20</td></tr>
+<tr><td>AS level</td><td>B</td><td>16</td></tr>
+<tr><td>AS level</td><td>C</td><td>12</td></tr>
+<tr><td>AS level</td><td>D</td><td>10</td></tr>
+<tr><td>AS level</td><td>E</td><td>6</td></tr>
+<tr><td>BTEC</td><td>Distinction*</td><td>56</td></tr>
+<tr><td>BTEC</td><td>Distinction</td><td>48</td></tr>
+<tr><td>BTEC</td><td>Merit</td><td>32</td></tr>
+<tr><td>BTEC</td><td>Pass</td><td>16</td></tr>
+</table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="uk-degree-classification-calculator.html">UK Degree Classification Calculator</a><p>Work out your degree class from your Year 2 and Year 3 marks.</p></div>
+  <div class="card"><a href="uk-year-weighting-calculator.html">UK Year Weighting Calculator</a><p>See how each year of your degree counts toward your final mark.</p></div>
+  <div class="card"><a href="grade-points-calculator.html">Grade Points Calculator</a><p>Convert a letter grade into grade points for one course.</p></div>
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA from all your courses and credits.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How many UCAS points is an A at A-Level worth?</h3>
+  <p>An A at A-Level is worth 48 UCAS tariff points. An A star is worth 56, a B is 40, a C is 32, a D is 24 and an E is 16.</p>
+  <h3>How many UCAS points is a BTEC Merit worth?</h3>
+  <p>A BTEC Merit at National Extended Certificate level is worth 32 UCAS points. A Distinction star is 56, a Distinction is 48 and a Pass is 16.</p>
+  <h3>How many UCAS points do I need for university?</h3>
+  <p>It depends on the course. Many courses ask for 96 to 128 points, which is around three C to B grades at A-Level, while competitive courses can ask for 144 points or more. Check the entry requirements for each course.</p>
+  <h3>Do AS levels count toward UCAS points?</h3>
+  <p>Yes. An AS level grade A is worth 20 points, B is 16, C is 12, D is 10 and E is 6. AS levels are worth less than full A-Levels because they cover half the course.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+var GRADES = {
+  alevel: [['A*', 56], ['A', 48], ['B', 40], ['C', 32], ['D', 24], ['E', 16]],
+  as: [['A', 20], ['B', 16], ['C', 12], ['D', 10], ['E', 6]],
+  btec: [['Distinction*', 56], ['Distinction', 48], ['Merit', 32], ['Pass', 16]]
+};
+function updateGrades(row, keepValue) {
+  var type = document.getElementById('type' + row).value;
+  var gradeSel = document.getElementById('grade' + row);
+  var prev = keepValue !== undefined ? keepValue : gradeSel.value;
+  gradeSel.innerHTML = '';
+  GRADES[type].forEach(function (g) {
+    var opt = document.createElement('option');
+    opt.value = g[1];
+    opt.text = g[0];
+    gradeSel.appendChild(opt);
+  });
+  for (var i = 0; i < gradeSel.options.length; i++) {
+    if (String(gradeSel.options[i].value) === String(prev)) { gradeSel.selectedIndex = i; break; }
+  }
+}
+updateGrades(1, 48);
+updateGrades(2, 40);
+updateGrades(3, 32);
+function calculate() {
+  var total = 0;
+  var parts = [];
+  for (var i = 1; i <= 3; i++) {
+    var gradeSel = document.getElementById('grade' + i);
+    var pts = parseInt(gradeSel.value, 10);
+    var label = gradeSel.options[gradeSel.selectedIndex].text;
+    total += pts;
+    parts.push(label + ' (' + pts + ')');
+  }
+  var result = document.getElementById('result');
+  result.innerHTML = 'Your total is <strong>' + total + ' UCAS points</strong>: ' + parts.join(' + ') + ' = ' + total + '.';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  updateGrades(1, 48);
+  updateGrades(2, 40);
+  updateGrades(3, 32);
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

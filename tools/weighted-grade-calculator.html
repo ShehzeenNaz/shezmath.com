@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weighted Grade Calculator | ShezMath</title>
+<meta name="description" content="Calculate your course grade from assignments with different weights. Enter up to four scores and weights to get your weighted average instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is a weighted grade?", "acceptedAnswer": {"@type": "Answer", "text": "A weighted grade gives more importance to some assignments than others. A final exam worth 40% counts four times as much as homework worth 10%, so each score is multiplied by its weight before averaging."}},
+    {"@type": "Question", "name": "Do the weights have to add up to 100%?", "acceptedAnswer": {"@type": "Answer", "text": "For a final course grade they should add up to 100%. If your weights add up to less, the calculator still works by dividing by the total weight you entered, which is useful for a part-finished course."}},
+    {"@type": "Question", "name": "What if I have more than four assignments?", "acceptedAnswer": {"@type": "Answer", "text": "Combine similar assignments into one row first. For example, average all your homework scores into one homework score, then enter that score with the total homework weight."}},
+    {"@type": "Question", "name": "What is the difference between a weighted and a simple average?", "acceptedAnswer": {"@type": "Answer", "text": "A simple average treats every score equally. A weighted average counts each score according to its weight, so a big exam moves your grade far more than a small quiz."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Weighted Grade Calculator</h1>
+<p class="lede">Not every assignment counts the same. Enter up to four scores with their weights to work out your weighted course grade in seconds.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="score1">Assignment 1 score (%)</label>
+    <input type="number" id="score1" min="0" max="100" step="0.1" value="90">
+    <label for="weight1">Assignment 1 weight (%)</label>
+    <input type="number" id="weight1" min="0" max="100" step="0.1" value="20">
+    <label for="score2">Assignment 2 score (%)</label>
+    <input type="number" id="score2" min="0" max="100" step="0.1" value="80">
+    <label for="weight2">Assignment 2 weight (%)</label>
+    <input type="number" id="weight2" min="0" max="100" step="0.1" value="30">
+    <label for="score3">Assignment 3 score (%)</label>
+    <input type="number" id="score3" min="0" max="100" step="0.1" value="95">
+    <label for="weight3">Assignment 3 weight (%)</label>
+    <input type="number" id="weight3" min="0" max="100" step="0.1" value="10">
+    <label for="score4">Assignment 4 score (%)</label>
+    <input type="number" id="score4" min="0" max="100" step="0.1" value="85">
+    <label for="weight4">Assignment 4 weight (%)</label>
+    <input type="number" id="weight4" min="0" max="100" step="0.1" value="40">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Weighted grade = (score 1 × weight 1 + score 2 × weight 2 + score 3 × weight 3 + score 4 × weight 4) ÷ total weight. Leave a row at 0% weight to ignore it.</p>
+<p><strong>Worked example:</strong> Your scores are 90% at 20%, 80% at 30%, 95% at 10% and 85% at 40%. Multiply each score by its weight: 90 × 20 = 1800, 80 × 30 = 2400, 95 × 10 = 950, 85 × 40 = 3400. Add them up: 1800 + 2400 + 950 + 3400 = 8550. Divide by the total weight, 100: 8550 ÷ 100 = 85.5%. Your weighted grade is 85.5%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Work out a simple average grade from a set of test scores.</p></div>
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out your final course grade from your current grade and final exam score.</p></div>
+  <div class="card"><a href="weighted-gpa-calculator.html">Weighted GPA Calculator</a><p>Calculate a weighted GPA that gives extra credit for honours and AP classes.</p></div>
+  <div class="card"><a href="drop-lowest-grade-calculator.html">Drop Lowest Grade Calculator</a><p>See how your grade changes when your lowest score is dropped.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is a weighted grade?</h3>
+  <p>A weighted grade gives more importance to some assignments than others. A final exam worth 40% counts four times as much as homework worth 10%, so each score is multiplied by its weight before averaging.</p>
+  <h3>Do the weights have to add up to 100%?</h3>
+  <p>For a final course grade they should add up to 100%. If your weights add up to less, the calculator still works by dividing by the total weight you entered, which is useful for a part-finished course.</p>
+  <h3>What if I have more than four assignments?</h3>
+  <p>Combine similar assignments into one row first. For example, average all your homework scores into one homework score, then enter that score with the total homework weight.</p>
+  <h3>What is the difference between a weighted and a simple average?</h3>
+  <p>A simple average treats every score equally. A weighted average counts each score according to its weight, so a big exam moves your grade far more than a small quiz.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var result = document.getElementById('result');
+  var total = 0, weightSum = 0;
+  for (var i = 1; i <= 4; i++) {
+    var s = parseFloat(document.getElementById('score' + i).value);
+    var w = parseFloat(document.getElementById('weight' + i).value);
+    if (isNaN(s)) s = 0;
+    if (isNaN(w)) w = 0;
+    total += s * w;
+    weightSum += w;
+  }
+  if (weightSum <= 0) {
+    result.innerHTML = 'Please enter at least one weight above 0.';
+    result.classList.add('show');
+    return;
+  }
+  var grade = total / weightSum;
+  var html = 'Your weighted grade is <strong>' + grade.toFixed(1) + '%</strong>.';
+  if (Math.abs(weightSum - 100) > 0.01) {
+    html += '<br>Note: your weights add up to ' + weightSum.toFixed(1) + '%, not 100%, so this is the weighted average of the work entered so far.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

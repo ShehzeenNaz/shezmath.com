@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Board Foot Calculator | ShezMath</title>
+<meta name="description" content="Calculate board feet for lumber. Enter thickness, width, length and pieces to get total board feet for pricing and ordering. Try it free now.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "What is a board foot?", "acceptedAnswer": {"@type": "Answer", "text": "A board foot is a volume of wood 12 inches by 12 inches by 1 inch thick. It is how hardwood lumber is measured and sold."}},
+    {"@type": "Question", "name": "How do I price lumber by board foot?", "acceptedAnswer": {"@type": "Answer", "text": "Multiply total board feet by the price per board foot. A $5 per board foot price on 80 board feet is $400."}},
+    {"@type": "Question", "name": "Is a 2x4 really 2 inches by 4 inches?", "acceptedAnswer": {"@type": "Answer", "text": "No. A 2x4 is actually 1.5 inches by 3.5 inches after drying and planing. Use the real size in this calculator."}},
+    {"@type": "Question", "name": "Do I need to add waste for board feet?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, add 10% to 15% for cuts, defects and mistakes when ordering lumber for a project."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Board Foot Calculator</h1>
+<p class="lede">Work out board feet, the standard way lumber is measured and priced. Enter the board size and count to get the total.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="thickness">Board thickness (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="thickness" data-kind="in" value="2" min="0" step="0.25">
+    <label for="width">Board width (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="width" data-kind="in" value="6" min="0" step="0.25">
+    <label for="length">Board length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="8" min="0" step="0.5">
+    <label for="pieces">Number of boards</label>
+    <input type="number" id="pieces" value="10" min="1" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per board foot" data-met="per board foot">per board foot</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Board feet per board = thickness (in) &times; width (in) &times; length (ft) &divide; 12. Total = board feet per board &times; number of boards.</p>
+<p><strong>Worked example:</strong> A 2 in by 6 in board, 8 ft long: 2 &times; 6 &times; 8 &divide; 12 = 8 board feet per board. Ten boards: 8 &times; 10 = 80 board feet.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Board size</th><th>Length</th><th>Board feet per board</th></tr><tr><td>1 in x 6 in</td><td>8 ft</td><td>4</td></tr><tr><td>2 in x 4 in</td><td>8 ft</td><td>5.33</td></tr><tr><td>2 in x 6 in</td><td>8 ft</td><td>8</td></tr><tr><td>2 in x 10 in</td><td>10 ft</td><td>16.67</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="lumber-calculator.html">Lumber Calculator</a><p>Work out how many boards to buy for framing, shelving or a fence run.</p></div>
+  <div class="card"><a href="decking-calculator.html">Decking Calculator</a><p>Work out how many deck boards your deck needs, including the gap between boards.</p></div>
+  <div class="card"><a href="fence-boards-calculator.html">Fence Boards Calculator</a><p>Work out how many fence boards or pickets a fence needs.</p></div>
+  <div class="card"><a href="stair-stringer-calculator.html">Stair Stringer Calculator</a><p>Work out the steps, riser height, total run and stringer length for a staircase.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is a board foot?</h3>
+  <p>A board foot is a volume of wood 12 inches by 12 inches by 1 inch thick. It is how hardwood lumber is measured and sold.</p>
+  <h3>How do I price lumber by board foot?</h3>
+  <p>Multiply total board feet by the price per board foot. A $5 per board foot price on 80 board feet is $400.</p>
+  <h3>Is a 2x4 really 2 inches by 4 inches?</h3>
+  <p>No. A 2x4 is actually 1.5 inches by 3.5 inches after drying and planing. Use the real size in this calculator.</p>
+  <h3>Do I need to add waste for board feet?</h3>
+  <p>Yes, add 10% to 15% for cuts, defects and mistakes when ordering lumber for a project.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var T = v('thickness','in'), W = v('width','in'), L = v('length','ft'), n = raw('pieces');
+  if([T,W,L,n].some(isNaN) || T <= 0 || W <= 0 || L <= 0 || n <= 0){ r.innerHTML = 'Please enter positive numbers for all values.'; r.classList.add('show'); return; }
+  var perBoard = T * W * L / 12;
+  var total = perBoard * n;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (total) : (total); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per board foot' : 'per board foot') + '.'; }
+
+  r.innerHTML = 'Each board is <b>' + perBoard.toFixed(2) + ' board feet</b>.<br>Total for ' + n + ' boards: <b>' + total.toFixed(2) + ' board feet</b>.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

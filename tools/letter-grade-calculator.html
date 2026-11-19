@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letter Grade Calculator | ShezMath</title>
+<meta name="description" content="Convert a percentage score into a letter grade from A to F. Enter your percentage to see your letter grade on the standard A to F scale instantly.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What letter grade is 88%?", "acceptedAnswer": {"@type": "Answer", "text": "88% is a B plus. On the standard scale, 87 to 89% is a B plus, 83 to 86% is a B, and 90 to 92% is an A minus."}},
+    {"@type": "Question", "name": "What percentage do I need for an A?", "acceptedAnswer": {"@type": "Answer", "text": "On the standard scale used here, 93 to 100% is an A, and 90 to 92% is an A minus. Some schools use a different cut-off, such as 90% for an A, so check your own grading scale."}},
+    {"@type": "Question", "name": "What is the lowest passing letter grade?", "acceptedAnswer": {"@type": "Answer", "text": "On this scale, a D minus at 60 to 62% is the lowest passing grade. Anything below 60% is an F, which means you did not pass."}},
+    {"@type": "Question", "name": "Do all schools use the same letter grade bands?", "acceptedAnswer": {"@type": "Answer", "text": "No. The bands on this page are the common US standard, but schools and universities can set their own cut-offs, and some do not use plus and minus grades at all."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Letter Grade Calculator</h1>
+<p class="lede">Convert a percentage score into a letter grade. Enter your percentage and see your grade on the standard A to F scale in one click.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="percentage">Percentage score (%)</label>
+    <input type="number" id="percentage" min="0" max="100" step="any" value="88">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Match your percentage to the band it falls in: 93&ndash;100 A, 90&ndash;92 A&minus;, 87&ndash;89 B+, 83&ndash;86 B, 80&ndash;82 B&minus;, 77&ndash;79 C+, 73&ndash;76 C, 70&ndash;72 C&minus;, 67&ndash;69 D+, 63&ndash;66 D, 60&ndash;62 D&minus;, below 60 F.</p>
+<p><strong>Worked example:</strong> Your score is 88%. Look at the bands: 88 falls in the 87 to 89 range. That range is a B+. Your letter grade is B+.</p>
+
+<h2>Quick Reference: Percentage to Letter Grade</h2>
+<table>
+<tr><th>Percentage</th><th>Letter grade</th></tr>
+<tr><td>93&ndash;100%</td><td>A</td></tr>
+<tr><td>90&ndash;92%</td><td>A&minus;</td></tr>
+<tr><td>87&ndash;89%</td><td>B+</td></tr>
+<tr><td>83&ndash;86%</td><td>B</td></tr>
+<tr><td>80&ndash;82%</td><td>B&minus;</td></tr>
+<tr><td>77&ndash;79%</td><td>C+</td></tr>
+<tr><td>73&ndash;76%</td><td>C</td></tr>
+<tr><td>70&ndash;72%</td><td>C&minus;</td></tr>
+<tr><td>67&ndash;69%</td><td>D+</td></tr>
+<tr><td>63&ndash;66%</td><td>D</td></tr>
+<tr><td>60&ndash;62%</td><td>D&minus;</td></tr>
+<tr><td>Below 60%</td><td>F</td></tr>
+</table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn your marks into a percentage first, then find the letter grade.</p></div>
+  <div class="card"><a href="gpa-to-percentage-calculator.html">GPA to Percentage Calculator</a><p>Convert a GPA on the 4.0 scale into a percentage.</p></div>
+  <div class="card"><a href="percentage-to-gpa-calculator.html">Percentage to GPA Calculator</a><p>Convert a percentage score into a GPA on the 4.0 scale.</p></div>
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Find the average of up to five test scores in one go.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What letter grade is 88%?</h3>
+  <p>88% is a B plus. On the standard scale, 87 to 89% is a B plus, 83 to 86% is a B, and 90 to 92% is an A minus.</p>
+  <h3>What percentage do I need for an A?</h3>
+  <p>On the standard scale used here, 93 to 100% is an A, and 90 to 92% is an A minus. Some schools use a different cut-off, such as 90% for an A, so check your own grading scale.</p>
+  <h3>What is the lowest passing letter grade?</h3>
+  <p>On this scale, a D minus at 60 to 62% is the lowest passing grade. Anything below 60% is an F, which means you did not pass.</p>
+  <h3>Do all schools use the same letter grade bands?</h3>
+  <p>No. The bands on this page are the common US standard, but schools and universities can set their own cut-offs, and some do not use plus and minus grades at all.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function letterGrade(p) {
+  if (p >= 93) return 'A';
+  if (p >= 90) return 'A\u2212';
+  if (p >= 87) return 'B+';
+  if (p >= 83) return 'B';
+  if (p >= 80) return 'B\u2212';
+  if (p >= 77) return 'C+';
+  if (p >= 73) return 'C';
+  if (p >= 70) return 'C\u2212';
+  if (p >= 67) return 'D+';
+  if (p >= 63) return 'D';
+  if (p >= 60) return 'D\u2212';
+  return 'F';
+}
+function calculate() {
+  var p = parseFloat(document.getElementById('percentage').value);
+  var result = document.getElementById('result');
+  if (isNaN(p) || p < 0 || p > 100) {
+    result.innerHTML = 'Please enter a percentage between 0 and 100.';
+    result.classList.add('show');
+    return;
+  }
+  result.innerHTML = p + '% is a letter grade of <strong>' + letterGrade(p) + '</strong>.';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

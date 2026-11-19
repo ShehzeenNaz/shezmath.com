@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semester GPA Calculator | ShezMath</title>
+<meta name="description" content="Work out your GPA for one semester on a 4.0 scale. Enter up to four courses with letter grades and credit hours for an instant result.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is the difference between semester GPA and cumulative GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Semester GPA covers one term only. Cumulative GPA covers all your terms so far. Your semester GPA feeds into your cumulative GPA, weighted by its credits."}},
+    {"@type": "Question", "name": "What if I took more than four courses this semester?", "acceptedAnswer": {"@type": "Answer", "text": "Work out the GPA for four courses, then use the cumulative GPA calculator to combine that result with your remaining courses, treating each group as one block."}},
+    {"@type": "Question", "name": "Do pass or fail courses count in my semester GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Usually no. Pass or fail courses normally earn credit but no grade points, so leave them out of this calculator. Check your school policy if you are unsure."}},
+    {"@type": "Question", "name": "How does my semester GPA affect my cumulative GPA?", "acceptedAnswer": {"@type": "Answer", "text": "A semester above your cumulative average pulls it up, and a semester below it pulls it down. The more credits you already have, the smaller the move. Use the cumulative GPA calculator to see it."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Semester GPA Calculator</h1>
+<p class="lede">Work out your GPA for one semester on the standard 4.0 scale. Add up to four courses, pick each letter grade and enter the credit hours.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="grade1">Course 1 grade</label>
+    <select id="grade1">
+      <option value="4">A</option>
+      <option value="3" selected>B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits1">Course 1 credits</label>
+    <input type="number" id="credits1" value="3" min="0" step="0.5">
+    <label for="grade2">Course 2 grade</label>
+    <select id="grade2">
+      <option value="4" selected>A</option>
+      <option value="3">B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits2">Course 2 credits</label>
+    <input type="number" id="credits2" value="3" min="0" step="0.5">
+    <label for="grade3">Course 3 grade</label>
+    <select id="grade3">
+      <option value="4">A</option>
+      <option value="3" selected>B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits3">Course 3 credits</label>
+    <input type="number" id="credits3" value="4" min="0" step="0.5">
+    <label for="grade4">Course 4 grade</label>
+    <select id="grade4">
+      <option value="4" selected>A</option>
+      <option value="3">B</option>
+      <option value="2">C</option>
+      <option value="1">D</option>
+      <option value="0">F</option>
+    </select>
+    <label for="credits4">Course 4 credits</label>
+    <input type="number" id="credits4" value="3" min="0" step="0.5">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Semester GPA = total grade points &divide; total credits for the semester. Each course earns grade points equal to its grade value (A = 4, B = 3, C = 2, D = 1, F = 0) multiplied by its credit hours.</p>
+<p><strong>Worked example:</strong> Four courses this semester: B (3 credits), A (3 credits), B (4 credits) and A (3 credits). Grade points are 3 &times; 3 = 9, 4 &times; 3 = 12, 3 &times; 4 = 12 and 4 &times; 3 = 12. That is 9 + 12 + 12 + 12 = 45 grade points over 3 + 3 + 4 + 3 = 13 credits. 45 &divide; 13 = 3.46. Your semester GPA is 3.46.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your overall GPA on the 4.0 scale.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine this semester with your GPA so far.</p></div>
+  <div class="card"><a href="weighted-gpa-calculator.html">Weighted GPA Calculator</a><p>Add AP and Honors bonuses to your GPA.</p></div>
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Average your scores across a subject or term.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is the difference between semester GPA and cumulative GPA?</h3>
+  <p>Semester GPA covers one term only. Cumulative GPA covers all your terms so far. Your semester GPA feeds into your cumulative GPA, weighted by its credits.</p>
+  <h3>What if I took more than four courses this semester?</h3>
+  <p>Work out the GPA for four courses, then use the cumulative GPA calculator to combine that result with your remaining courses, treating each group as one block.</p>
+  <h3>Do pass or fail courses count in my semester GPA?</h3>
+  <p>Usually no. Pass or fail courses normally earn credit but no grade points, so leave them out of this calculator. Check your school policy if you are unsure.</p>
+  <h3>How does my semester GPA affect my cumulative GPA?</h3>
+  <p>A semester above your cumulative average pulls it up, and a semester below it pulls it down. The more credits you already have, the smaller the move. Use the cumulative GPA calculator to see it.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var totalPoints = 0;
+  var totalCredits = 0;
+  var r = document.getElementById('result');
+  for (var i = 1; i <= 4; i++) {
+    var grade = parseFloat(document.getElementById('grade' + i).value);
+    var credits = parseFloat(document.getElementById('credits' + i).value);
+    if (isNaN(credits) || credits < 0) {
+      r.innerHTML = 'Please enter valid credit hours for every course.';
+      r.classList.add('show');
+      return;
+    }
+    totalPoints += grade * credits;
+    totalCredits += credits;
+  }
+  if (totalCredits === 0) {
+    r.innerHTML = 'Enter at least one credit hour to calculate a GPA.';
+    r.classList.add('show');
+    return;
+  }
+  var gpa = totalPoints / totalCredits;
+  r.innerHTML = 'Your semester GPA is <strong>' + gpa.toFixed(2) + '</strong> (' + totalPoints + ' grade points &divide; ' + totalCredits + ' credits).';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

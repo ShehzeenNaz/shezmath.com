@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retake GPA Calculator | ShezMath</title>
+<meta name="description" content="See how retaking a course changes your GPA. Enter your current GPA, credits and the old and new grades to find your updated average.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Does my school replace the old grade or average the two?", "acceptedAnswer": {"@type": "Answer", "text": "Most schools replace the old grade with the new one in your GPA, though the old grade stays on your transcript. Some schools average both attempts instead. Check your school policy before you rely on this result."}},
+    {"@type": "Question", "name": "What if I retake a course worth different credits?", "acceptedAnswer": {"@type": "Answer", "text": "Enter the credits of the course you are retaking. If the new attempt is worth different credits than the old one, use the credits of the new attempt and check with your school how it counts."}},
+    {"@type": "Question", "name": "Can retaking a course lower my GPA?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if your new grade is lower than the old one. Retaking only helps when the new grade beats the grade it replaces. This calculator shows the change either way."}},
+    {"@type": "Question", "name": "What grade points is each letter grade worth?", "acceptedAnswer": {"@type": "Answer", "text": "On the 4.0 scale, A is worth 4.0, B is worth 3.0, C is worth 2.0, D is worth 1.0 and F is worth 0. Enter those numbers as the old and new grade points."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Retake GPA Calculator</h1>
+<p class="lede">See how retaking a course changes your GPA. Enter your current GPA and credits, then the old and new grades for the course you retake.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current-gpa">Current GPA</label>
+    <input type="number" id="current-gpa" value="3.0" min="0" max="4" step="0.01">
+    <label for="total-credits">Total credits completed</label>
+    <input type="number" id="total-credits" value="30" min="0" step="0.5">
+    <label for="retake-credits">Retaken course credits</label>
+    <input type="number" id="retake-credits" value="3" min="0" step="0.5">
+    <label for="old-grade">Old grade points (C = 2.0)</label>
+    <input type="number" id="old-grade" value="2.0" min="0" max="4" step="0.1">
+    <label for="new-grade">New grade points (A = 4.0)</label>
+    <input type="number" id="new-grade" value="4.0" min="0" max="4" step="0.1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> New GPA = (current GPA &times; total credits &minus; old grade points &times; retaken credits + new grade points &times; retaken credits) &divide; total credits. The old grade is taken out and the new grade is put in its place.</p>
+<p><strong>Worked example:</strong> Your GPA is 3.0 over 30 credits and you retake a 3-credit course, moving from a C (2.0) to an A (4.0). Your grade points now: 3.0 &times; 30 = 90. Take out the old C: 90 &minus; (2.0 &times; 3) = 84. Add the new A: 84 + (4.0 &times; 3) = 96. 96 &divide; 30 = 3.20. Your new GPA is 3.20.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA on the 4.0 scale from your course grades.</p></div>
+  <div class="card"><a href="credits-to-raise-gpa-calculator.html">Credits to Raise GPA Calculator</a><p>Find how many A credits you need to hit a target GPA.</p></div>
+  <div class="card"><a href="cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine your GPA so far with a new semester.</p></div>
+  <div class="card"><a href="grade-points-calculator.html">Grade Points Calculator</a><p>Turn letter grades into grade points.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>Does my school replace the old grade or average the two?</h3>
+  <p>Most schools replace the old grade with the new one in your GPA, though the old grade stays on your transcript. Some schools average both attempts instead. Check your school policy before you rely on this result.</p>
+  <h3>What if I retake a course worth different credits?</h3>
+  <p>Enter the credits of the course you are retaking. If the new attempt is worth different credits than the old one, use the credits of the new attempt and check with your school how it counts.</p>
+  <h3>Can retaking a course lower my GPA?</h3>
+  <p>Yes, if your new grade is lower than the old one. Retaking only helps when the new grade beats the grade it replaces. This calculator shows the change either way.</p>
+  <h3>What grade points is each letter grade worth?</h3>
+  <p>On the 4.0 scale, A is worth 4.0, B is worth 3.0, C is worth 2.0, D is worth 1.0 and F is worth 0. Enter those numbers as the old and new grade points.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var gpa = parseFloat(document.getElementById('current-gpa').value);
+  var credits = parseFloat(document.getElementById('total-credits').value);
+  var retake = parseFloat(document.getElementById('retake-credits').value);
+  var oldGrade = parseFloat(document.getElementById('old-grade').value);
+  var newGrade = parseFloat(document.getElementById('new-grade').value);
+  var r = document.getElementById('result');
+  if (isNaN(gpa) || isNaN(credits) || isNaN(retake) || isNaN(oldGrade) || isNaN(newGrade)) {
+    r.innerHTML = 'Please enter all five numbers.';
+    r.classList.add('show');
+    return;
+  }
+  if (credits <= 0 || retake <= 0 || retake > credits) {
+    r.innerHTML = 'Retaken credits must be more than 0 and no more than your total credits.';
+    r.classList.add('show');
+    return;
+  }
+  var newGpa = (gpa * credits - oldGrade * retake + newGrade * retake) / credits;
+  r.innerHTML = 'Your new GPA after the retake is <strong>' + newGpa.toFixed(2) + '</strong> (was ' + gpa.toFixed(2) + ').';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

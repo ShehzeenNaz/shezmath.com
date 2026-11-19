@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Two-Part Final Calculator | ShezMath</title>
+<meta name="description" content="Calculate your course grade when the final exam has two parts with different weights. Enter your current grade and each part's score and weight.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What if the two part weights do not add up to 100%?", "acceptedAnswer": {"@type": "Answer", "text": "The two part weights must add up to 100% of the final exam. If they do not, check your syllabus and fix the numbers, because the calculator cannot split the final correctly otherwise."}},
+    {"@type": "Question", "name": "How do I know each part's weight?", "acceptedAnswer": {"@type": "Answer", "text": "Check your syllabus or ask your teacher. A common split is a written paper worth 60% of the final and a practical or oral part worth 40% of the final."}},
+    {"@type": "Question", "name": "What is the final exam weight in the course?", "acceptedAnswer": {"@type": "Answer", "text": "It is the share of your whole course grade decided by the final exam. If the final is worth 40% of your course, enter 40. Your current grade covers the other 60%."}},
+    {"@type": "Question", "name": "Can I use this for a final with more than two parts?", "acceptedAnswer": {"@type": "Answer", "text": "Not directly. Combine the smaller parts into one part first by working out their weighted average, then enter that combined score and its total weight as one part."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Two-Part Final Calculator</h1>
+<p class="lede">Some finals are split into two parts, such as a written paper and a practical. Enter each part's score and weight to find your final exam score and your overall course grade.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current">Current grade before the final (%)</label>
+    <input type="number" id="current" min="0" max="100" step="0.1" value="80">
+    <label for="finalweight">Final exam weight in course (%)</label>
+    <input type="number" id="finalweight" min="1" max="100" step="0.1" value="40">
+    <label for="part1score">Part 1 score (%)</label>
+    <input type="number" id="part1score" min="0" max="100" step="0.1" value="90">
+    <label for="part1weight">Part 1 weight in the final (%)</label>
+    <input type="number" id="part1weight" min="0" max="100" step="0.1" value="25">
+    <label for="part2score">Part 2 score (%)</label>
+    <input type="number" id="part2score" min="0" max="100" step="0.1" value="70">
+    <label for="part2weight">Part 2 weight in the final (%)</label>
+    <input type="number" id="part2weight" min="0" max="100" step="0.1" value="75">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final exam score = (part 1 score × part 1 weight) + (part 2 score × part 2 weight), with weights as shares of the final exam. Course grade = (current grade × (1 − final weight)) + (final exam score × final weight).</p>
+<p><strong>Worked example:</strong> Your current grade is 80% and the final is worth 40% of the course. Part 1 is 90% at 25% of the final and part 2 is 70% at 75% of the final. Final exam score = 90 × 0.25 + 70 × 0.75 = 22.5 + 52.5 = 75%. Course grade = 80 × 0.60 + 75 × 0.40 = 48 + 30 = 78%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out your final course grade from your current grade and a single final exam score.</p></div>
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the final exam score you need to reach your target course grade.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Combine assignments with different weights into one overall course grade.</p></div>
+  <div class="card"><a href="grade-to-pass-calculator.html">Grade to Pass Calculator</a><p>Find the lowest score you need on remaining work to pass your course.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What if the two part weights do not add up to 100%?</h3>
+  <p>The two part weights must add up to 100% of the final exam. If they do not, check your syllabus and fix the numbers, because the calculator cannot split the final correctly otherwise.</p>
+  <h3>How do I know each part's weight?</h3>
+  <p>Check your syllabus or ask your teacher. A common split is a written paper worth 60% of the final and a practical or oral part worth 40% of the final.</p>
+  <h3>What is the final exam weight in the course?</h3>
+  <p>It is the share of your whole course grade decided by the final exam. If the final is worth 40% of your course, enter 40. Your current grade covers the other 60%.</p>
+  <h3>Can I use this for a final with more than two parts?</h3>
+  <p>Not directly. Combine the smaller parts into one part first by working out their weighted average, then enter that combined score and its total weight as one part.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var current = parseFloat(document.getElementById('current').value);
+  var fw = parseFloat(document.getElementById('finalweight').value);
+  var s1 = parseFloat(document.getElementById('part1score').value);
+  var w1 = parseFloat(document.getElementById('part1weight').value);
+  var s2 = parseFloat(document.getElementById('part2score').value);
+  var w2 = parseFloat(document.getElementById('part2weight').value);
+  var result = document.getElementById('result');
+  if ([current, fw, s1, w1, s2, w2].some(isNaN) || fw <= 0 || fw > 100) {
+    result.innerHTML = 'Please enter valid numbers. Final exam weight must be between 1 and 100.';
+    result.classList.add('show');
+    return;
+  }
+  if (Math.abs(w1 + w2 - 100) > 0.01) {
+    result.innerHTML = 'Part 1 and part 2 weights must add up to 100% of the final exam. They currently add up to ' + (w1 + w2).toFixed(1) + '%.';
+    result.classList.add('show');
+    return;
+  }
+  var finalScore = s1 * (w1 / 100) + s2 * (w2 / 100);
+  var course = current * (1 - fw / 100) + finalScore * (fw / 100);
+  result.innerHTML = 'Your final exam score is <strong>' + finalScore.toFixed(1) + '%</strong>.<br>Your course grade is <strong>' + course.toFixed(1) + '%</strong>.';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Score Percentage Calculator | ShezMath</title>
+<meta name="description" content="Turn your marks into a percentage in seconds. Enter the marks you scored and the total marks to see your test score as a percentage and letter grade.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How do I calculate my test score as a percentage?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the marks you obtained by the total marks, then multiply by 100. For example, 42 marks out of 50 is 42 divided by 50, which is 0.84, times 100 gives 84%."}},
+    {"@type": "Question", "name": "What is the difference between marks and percentage?", "acceptedAnswer": {"@type": "Answer", "text": "Marks are the raw score you earned, such as 42 out of 50. A percentage turns that score into a value out of 100, so 42 out of 50 becomes 84%, which makes it easy to compare tests with different totals."}},
+    {"@type": "Question", "name": "Can I use this calculator for any total marks?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Enter any total, whether the test was out of 20, 50, 100 or any other number, and the calculator will convert your marks into a percentage."}},
+    {"@type": "Question", "name": "What percentage is a pass?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your school or university. Many use 40% or 50% as the pass mark, while some courses need 60% or more. Check your course handbook for the exact pass mark."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Test Score Percentage Calculator</h1>
+<p class="lede">Turn your marks into a percentage in seconds. Enter the marks you scored and the total marks for the test, and see your result as a percentage.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="obtained">Marks obtained</label>
+    <input type="number" id="obtained" min="0" step="any" value="42">
+    <label for="total">Total marks</label>
+    <input type="number" id="total" min="0" step="any" value="50">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Percentage = (marks obtained &divide; total marks) &times; 100.</p>
+<p><strong>Worked example:</strong> You scored 42 marks out of a total of 50. Divide 42 by 50 to get 0.84. Multiply 0.84 by 100 to get 84. Your test score is 84%.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Find the average of up to five test scores in one go.</p></div>
+  <div class="card"><a href="letter-grade-calculator.html">Letter Grade Calculator</a><p>Convert a percentage into a letter grade from A to F.</p></div>
+  <div class="card"><a href="negative-marking-calculator.html">Negative Marking Calculator</a><p>See how wrong answers with negative marking change your score.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Combine grades with different weights into one overall grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How do I calculate my test score as a percentage?</h3>
+  <p>Divide the marks you obtained by the total marks, then multiply by 100. For example, 42 marks out of 50 is 42 divided by 50, which is 0.84, times 100 gives 84%.</p>
+  <h3>What is the difference between marks and percentage?</h3>
+  <p>Marks are the raw score you earned, such as 42 out of 50. A percentage turns that score into a value out of 100, so 42 out of 50 becomes 84%, which makes it easy to compare tests with different totals.</p>
+  <h3>Can I use this calculator for any total marks?</h3>
+  <p>Yes. Enter any total, whether the test was out of 20, 50, 100 or any other number, and the calculator will convert your marks into a percentage.</p>
+  <h3>What percentage is a pass?</h3>
+  <p>It depends on your school or university. Many use 40% or 50% as the pass mark, while some courses need 60% or more. Check your course handbook for the exact pass mark.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var obtained = parseFloat(document.getElementById('obtained').value);
+  var total = parseFloat(document.getElementById('total').value);
+  var result = document.getElementById('result');
+  if (isNaN(obtained) || isNaN(total) || total <= 0) {
+    result.innerHTML = 'Please enter your marks and a total above zero.';
+    result.classList.add('show');
+    return;
+  }
+  if (obtained > total) {
+    result.innerHTML = 'Marks obtained cannot be more than the total marks.';
+    result.classList.add('show');
+    return;
+  }
+  var pct = (obtained / total) * 100;
+  result.innerHTML = 'Your test score is <strong>' + pct.toFixed(1) + '%</strong> (' + obtained + ' out of ' + total + ').';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dissertation Weighting Calculator | ShezMath</title>
+<meta name="description" content="See how much your dissertation moves your final mark. Enter your mark without it, your dissertation mark and its weight to find the change.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How much does a dissertation affect my final mark?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on its weight. A dissertation worth 25% of your mark moves your final result by a quarter of the gap between your dissertation mark and your other marks. For example, 62% without the dissertation and 75% on a 25% dissertation gives a final mark of 65.25%, a rise of 3.25 points."}},
+    {"@type": "Question", "name": "Can a dissertation lower my final mark?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. If your dissertation mark is lower than your mark on the rest of your work, it will pull your final mark down. The bigger the dissertation weight, the bigger the fall."}},
+    {"@type": "Question", "name": "What is the usual weight of a dissertation?", "acceptedAnswer": {"@type": "Answer", "text": "Most UK dissertations are worth 20 to 40 credits, which is often 25% of the final year or around 15 to 20% of the whole degree. Check your course handbook for the exact weight."}},
+    {"@type": "Question", "name": "What dissertation mark do I need to raise my final mark by 5 points?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the rise you want by the dissertation weight. For a 5-point rise with a 25% dissertation, you need a dissertation mark 20 points above your other marks, because 20 times 0.25 is 5."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Dissertation Weighting Calculator</h1>
+<p class="lede">See how much your dissertation moves your final mark. Enter your mark without the dissertation, your dissertation mark and its weight to find the change.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="without">Mark without dissertation (%)</label>
+    <input type="number" id="without" min="0" max="100" step="any" value="62">
+    <label for="diss">Dissertation mark (%)</label>
+    <input type="number" id="diss" min="0" max="100" step="any" value="75">
+    <label for="weight">Dissertation weight (%)</label>
+    <input type="number" id="weight" min="0" max="100" step="any" value="25">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Final mark = mark without dissertation &times; (100 &minus; dissertation weight) &divide; 100 + dissertation mark &times; dissertation weight &divide; 100. Change = final mark &minus; mark without dissertation.</p>
+<p><strong>Worked example:</strong> Your mark without the dissertation is 62%, your dissertation mark is 75%, and the dissertation is worth 25%. First, 62 &times; 0.75 = 46.5. Then, 75 &times; 0.25 = 18.75. Add them: 46.5 + 18.75 = 65.25. Your final mark is 65.25%, which is 3.25 points higher than without the dissertation.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="uk-degree-classification-calculator.html">UK Degree Classification Calculator</a><p>Work out your degree class from your Year 2 and Year 3 marks.</p></div>
+  <div class="card"><a href="uk-year-weighting-calculator.html">UK Year Weighting Calculator</a><p>See how each year of your degree counts toward your final mark.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Combine grades with different weights into one overall grade.</p></div>
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out the score you need on your final exam to reach a target grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How much does a dissertation affect my final mark?</h3>
+  <p>It depends on its weight. A dissertation worth 25% of your mark moves your final result by a quarter of the gap between your dissertation mark and your other marks. For example, 62% without the dissertation and 75% on a 25% dissertation gives a final mark of 65.25%, a rise of 3.25 points.</p>
+  <h3>Can a dissertation lower my final mark?</h3>
+  <p>Yes. If your dissertation mark is lower than your mark on the rest of your work, it will pull your final mark down. The bigger the dissertation weight, the bigger the fall.</p>
+  <h3>What is the usual weight of a dissertation?</h3>
+  <p>Most UK dissertations are worth 20 to 40 credits, which is often 25% of the final year or around 15 to 20% of the whole degree. Check your course handbook for the exact weight.</p>
+  <h3>What dissertation mark do I need to raise my final mark by 5 points?</h3>
+  <p>Divide the rise you want by the dissertation weight. For a 5-point rise with a 25% dissertation, you need a dissertation mark 20 points above your other marks, because 20 times 0.25 is 5.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var without = parseFloat(document.getElementById('without').value);
+  var diss = parseFloat(document.getElementById('diss').value);
+  var weight = parseFloat(document.getElementById('weight').value);
+  var result = document.getElementById('result');
+  if (isNaN(without) || isNaN(diss) || isNaN(weight)) {
+    result.innerHTML = 'Please enter a number in every box.';
+    result.classList.add('show');
+    return;
+  }
+  var final = without * (100 - weight) / 100 + diss * weight / 100;
+  var change = final - without;
+  var sign = change >= 0 ? '+' : '';
+  result.innerHTML = 'Your final mark is <strong>' + final.toFixed(2) + '%</strong>. The dissertation moves it by <strong>' + sign + change.toFixed(2) + ' points</strong> (from ' + without + '% to ' + final.toFixed(2) + '%).';
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade to Pass Calculator | ShezMath</title>
+<meta name="description" content="Find the minimum grade you need on your remaining coursework to pass. Enter your current grade, completed weight, remaining weight and pass mark.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What if the grade I need is over 100%?", "acceptedAnswer": {"@type": "Answer", "text": "If the needed grade is above 100%, you cannot pass with the remaining work alone. Talk to your teacher about extra credit, a retake, or repeating the course."}},
+    {"@type": "Question", "name": "What is the pass mark for my course?", "acceptedAnswer": {"@type": "Answer", "text": "Most courses set the pass mark at 50% or 60%, but it varies by school and subject. Check your syllabus or ask your teacher before entering a pass mark."}},
+    {"@type": "Question", "name": "Do completed and remaining weights have to add up to 100%?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Completed work and remaining work together make up your whole course grade, so their weights must add up to 100%."}},
+    {"@type": "Question", "name": "What does it mean if the needed grade is negative?", "acceptedAnswer": {"@type": "Answer", "text": "A negative result means you have already earned enough marks to pass, even if you score zero on the remaining work. You have passed the course already."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Grade to Pass Calculator</h1>
+<p class="lede">Worried about passing? Enter your grade so far and how much work is left to find the lowest score you need on the remaining work to pass your course.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current">Current grade on completed work (%)</label>
+    <input type="number" id="current" min="0" max="100" step="0.1" value="55">
+    <label for="completed">Weight of completed work (%)</label>
+    <input type="number" id="completed" min="0" max="100" step="0.1" value="60">
+    <label for="remaining">Weight of remaining work (%)</label>
+    <input type="number" id="remaining" min="1" max="100" step="0.1" value="40">
+    <label for="pass">Pass mark (%)</label>
+    <input type="number" id="pass" min="0" max="100" step="0.1" value="50">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Needed grade = (pass mark − current grade × completed weight) ÷ remaining weight. Weights are used as decimals, so 60% completed is 0.60 and 40% remaining is 0.40.</p>
+<p><strong>Worked example:</strong> Your current grade is 55%, completed work is worth 60%, remaining work is worth 40%, and the pass mark is 50%. First, 55 × 0.60 = 33. Then 50 − 33 = 17. Finally, 17 ÷ 0.40 = 42.5%. You need at least 42.5% on the remaining work to pass.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>Find the final exam score you need to reach your target course grade.</p></div>
+  <div class="card"><a href="final-grade-calculator.html">Final Grade Calculator</a><p>Work out your final course grade from your current grade and final exam score.</p></div>
+  <div class="card"><a href="test-score-needed-calculator.html">Test Score Needed Calculator</a><p>Find the score you need on your next test to reach your target average.</p></div>
+  <div class="card"><a href="what-if-grade-calculator.html">What-If Grade Calculator</a><p>See how different scores on future work would change your course grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What if the grade I need is over 100%?</h3>
+  <p>If the needed grade is above 100%, you cannot pass with the remaining work alone. Talk to your teacher about extra credit, a retake, or repeating the course.</p>
+  <h3>What is the pass mark for my course?</h3>
+  <p>Most courses set the pass mark at 50% or 60%, but it varies by school and subject. Check your syllabus or ask your teacher before entering a pass mark.</p>
+  <h3>Do completed and remaining weights have to add up to 100%?</h3>
+  <p>Yes. Completed work and remaining work together make up your whole course grade, so their weights must add up to 100%.</p>
+  <h3>What does it mean if the needed grade is negative?</h3>
+  <p>A negative result means you have already earned enough marks to pass, even if you score zero on the remaining work. You have passed the course already.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var current = parseFloat(document.getElementById('current').value);
+  var completed = parseFloat(document.getElementById('completed').value);
+  var remaining = parseFloat(document.getElementById('remaining').value);
+  var pass = parseFloat(document.getElementById('pass').value);
+  var result = document.getElementById('result');
+  if ([current, completed, remaining, pass].some(isNaN) || remaining <= 0 || remaining > 100) {
+    result.innerHTML = 'Please enter valid numbers. Remaining weight must be between 1 and 100.';
+    result.classList.add('show');
+    return;
+  }
+  if (Math.abs(completed + remaining - 100) > 0.01) {
+    result.innerHTML = 'Completed and remaining weights must add up to 100%. They currently add up to ' + (completed + remaining).toFixed(1) + '%.';
+    result.classList.add('show');
+    return;
+  }
+  var needed = (pass - current * (completed / 100)) / (remaining / 100);
+  var html;
+  if (needed > 100) {
+    html = 'You need <strong>' + needed.toFixed(1) + '%</strong> on the remaining work.<br><strong>You cannot pass with the remaining work alone.</strong> Even a perfect score would not be enough.';
+  } else if (needed <= 0) {
+    html = 'You have already passed. You need <strong>0%</strong> on the remaining work to reach the ' + pass + '% pass mark.';
+  } else {
+    html = 'You need at least <strong>' + needed.toFixed(1) + '%</strong> on the remaining work to pass with ' + pass + '%.';
+  }
+  result.innerHTML = html;
+  result.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[PAGE TITLE] | ShezMath</title>
+<meta name="description" content="[META DESCRIPTION, 130-150 CHARS]">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "[FAQ Q1]", "acceptedAnswer": {"@type": "Answer", "text": "[FAQ A1]"}},
+    {"@type": "Question", "name": "[FAQ Q2]", "acceptedAnswer": {"@type": "Answer", "text": "[FAQ A2]"}},
+    {"@type": "Question", "name": "[FAQ Q3]", "acceptedAnswer": {"@type": "Answer", "text": "[FAQ A3]"}},
+    {"@type": "Question", "name": "[FAQ Q4]", "acceptedAnswer": {"@type": "Answer", "text": "[FAQ A4]"}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>[H1 TITLE]</h1>
+<p class="lede">[2-LINE INTRO: what this tool does and who it is for.]</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <!-- INPUTS: one labelled input/select per value. Give every input an id.
+         Pre-fill every input with a realistic example value using value="...". -->
+    [INPUTS HERE]
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> [STATE THE REAL FORMULA IN PLAIN WORDS AND SYMBOLS.]</p>
+<p><strong>Worked example:</strong> [ONE FULL WORKED EXAMPLE WITH REAL NUMBERS, STEP BY STEP, ENDING IN THE ANSWER.]</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <!-- 3-4 cards, each linking to another tool in ../tools/. Use real slugs only. -->
+  <div class="card"><a href="[SLUG].html">[Tool name]</a><p>[One-line description.]</p></div>
+  <div class="card"><a href="[SLUG].html">[Tool name]</a><p>[One-line description.]</p></div>
+  <div class="card"><a href="[SLUG].html">[Tool name]</a><p>[One-line description.]</p></div>
+  <div class="card"><a href="[SLUG].html">[Tool name]</a><p>[One-line description.]</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>[FAQ Q1]</h3>
+  <p>[FAQ A1]</p>
+  <h3>[FAQ Q2]</h3>
+  <p>[FAQ A2]</p>
+  <h3>[FAQ Q3]</h3>
+  <p>[FAQ A3]</p>
+  <h3>[FAQ Q4]</h3>
+  <p>[FAQ A4]</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+// [CALCULATOR JS: read inputs by id, validate numbers, compute, show result in #result
+//  with class "show". Keep it plain vanilla JS, no libraries.
+//  resetCalc() restores the pre-filled example values and hides the result.]
+function calculate() {
+  // [IMPLEMENT]
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attendance Percentage Calculator | ShezMath</title>
+<meta name="description" content="Work out your attendance percentage in seconds. Enter the classes you attended and the total classes held to see if you meet the required limit.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How is attendance percentage calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the number of classes you attended by the total number of classes held, then multiply by 100. For example, 42 attended out of 48 held is 42 divided by 48 times 100, which is 87.5%."}},
+    {"@type": "Question", "name": "What is the minimum attendance required?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on your school or university. Many require 75%, while some require 80% or 85%. Check your course handbook or ask your teacher for the exact rule."}},
+    {"@type": "Question", "name": "What happens if my attendance is too low?", "acceptedAnswer": {"@type": "Answer", "text": "Low attendance can mean you are barred from exams, lose marks, or have to repeat a course. If you are below the limit, attend every class and speak to your teacher about your options."}},
+    {"@type": "Question", "name": "Do late arrivals count as present?", "acceptedAnswer": {"@type": "Answer", "text": "That depends on your institution. Some mark a late arrival as present, others as absent or half present. Check your school's attendance policy to be sure."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Attendance Percentage Calculator</h1>
+<p class="lede">Find your attendance percentage in seconds. Enter how many classes you attended and how many were held to see where you stand against the required limit.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="attended">Classes attended</label>
+    <input type="number" id="attended" value="42" min="0" step="1">
+    <label for="total">Total classes held</label>
+    <input type="number" id="total" value="48" min="1" step="1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Attendance % = (Classes attended &divide; Total classes held) &times; 100. You can also find classes missed by subtracting attended classes from total classes held.</p>
+<p><strong>Worked example:</strong> You attended 42 classes out of 48 held. Divide 42 by 48 to get 0.875. Multiply by 100 to get 87.5%. Your attendance is 87.5%, and you missed 6 classes.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="attendance-target-calculator.html">Attendance Target Calculator</a><p>How many classes in a row you must attend to hit your target.</p></div>
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn any test score into a percentage.</p></div>
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Work out the average of your marks.</p></div>
+  <div class="card"><a href="study-hours-planner.html">Study Hours Planner</a><p>Split your study time across subjects by importance.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How is attendance percentage calculated?</h3>
+  <p>Divide the number of classes you attended by the total number of classes held, then multiply by 100. For example, 42 attended out of 48 held is 42 divided by 48 times 100, which is 87.5%.</p>
+  <h3>What is the minimum attendance required?</h3>
+  <p>It depends on your school or university. Many require 75%, while some require 80% or 85%. Check your course handbook or ask your teacher for the exact rule.</p>
+  <h3>What happens if my attendance is too low?</h3>
+  <p>Low attendance can mean you are barred from exams, lose marks, or have to repeat a course. If you are below the limit, attend every class and speak to your teacher about your options.</p>
+  <h3>Do late arrivals count as present?</h3>
+  <p>That depends on your institution. Some mark a late arrival as present, others as absent or half present. Check your school's attendance policy to be sure.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var attended = parseFloat(document.getElementById('attended').value);
+  var total = parseFloat(document.getElementById('total').value);
+  var r = document.getElementById('result');
+  if (isNaN(attended) || isNaN(total) || total <= 0) {
+    r.innerHTML = 'Please enter valid numbers. Total classes held must be more than 0.';
+    r.classList.add('show');
+    return;
+  }
+  if (attended < 0 || attended > total) {
+    r.innerHTML = 'Classes attended cannot be less than 0 or more than total classes held.';
+    r.classList.add('show');
+    return;
+  }
+  var pct = (attended / total) * 100;
+  var missed = total - attended;
+  r.innerHTML = 'Your attendance is <strong>' + pct.toFixed(1) + '%</strong>. You attended ' + attended + ' out of ' + total + ' classes and missed ' + missed + '.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+calculate();
+</script>
+</body>
+</html>

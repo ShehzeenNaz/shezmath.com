@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Grade, GPA &amp; Home Calculators | ShezMath</title>
+<meta name="description" content="Free calculators for students and homeowners: grade and GPA, UK degree class, UCAS points, plus gravel, concrete, mulch, paint, tile and fence calculators. Fast, free, private.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="index.html">ShezMath</a>
+    <nav class="main">
+      <a href="index.html">Home</a>
+      <a href="#gpa">Grades &amp; GPA</a>
+      <a href="#uk">UK Grading</a>
+      <a href="#study">Study Tools</a>
+      <a href="#yard">Yard &amp; Home</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Free Grade, GPA &amp; Home Calculators</h1>
+<p class="lede">One small calculator for every grade problem — and every home and yard job. Pick your exact question below, or try the final grade calculator right now.</p>
+
+<div class="search-box">
+  <label for="tool-search" class="visually-hidden">Search calculators</label>
+  <input type="text" id="tool-search" placeholder="Search calculators &mdash; try &quot;gpa&quot;, &quot;gravel&quot; or &quot;ucas&quot;&hellip;" autocomplete="off">
+</div>
+<p id="no-tools-found" style="display:none">No tools found. Try a different search.</p>
+
+
+<div class="calc">
+  <h2 style="margin-top:0">Final Grade Calculator</h2>
+  <p>Work out your final course grade from your current grade and your final exam.</p>
+  <form id="home-calc" onsubmit="return false;">
+    <div class="row">
+      <div>
+        <label for="current">Current grade (%)</label>
+        <input type="number" id="current" value="85" min="0" max="100" step="0.1">
+      </div>
+      <div>
+        <label for="weight">Final exam weight (%)</label>
+        <input type="number" id="weight" value="30" min="0" max="100" step="1">
+      </div>
+    </div>
+    <label for="expected">Expected score on the final (%)</label>
+    <input type="number" id="expected" value="90" min="0" max="100" step="0.1">
+    <button class="btn" type="button" onclick="calcHome()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetHome()">Reset</button>
+  </form>
+  <div class="result" id="home-result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2 id="gpa">Grades &amp; GPA</h2>
+<div class="grid">
+  <div class="card"><a href="tools/final-grade-calculator.html">Final Grade Calculator</a><p>Your final course grade from current grade and final exam.</p></div>
+  <div class="card"><a href="tools/gpa-calculator.html">GPA Calculator</a><p>Your GPA on the 4.0 scale from courses and credits.</p></div>
+  <div class="card"><a href="tools/weighted-gpa-calculator.html">Weighted GPA Calculator</a><p>GPA with AP and Honors bonus points included.</p></div>
+  <div class="card"><a href="tools/cumulative-gpa-calculator.html">Cumulative GPA Calculator</a><p>Combine past GPA with a new semester.</p></div>
+  <div class="card"><a href="tools/semester-gpa-calculator.html">Semester GPA Calculator</a><p>GPA for one semester only.</p></div>
+  <div class="card"><a href="tools/credits-to-raise-gpa-calculator.html">Credits to Raise GPA Calculator</a><p>How many A credits you need to reach a target GPA.</p></div>
+  <div class="card"><a href="tools/retake-gpa-calculator.html">Retake GPA Calculator</a><p>Your GPA if you retake a course for a better grade.</p></div>
+  <div class="card"><a href="tools/drop-lowest-grade-calculator.html">Drop Lowest Grade Calculator</a><p>Your average after dropping the lowest grade.</p></div>
+  <div class="card"><a href="tools/final-grade-needed-calculator.html">Final Grade Needed Calculator</a><p>The score you need on the final to hit your target grade.</p></div>
+  <div class="card"><a href="tools/two-part-final-calculator.html">Two-Part Final Calculator</a><p>Final grade when the final has two parts.</p></div>
+  <div class="card"><a href="tools/grade-to-pass-calculator.html">Grade to Pass Calculator</a><p>The minimum grade you need to pass a course.</p></div>
+  <div class="card"><a href="tools/test-score-needed-calculator.html">Test Score Needed Calculator</a><p>The score you need on the next test to reach a target.</p></div>
+  <div class="card"><a href="tools/weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Your grade from assignments with different weights.</p></div>
+  <div class="card"><a href="tools/gpa-to-percentage-calculator.html">GPA to Percentage Calculator</a><p>Convert a 4.0 GPA to a percentage.</p></div>
+  <div class="card"><a href="tools/percentage-to-gpa-calculator.html">Percentage to GPA Calculator</a><p>Convert a percentage to a 4.0 GPA.</p></div>
+  <div class="card"><a href="tools/class-rank-estimator.html">Class Rank Estimator</a><p>Estimate your class rank from your GPA.</p></div>
+  <div class="card"><a href="tools/what-if-grade-calculator.html">What-If Grade Calculator</a><p>Your final grade if you score a set mark on remaining work.</p></div>
+  <div class="card"><a href="tools/test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Marks obtained out of total marks, as a percentage.</p></div>
+  <div class="card"><a href="tools/grade-points-calculator.html">Grade Points Calculator</a><p>Letter grades to grade points for one course.</p></div>
+  <div class="card"><a href="tools/letter-grade-calculator.html">Letter Grade Calculator</a><p>Your percentage as a letter grade, A to F.</p></div>
+  <div class="card"><a href="tools/grade-average-calculator.html">Grade Average Calculator</a><p>The simple average of your test scores.</p></div>
+</div>
+
+<h2 id="uk">UK Grading</h2>
+<div class="grid">
+  <div class="card"><a href="tools/uk-degree-classification-calculator.html">UK Degree Classification Calculator</a><p>First, 2:1, 2:2 or Third from your module marks.</p></div>
+  <div class="card"><a href="tools/ucas-tariff-calculator.html">UCAS Tariff Points Calculator</a><p>UCAS points from your A-Level and BTEC grades.</p></div>
+  <div class="card"><a href="tools/dissertation-weighting-calculator.html">Dissertation Weighting Calculator</a><p>How much your dissertation moves your final mark.</p></div>
+  <div class="card"><a href="tools/uk-year-weighting-calculator.html">UK Year Weighting Calculator</a><p>Your degree mark with year 2 and year 3 weighted.</p></div>
+</div>
+
+<h2 id="study">Study &amp; Exam Tools</h2>
+<div class="grid">
+  <div class="card"><a href="tools/attendance-percentage-calculator.html">Attendance Percentage Calculator</a><p>Your attendance as a percentage.</p></div>
+  <div class="card"><a href="tools/attendance-target-calculator.html">Attendance Target Calculator</a><p>How many more classes to attend to hit a target.</p></div>
+  <div class="card"><a href="tools/negative-marking-calculator.html">Negative Marking Calculator</a><p>Your score when wrong answers lose marks.</p></div>
+  <div class="card"><a href="tools/exam-time-allocation-calculator.html">Exam Time Allocation Calculator</a><p>Minutes per question in your exam.</p></div>
+  <div class="card"><a href="tools/study-hours-planner.html">Study Hours Planner</a><p>Study hours per subject before exam day.</p></div>
+</div>
+
+<h2 id="yard">Home, Yard &amp; Construction</h2>
+<div class="grid">
+  <div class="card"><a href="yard-home/index.html">Home, Yard &amp; Construction Hub</a><p>All 30 home and yard calculators in one place.</p></div>
+  <div class="card"><a href="yard-home/gravel-driveway-calculator.html">Gravel Driveway Calculator</a><p>How much gravel you need for a driveway, in tons and cubic yards.</p></div>
+  <div class="card"><a href="yard-home/crushed-stone-calculator.html">Crushed Stone Calculator</a><p>How much crushed stone you need, in tons and cubic yards.</p></div>
+  <div class="card"><a href="yard-home/mulch-calculator.html">Mulch Calculator</a><p>How much mulch you need for beds and borders.</p></div>
+  <div class="card"><a href="yard-home/topsoil-calculator.html">Topsoil Calculator</a><p>How much topsoil you need for your lawn or beds.</p></div>
+  <div class="card"><a href="yard-home/compost-calculator.html">Compost Calculator</a><p>How much compost you need for your garden.</p></div>
+  <div class="card"><a href="yard-home/concrete-slab-calculator.html">Concrete Slab Calculator</a><p>Concrete volume and bags for a slab.</p></div>
+  <div class="card"><a href="yard-home/concrete-footing-calculator.html">Concrete Footing Calculator</a><p>Concrete volume for strip and pad footings.</p></div>
+  <div class="card"><a href="yard-home/post-hole-concrete-calculator.html">Post Hole Concrete Bags Calculator</a><p>Bags of concrete for each fence or deck post hole.</p></div>
+  <div class="card"><a href="yard-home/paver-base-calculator.html">Paver Base Calculator</a><p>Gravel base under pavers, in tons and cubic yards.</p></div>
+  <div class="card"><a href="yard-home/paver-sand-calculator.html">Paver Sand Calculator</a><p>Sand for paver bedding and joints.</p></div>
+  <div class="card"><a href="yard-home/brick-calculator.html">Brick Calculator</a><p>How many bricks and mortar bags for a wall.</p></div>
+  <div class="card"><a href="yard-home/sod-calculator.html">Sod Calculator</a><p>Sod rolls and pallets for your lawn.</p></div>
+  <div class="card"><a href="yard-home/grass-seed-calculator.html">Grass Seed Calculator</a><p>Grass seed for a new lawn or overseeding.</p></div>
+  <div class="card"><a href="yard-home/fertilizer-calculator.html">Fertilizer Coverage Calculator</a><p>Fertilizer bags for your lawn size.</p></div>
+  <div class="card"><a href="yard-home/board-foot-calculator.html">Board Foot Calculator</a><p>Board feet for hardwood lumber.</p></div>
+  <div class="card"><a href="yard-home/lumber-calculator.html">Lumber Calculator</a><p>How many boards for your framing project.</p></div>
+  <div class="card"><a href="yard-home/stair-stringer-calculator.html">Stair Stringer Calculator</a><p>Risers, treads and stringer length for stairs.</p></div>
+  <div class="card"><a href="yard-home/decking-calculator.html">Decking Calculator</a><p>Deck boards and materials for your deck.</p></div>
+  <div class="card"><a href="yard-home/fence-boards-calculator.html">Fence Boards Calculator</a><p>Fence pickets for a privacy fence.</p></div>
+  <div class="card"><a href="yard-home/fence-post-calculator.html">Fence Post Calculator</a><p>Fence posts and spacing for your fence line.</p></div>
+  <div class="card"><a href="yard-home/paint-calculator.html">Paint Calculator</a><p>Paint gallons for walls and ceilings.</p></div>
+  <div class="card"><a href="yard-home/wallpaper-roll-calculator.html">Wallpaper Roll Calculator</a><p>Wallpaper rolls for a room.</p></div>
+  <div class="card"><a href="yard-home/flooring-tile-calculator.html">Flooring and Tile Calculator</a><p>Tiles and flooring for a room.</p></div>
+  <div class="card"><a href="yard-home/grout-calculator.html">Grout Calculator</a><p>Grout for your tile project.</p></div>
+  <div class="card"><a href="yard-home/drywall-sheet-calculator.html">Drywall Sheet Calculator</a><p>Drywall sheets and screws for a room.</p></div>
+  <div class="card"><a href="yard-home/btu-ac-size-calculator.html">BTU AC Size Calculator</a><p>What size air conditioner for your room.</p></div>
+  <div class="card"><a href="yard-home/retaining-wall-block-calculator.html">Retaining Wall Block Calculator</a><p>Retaining wall blocks for your wall.</p></div>
+  <div class="card"><a href="yard-home/paver-patio-calculator.html">Paver Patio Calculator</a><p>Pavers and base for a patio.</p></div>
+  <div class="card"><a href="yard-home/walkway-concrete-calculator.html">Walkway Concrete Calculator</a><p>Concrete for a walkway or sidewalk.</p></div>
+  <div class="card"><a href="yard-home/sand-calculator.html">Sand Calculator</a><p>Sand in cubic yards and tons.</p></div>
+</div>
+
+<h2>Study Guides</h2>
+<div class="grid">
+  <div class="card"><a href="guides/grading-us-uk-canada.html">Grading Across the US, UK &amp; Canada</a><p>How grades work in each country, side by side.</p></div>
+  <div class="card"><a href="guides/how-gpa-works.html">How GPA Works</a><p>The 4.0 scale, credits and weighted GPA explained.</p></div>
+  <div class="card"><a href="guides/final-exam-strategy.html">Final Exam Strategy</a><p>What score you need and how to plan for it.</p></div>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="methodology.html">Methodology</a>
+    <p>ShezMath — free grade, GPA and home calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script src="search-index.js"></script>
+<script src="search.js"></script>
+<script>
+function calcHome() {
+  var current = parseFloat(document.getElementById('current').value);
+  var weight = parseFloat(document.getElementById('weight').value);
+  var expected = parseFloat(document.getElementById('expected').value);
+  var out = document.getElementById('home-result');
+  if (isNaN(current) || isNaN(weight) || isNaN(expected) || weight < 0 || weight > 100) {
+    out.innerHTML = 'Please enter valid numbers. Weight must be between 0 and 100.';
+    out.classList.add('show');
+    return;
+  }
+  var finalGrade = current * (1 - weight / 100) + expected * (weight / 100);
+  out.innerHTML = 'Your final grade: <b>' + finalGrade.toFixed(1) + '%</b>';
+  out.classList.add('show');
+}
+function resetHome() {
+  document.getElementById('home-calc').reset();
+  document.getElementById('home-result').classList.remove('show');
+  document.getElementById('home-result').innerHTML = '';
+}
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('home-calc').addEventListener('input', calcHome);
+document.getElementById('home-calc').addEventListener('change', calcHome);
+calcHome();
+</script>
+</body>
+</html>

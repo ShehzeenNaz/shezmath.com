@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cumulative GPA Calculator | ShezMath</title>
+<meta name="description" content="Combine your current GPA with a new semester to find your cumulative GPA. Enter your credits and grades to see your new overall average.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is the difference between cumulative GPA and semester GPA?", "acceptedAnswer": {"@type": "Answer", "text": "A semester GPA covers one term only. A cumulative GPA covers everything you have done so far, all semesters combined. Each new semester moves your cumulative GPA a little."}},
+    {"@type": "Question", "name": "Can my cumulative GPA go down after a good semester?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, if your new semester GPA is lower than your current cumulative GPA. A good semester only raises your cumulative GPA when it beats your average so far."}},
+    {"@type": "Question", "name": "How many credits do I need to raise my cumulative GPA?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on how many credits you already have. The more credits behind you, the slower your GPA moves. Use our credits to raise GPA calculator to find the exact number."}},
+    {"@type": "Question", "name": "Does retaking a course change my cumulative GPA?", "acceptedAnswer": {"@type": "Answer", "text": "At most schools, yes. The new grade usually replaces the old one in your GPA. Use our retake GPA calculator to see the change before you decide."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Cumulative GPA Calculator</h1>
+<p class="lede">Combine your GPA so far with a new semester to find your new overall average. Enter your current GPA and credits, then your latest semester.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="current-gpa">Current cumulative GPA</label>
+    <input type="number" id="current-gpa" value="3.2" min="0" max="4" step="0.01">
+    <label for="current-credits">Completed credits</label>
+    <input type="number" id="current-credits" value="30" min="0" step="0.5">
+    <label for="new-gpa">New semester GPA</label>
+    <input type="number" id="new-gpa" value="3.8" min="0" max="4" step="0.01">
+    <label for="new-credits">New semester credits</label>
+    <input type="number" id="new-credits" value="15" min="0" step="0.5">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Cumulative GPA = (current GPA &times; completed credits + new GPA &times; new credits) &divide; (completed credits + new credits). Each GPA is weighted by the credits behind it.</p>
+<p><strong>Worked example:</strong> Your GPA is 3.2 over 30 credits and your new semester GPA is 3.8 over 15 credits. Grade points so far: 3.2 &times; 30 = 96. New grade points: 3.8 &times; 15 = 57. Total points: 96 + 57 = 153 over 30 + 15 = 45 credits. 153 &divide; 45 = 3.40. Your new cumulative GPA is 3.40.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="gpa-calculator.html">GPA Calculator</a><p>Work out your GPA on the 4.0 scale from your course grades.</p></div>
+  <div class="card"><a href="semester-gpa-calculator.html">Semester GPA Calculator</a><p>Work out your GPA for a single semester first.</p></div>
+  <div class="card"><a href="credits-to-raise-gpa-calculator.html">Credits to Raise GPA Calculator</a><p>Find how many A credits you need to hit a target GPA.</p></div>
+  <div class="card"><a href="retake-gpa-calculator.html">Retake GPA Calculator</a><p>See how retaking a course changes your GPA.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>What is the difference between cumulative GPA and semester GPA?</h3>
+  <p>A semester GPA covers one term only. A cumulative GPA covers everything you have done so far, all semesters combined. Each new semester moves your cumulative GPA a little.</p>
+  <h3>Can my cumulative GPA go down after a good semester?</h3>
+  <p>Yes, if your new semester GPA is lower than your current cumulative GPA. A good semester only raises your cumulative GPA when it beats your average so far.</p>
+  <h3>How many credits do I need to raise my cumulative GPA?</h3>
+  <p>It depends on how many credits you already have. The more credits behind you, the slower your GPA moves. Use our credits to raise GPA calculator to find the exact number.</p>
+  <h3>Does retaking a course change my cumulative GPA?</h3>
+  <p>At most schools, yes. The new grade usually replaces the old one in your GPA. Use our retake GPA calculator to see the change before you decide.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var cgpa = parseFloat(document.getElementById('current-gpa').value);
+  var ccredits = parseFloat(document.getElementById('current-credits').value);
+  var ngpa = parseFloat(document.getElementById('new-gpa').value);
+  var ncredits = parseFloat(document.getElementById('new-credits').value);
+  var r = document.getElementById('result');
+  if (isNaN(cgpa) || isNaN(ccredits) || isNaN(ngpa) || isNaN(ncredits)) {
+    r.innerHTML = 'Please enter all four numbers.';
+    r.classList.add('show');
+    return;
+  }
+  var totalCredits = ccredits + ncredits;
+  if (totalCredits === 0) {
+    r.innerHTML = 'Enter at least one credit hour to calculate a GPA.';
+    r.classList.add('show');
+    return;
+  }
+  var totalPoints = cgpa * ccredits + ngpa * ncredits;
+  var cum = totalPoints / totalCredits;
+  r.innerHTML = 'Your new cumulative GPA is <strong>' + cum.toFixed(2) + '</strong> (' + totalPoints.toFixed(1) + ' grade points &divide; ' + totalCredits + ' credits).';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

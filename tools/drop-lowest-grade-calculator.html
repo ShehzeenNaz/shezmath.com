@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drop Lowest Grade Calculator | ShezMath</title>
+<meta name="description" content="Average your test scores after dropping the lowest one. Enter up to five scores and see your new average with the lowest grade removed.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "Why do teachers drop the lowest grade?", "acceptedAnswer": {"@type": "Answer", "text": "To forgive one bad day. A single low score from illness or a rough week should not decide your whole grade, so many teachers drop the lowest test or homework score."}},
+    {"@type": "Question", "name": "What if two of my scores tie for the lowest?", "acceptedAnswer": {"@type": "Answer", "text": "Only one of them is dropped. If two scores tie at 67, one 67 is removed and the other still counts in your average."}},
+    {"@type": "Question", "name": "Can I drop more than one low score?", "acceptedAnswer": {"@type": "Answer", "text": "That depends on your teacher. Some drop the lowest two. This calculator drops one only. To drop two, run it once, then run it again on the remaining scores."}},
+    {"@type": "Question", "name": "Does dropping the lowest grade always raise my average?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, unless every score is the same. Removing a score below the average pulls the average up. The lower the dropped score, the bigger the rise."}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="../index.html#gpa">Grades &amp; GPA</a>
+      <a href="../index.html#uk">UK Grading</a>
+      <a href="../index.html#study">Study Tools</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Drop Lowest Grade Calculator</h1>
+<p class="lede">Average your test scores after dropping the lowest one. Enter up to five scores and see your new average with the worst result removed.</p>
+
+<div class="calc">
+  <form id="calc-form" onsubmit="return false;">
+    <label for="score1">Test score 1</label>
+    <input type="number" id="score1" value="78" min="0" max="100" step="0.1">
+    <label for="score2">Test score 2</label>
+    <input type="number" id="score2" value="85" min="0" max="100" step="0.1">
+    <label for="score3">Test score 3</label>
+    <input type="number" id="score3" value="92" min="0" max="100" step="0.1">
+    <label for="score4">Test score 4</label>
+    <input type="number" id="score4" value="67" min="0" max="100" step="0.1">
+    <label for="score5">Test score 5</label>
+    <input type="number" id="score5" value="88" min="0" max="100" step="0.1">
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Average after dropping the lowest = (sum of all scores &minus; lowest score) &divide; (number of scores &minus; 1). Only one score is dropped, even if two scores tie for the lowest.</p>
+<p><strong>Worked example:</strong> Your five test scores are 78, 85, 92, 67 and 88. The lowest is 67, so it is dropped. Add the rest: 78 + 85 + 92 + 88 = 343. Divide by the 4 remaining scores: 343 &divide; 4 = 85.75. Your average after dropping the lowest is 85.75. Without dropping it, your average would be 82.</p>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grade-average-calculator.html">Grade Average Calculator</a><p>Average all your scores without dropping any.</p></div>
+  <div class="card"><a href="test-score-percentage-calculator.html">Test Score Percentage Calculator</a><p>Turn raw test marks into a percentage.</p></div>
+  <div class="card"><a href="weighted-grade-calculator.html">Weighted Grade Calculator</a><p>Find your grade when tests and homework count differently.</p></div>
+  <div class="card"><a href="letter-grade-calculator.html">Letter Grade Calculator</a><p>Turn a percentage into a letter grade.</p></div>
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>Why do teachers drop the lowest grade?</h3>
+  <p>To forgive one bad day. A single low score from illness or a rough week should not decide your whole grade, so many teachers drop the lowest test or homework score.</p>
+  <h3>What if two of my scores tie for the lowest?</h3>
+  <p>Only one of them is dropped. If two scores tie at 67, one 67 is removed and the other still counts in your average.</p>
+  <h3>Can I drop more than one low score?</h3>
+  <p>That depends on your teacher. Some drop the lowest two. This calculator drops one only. To drop two, run it once, then run it again on the remaining scores.</p>
+  <h3>Does dropping the lowest grade always raise my average?</h3>
+  <p>Yes, unless every score is the same. Removing a score below the average pulls the average up. The lower the dropped score, the bigger the rise.</p>
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free grade and GPA calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+function calculate() {
+  var scores = [];
+  var r = document.getElementById('result');
+  for (var i = 1; i <= 5; i++) {
+    var v = document.getElementById('score' + i).value;
+    if (v !== '') {
+      var n = parseFloat(v);
+      if (!isNaN(n)) scores.push(n);
+    }
+  }
+  if (scores.length < 2) {
+    r.innerHTML = 'Please enter at least two test scores.';
+    r.classList.add('show');
+    return;
+  }
+  var lowest = Math.min.apply(null, scores);
+  var sum = 0;
+  for (var j = 0; j < scores.length; j++) sum += scores[j];
+  var avg = (sum - lowest) / (scores.length - 1);
+  r.innerHTML = 'Lowest score dropped: <strong>' + lowest + '</strong>. Your average of the other ' + (scores.length - 1) + ' scores is <strong>' + avg.toFixed(2) + '</strong>.';
+  r.classList.add('show');
+}
+function resetCalc() {
+  document.getElementById('calc-form').reset();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('result').innerHTML = '';
+}
+calculate();
+
+// Live calculation: update the result as the user types or changes a value.
+document.getElementById('calc-form').addEventListener('input', calculate);
+document.getElementById('calc-form').addEventListener('change', calculate);
+</script>
+</body>
+</html>

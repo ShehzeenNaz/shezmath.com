@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post Hole Concrete Bags Calculator | ShezMath</title>
+<meta name="description" content="Find how many concrete bags each post hole needs. Enter hole size and count to get total bags and cubic feet for fence posts. Free to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How deep should a fence post hole be?", "acceptedAnswer": {"@type": "Answer", "text": "Dig one third of the post length, and at least 24 inches deep. In cold areas go below the frost line."}},
+    {"@type": "Question", "name": "How many bags of concrete per post hole?", "acceptedAnswer": {"@type": "Answer", "text": "A standard 12 inch wide, 24 inch deep hole takes about 3 bags of 80 lb concrete. Wider or deeper holes take more."}},
+    {"@type": "Question", "name": "Should concrete fill the whole hole?", "acceptedAnswer": {"@type": "Answer", "text": "Fill to about 3 inches below ground level and slope the top away from the post so water runs off."}},
+    {"@type": "Question", "name": "Can I use dry concrete mix in a post hole?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, pour dry mix around the post, add water and let it set. It works well for fence posts."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Post Hole Concrete Bags Calculator</h1>
+<p class="lede">Work out concrete for fence and deck post holes. Enter the hole diameter, depth and number of holes to get the total bag count.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="holes">Number of post holes</label>
+    <input type="number" id="holes" value="6" min="1" step="1">
+    <label for="diameter">Hole diameter (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="diameter" data-kind="in" value="12" min="0" step="1">
+    <label for="depth">Hole depth (<span class="ulabel" data-imp="in" data-met="cm">in</span>)</label>
+    <input type="number" id="depth" data-kind="in" value="24" min="0" step="1">
+    <label for="bag">Bag size</label>
+    <select id="bag"><option value="0.6" selected>80 lb bag — 0.60 cubic feet</option><option value="0.45">60 lb bag — 0.45 cubic feet</option><option value="0.3">40 lb bag — 0.30 cubic feet</option></select>
+    <label for="price">Price (<span class="ulabel" data-imp="per bag" data-met="per bag">per bag</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Volume per hole = &pi; &times; (diameter &divide; 2)&#178; &times; depth, all in feet. Bags per hole = volume per hole &divide; yield per bag, rounded up.</p>
+<p><strong>Worked example:</strong> One hole 12 in wide and 24 in deep: radius is 6 in, or 0.5 ft. 3.1416 &times; 0.5&#178; &times; 2 = 1.57 cubic feet. With 80 lb bags at 0.60 cubic feet: 1.57 &divide; 0.60 = 2.62, so 3 bags per hole.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Hole size</th><th>Cubic feet per hole</th><th>80 lb bags per hole</th></tr><tr><td>8 in wide, 24 in deep</td><td>0.70</td><td>2</td></tr><tr><td>10 in wide, 24 in deep</td><td>1.09</td><td>2</td></tr><tr><td>12 in wide, 24 in deep</td><td>1.57</td><td>3</td></tr><tr><td>12 in wide, 36 in deep</td><td>2.36</td><td>4</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="fence-post-calculator.html">Fence Post Calculator</a><p>Work out how many fence posts your fence needs and how far apart to set them.</p></div>
+  <div class="card"><a href="concrete-slab-calculator.html">Concrete Slab Calculator</a><p>Work out how much concrete a patio slab, shed base or garage floor needs.</p></div>
+  <div class="card"><a href="concrete-footing-calculator.html">Concrete Footing Calculator</a><p>Work out concrete for strip footings under walls, decks and extensions.</p></div>
+  <div class="card"><a href="fence-boards-calculator.html">Fence Boards Calculator</a><p>Work out how many fence boards or pickets a fence needs.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How deep should a fence post hole be?</h3>
+  <p>Dig one third of the post length, and at least 24 inches deep. In cold areas go below the frost line.</p>
+  <h3>How many bags of concrete per post hole?</h3>
+  <p>A standard 12 inch wide, 24 inch deep hole takes about 3 bags of 80 lb concrete. Wider or deeper holes take more.</p>
+  <h3>Should concrete fill the whole hole?</h3>
+  <p>Fill to about 3 inches below ground level and slope the top away from the post so water runs off.</p>
+  <h3>Can I use dry concrete mix in a post hole?</h3>
+  <p>Yes, pour dry mix around the post, add water and let it set. It works well for fence posts.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var holes = raw('holes'), D = v('diameter','in'), Dep = v('depth','in');
+  var yield_ = parseFloat(document.getElementById('bag').value);
+  if([holes,D,Dep].some(isNaN) || holes <= 0 || D <= 0 || Dep <= 0){ r.innerHTML = 'Please enter positive numbers for holes, diameter and depth.'; r.classList.add('show'); return; }
+  var perHole = Math.PI * Math.pow(D / 2 / 12, 2) * (Dep / 12);
+  var total = perHole * holes;
+  var bagsPerHole = Math.ceil(perHole / yield_);
+  var bags = bagsPerHole * holes;
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (bags) : (bags); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per bag' : 'per bag') + '.'; }
+
+  r.innerHTML = 'Each hole needs <b>' + fmtCuFt(perHole) + '</b> — about <b>' + bagsPerHole + ' bags</b> per hole.<br>Total for ' + holes + ' holes: <b>' + bags + ' bags</b> (' + fmtCuFt(total) + ').' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>

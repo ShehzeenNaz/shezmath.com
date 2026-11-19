@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sod Calculator | ShezMath</title>
+<meta name="description" content="Calculate sod rolls and pallets for a new lawn. Enter lawn size to get coverage, rolls and pallets with waste included. Free and easy to use.">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{"@type": "Question", "name": "How big is a roll of sod?", "acceptedAnswer": {"@type": "Answer", "text": "A standard roll is 2 ft by 5 ft, covering 10 square feet. Some suppliers sell slabs of 16 by 24 inches instead."}},
+    {"@type": "Question", "name": "How much sod is on a pallet?", "acceptedAnswer": {"@type": "Answer", "text": "A pallet usually covers about 500 square feet, or 50 rolls. Large pallets can cover 600 square feet."}},
+    {"@type": "Question", "name": "How much waste should I allow for sod?", "acceptedAnswer": {"@type": "Answer", "text": "Allow 5% for a square lawn and 10% for a lawn with curves, trees or beds to cut around."}},
+    {"@type": "Question", "name": "How soon can I walk on new sod?", "acceptedAnswer": {"@type": "Answer", "text": "Wait two to three weeks for the roots to take hold, and water it daily for the first two weeks."}}]
+}
+</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="../index.html">ShezMath</a>
+    <nav class="main">
+      <a href="../index.html">Home</a>
+      <a href="index.html">Yard &amp; Home</a>
+      <a href="../index.html#gpa">GPA</a>
+      <a href="../about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+<h1>Sod Calculator</h1>
+<p class="lede">Work out how much sod your lawn needs in square feet, rolls and pallets. Includes 5% extra for cuts and odd shapes.</p>
+
+<div class="calc">
+  <p><button class="btn" type="button" id="unit-imp" onclick="setUnit('imp')">Imperial (ft / in)</button>
+  <button class="btn secondary" type="button" id="unit-met" onclick="setUnit('met')">Metric (m / cm)</button></p>
+  <form id="calc-form" onsubmit="return false;">
+    <label for="length">Lawn length (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="length" data-kind="ft" value="40" min="0" step="0.5">
+    <label for="width">Lawn width (<span class="ulabel" data-imp="ft" data-met="m">ft</span>)</label>
+    <input type="number" id="width" data-kind="ft" value="25" min="0" step="0.5">
+    <label for="waste">Extra for cuts and waste (%)</label>
+    <input type="number" id="waste" value="5" min="0" step="1">
+    <label for="price">Price (<span class="ulabel" data-imp="per roll" data-met="per roll">per roll</span>) — optional, leave blank to skip cost</label>
+    <input type="number" id="price" value="" min="0" step="0.01" placeholder="e.g. 45">
+
+    <button class="btn" type="button" onclick="calculate()">Calculate</button>
+    <button class="btn secondary" type="button" onclick="resetCalc()">Reset</button>
+  </form>
+  <div class="result" id="result"></div>
+</div>
+<p class="note">Your numbers never leave your device. All calculations happen in your browser.</p>
+
+<h2>How It Works</h2>
+<p><strong>Formula:</strong> Area = length (ft) &times; width (ft) &times; 1.05 for waste. Rolls = area &divide; 10, because one sod roll covers 10 sq ft. Pallets = area &divide; 500.</p>
+<p><strong>Worked example:</strong> A lawn 40 ft by 25 ft: area is 1,000 sq ft. With 5% waste: 1,000 &times; 1.05 = 1,050 sq ft. Rolls: 1,050 &divide; 10 = 105 rolls. Pallets: 1,050 &divide; 500 = 2.1, so 3 pallets.</p>
+
+<h2>Quick Reference</h2>
+<table><tr><th>Lawn size</th><th>Sod needed (with 5% waste)</th><th>Rolls</th></tr><tr><td>500 sq ft</td><td>525 sq ft</td><td>53</td></tr><tr><td>1,000 sq ft</td><td>1,050 sq ft</td><td>105</td></tr><tr><td>2,000 sq ft</td><td>2,100 sq ft</td><td>210</td></tr><tr><td>5,000 sq ft</td><td>5,250 sq ft</td><td>525</td></tr></table>
+
+<h2>Related Calculators</h2>
+<div class="grid">
+  <div class="card"><a href="grass-seed-calculator.html">Grass Seed Calculator</a><p>Work out how much grass seed to buy for a new lawn or to thicken an old one.</p></div>
+  <div class="card"><a href="topsoil-calculator.html">Topsoil Calculator</a><p>Work out how much topsoil you need to level a lawn or fill a raised bed.</p></div>
+  <div class="card"><a href="fertilizer-calculator.html">Fertilizer Coverage Calculator</a><p>Work out how many bags of fertilizer your lawn needs.</p></div>
+  <div class="card"><a href="mulch-calculator.html">Mulch Calculator</a><p>Work out mulch for flower beds and garden borders in cubic yards and bags.</p></div>
+
+</div>
+
+<h2>Frequently Asked Questions</h2>
+<div class="faq">
+  <h3>How big is a roll of sod?</h3>
+  <p>A standard roll is 2 ft by 5 ft, covering 10 square feet. Some suppliers sell slabs of 16 by 24 inches instead.</p>
+  <h3>How much sod is on a pallet?</h3>
+  <p>A pallet usually covers about 500 square feet, or 50 rolls. Large pallets can cover 600 square feet.</p>
+  <h3>How much waste should I allow for sod?</h3>
+  <p>Allow 5% for a square lawn and 10% for a lawn with curves, trees or beds to cut around.</p>
+  <h3>How soon can I walk on new sod?</h3>
+  <p>Wait two to three weeks for the roots to take hold, and water it daily for the first two weeks.</p>
+
+</div>
+
+</main>
+<footer class="site">
+  <div class="wrap">
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../terms.html">Terms</a>
+    <a href="../methodology.html">Methodology</a>
+    <p>ShezMath — free home, yard and construction calculators. Calculations run in your browser.</p>
+  </div>
+</footer>
+<script>
+
+var UNIT = 'imp';
+function f(kind){ return {'ft':0.3048,'in':2.54,'sqft':0.092903,'yd3':0.764555,'ton':0.907185,'lb':0.453592,'gal':3.78541}[kind] || 1; }
+function v(id, kind){ var x = parseFloat(document.getElementById(id).value); if(isNaN(x)) return NaN; return UNIT === 'met' ? x / f(kind) : x; }
+function raw(id){ return parseFloat(document.getElementById(id).value); }
+function fmtVol(y){ return UNIT === 'met' ? (y*0.764555).toFixed(2) + ' m\u00b3' : y.toFixed(2) + ' cubic yards'; }
+function fmtWt(t){ return UNIT === 'met' ? (t*0.907185).toFixed(2) + ' tonnes' : t.toFixed(2) + ' tons'; }
+function fmtArea(a){ return UNIT === 'met' ? (a*0.092903).toFixed(2) + ' m\u00b2' : a.toFixed(0) + ' sq ft'; }
+function fmtLenFt(x){ return UNIT === 'met' ? (x*0.3048).toFixed(2) + ' m' : x.toFixed(2) + ' ft'; }
+function fmtLenIn(x){ return UNIT === 'met' ? (x*2.54).toFixed(1) + ' cm' : x.toFixed(2) + ' in'; }
+function fmtLb(x){ return UNIT === 'met' ? (x*0.453592).toFixed(1) + ' kg' : x.toFixed(1) + ' lb'; }
+function fmtGal(x){ return UNIT === 'met' ? (x*3.78541).toFixed(2) + ' litres' : x.toFixed(2) + ' gallons'; }
+function fmtCuFt(x){ return UNIT === 'met' ? (x*0.0283168).toFixed(2) + ' m\u00b3' : x.toFixed(2) + ' cubic feet'; }
+function setUnit(u){
+  if(u === UNIT) return;
+  document.querySelectorAll('[data-kind]').forEach(function(el){
+    var val = parseFloat(el.value); if(isNaN(val)) return;
+    el.value = (u === 'met' ? val * f(el.dataset.kind) : val / f(el.dataset.kind)).toFixed(2);
+  });
+  UNIT = u;
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = u === 'met' ? s.dataset.met : s.dataset.imp; });
+  document.getElementById('unit-imp').className = u === 'imp' ? 'btn' : 'btn secondary';
+  document.getElementById('unit-met').className = u === 'met' ? 'btn' : 'btn secondary';
+  calculate();
+}
+function resetCalc(){
+  UNIT = 'imp';
+  document.querySelectorAll('.ulabel').forEach(function(s){ s.textContent = s.dataset.imp; });
+  document.getElementById('unit-imp').className = 'btn';
+  document.getElementById('unit-met').className = 'btn secondary';
+  document.getElementById('calc-form').reset();
+  calculate();
+}
+document.querySelectorAll('#calc-form input, #calc-form select').forEach(function(el){
+  el.addEventListener('input', calculate);
+  el.addEventListener('change', calculate);
+});
+
+function calculate() {
+  var r = document.getElementById('result');
+  var L = v('length','ft'), W = v('width','ft'), waste = raw('waste');
+  if([L,W].some(isNaN) || L <= 0 || W <= 0){ r.innerHTML = 'Please enter positive numbers for length and width.'; r.classList.add('show'); return; }
+  var area = L * W * (1 + (isNaN(waste) ? 0 : waste) / 100);
+  var rolls = Math.ceil(area / 10);
+  var pallets = Math.ceil(area / 500);
+  var price = raw('price');
+  var costTxt = '';
+  if(price > 0){ var q = UNIT === 'met' ? (rolls) : (rolls); costTxt = '<br>Estimated cost: <b>$' + (q * price).toFixed(2) + '</b> at $' + price + ' ' + (UNIT === 'met' ? 'per roll' : 'per roll') + '.'; }
+
+  r.innerHTML = 'Lawn area with waste: <b>' + fmtArea(area) + '</b>.<br>You need <b>' + rolls + ' rolls</b> of sod (10 sq ft each), about <b>' + pallets + ' pallets</b>.' + costTxt;
+  r.classList.add('show');
+}
+calculate();
+</script>
+</body>
+</html>
